@@ -1,0 +1,40 @@
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.barContainer:hover .line{
+
+  display:block;
+}
+.bar:hover{
+    cursor: pointer;
+}
+
+.barContainer .line{
+  border-top:1px dashed #000;
+  opacity:0;
+}
+
+.barContainer:hover .line{
+  border-top:1px dashed #000;
+
+}
+
+.tick{
+    stroke :grey;
+    stroke-width : 0.2px;
+    stroke-dasharray :3,3;
+
+
+}
+
+.hide{
+
+  opacity: 0!important;
+}
