@@ -96,6 +96,7 @@ module.exports = function(grunt) {
              'js/charts/area/stack/stack.js',
              'js/charts/line/line/line.js',
              'js/charts/pie/pie/pie.js',
+             'js/services/valueServiceForCsvPath.js',
              'js/directives/pieChartDirective.js',
              'js/controllers/pieChartController.js',
              'js/Vtool.js',
