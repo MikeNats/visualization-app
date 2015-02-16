@@ -71,8 +71,10 @@ module.exports = function(grunt) {
              'js/charts/line/line/line.js',
              'js/charts/pie/pie/pie.js',
              'js/services/valueServiceForCsvPath.js',
+             'js/services/factories/fetchDataFromCsvFactory.js',
              'js/directives/pieChartDirective.js',
              'js/controllers/pieChartController.js',
+             'js/controllers/uiChartController.js',
              'js/Vtool.js',
              'js/app.js',
 
@@ -98,8 +100,10 @@ module.exports = function(grunt) {
              'js/charts/line/line/line.js',
              'js/charts/pie/pie/pie.js',
              'js/services/valueServiceForCsvPath.js',
+                          'js/services/factories/fetchDataFromCsvFactory.js',
              'js/directives/pieChartDirective.js',
              'js/controllers/pieChartController.js',
+                          'js/controllers/uiChartController.js',
              'js/Vtool.js',
              'js/app.js',
 

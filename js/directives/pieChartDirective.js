@@ -4,62 +4,62 @@ angular.module('pieChartDirectiveModule',[]).directive('pieChart',function(){
 
 
          scope.$watch('radiusdata', function(radiusdata){ //Watch radius
-              if(scope.piedata){
+              if(scope.incomingdata){
                  scope.settings.innerRadius = radiusdata  ;
-                 app.charts.pie.pie.setIneerRadius();
+                 scope.chart.setIneerRadius();
               }
          }); 
 
  
         scope.$watch('chartbgcolor', function(chartbgcolor){ //Watch chart bgColor
-              if(scope.piedata){   
-                 app.charts.pie.pie.setSvgBGcolor(chartbgcolor);
+              if(scope.incomingdata){   
+                 scope.chart.setSvgBGcolor(chartbgcolor);
               }
          }); 
  
 
         scope.$watch('startingcolorband', function(startingcolorband){ //Watch chart bgColor
-              if(scope.piedata){  
+              if(scope.incomingdata){  
                  scope.settings.lightbgColor = startingcolorband;
-                 app.charts.pie.pie.setColorSpectrum(scope.settings);
+                 scope.chart.setColorSpectrum(scope.settings);
               }
          });  
 
         scope.$watch('endingcolorband', function(endingcolorband){ //Watch chart bgColor
-              if(scope.piedata){   
+              if(scope.incomingdata){   
                  scope.settings.darkbgColor = endingcolorband;
-                 app.charts.pie.pie.setColorSpectrum(scope.settings);
+                 scope.chart.setColorSpectrum(scope.settings);
               }
          }); 
  
          scope.$watch('lettercolor', function(lettercolor){ //Watch chart bgColor
-              if(scope.piedata){   
+              if(scope.incomingdata){   
                  scope.settings.letter = lettercolor;
-                 app.charts.pie.pie.setColorOfLetters(lettercolor);
+                 scope.chart.setColorOfLetters(lettercolor);
               }
          }); 
 
           scope.$watch('widthdimention', function(widthdimention){ //Watch chart bgColor
-              if(scope.piedata){   
+              if(scope.incomingdata){   
                 scope.settings.isResponsive = false;
                 scope.settings.customWidth = widthdimention;
-                 app.charts.pie.pie.customDimentions(scope.settings);
+                 scope.chart.customDimentions(scope.settings);
               }
          });        
 
           scope.$watch('heightdimention', function(heightdimention){ //Watch chart bgColor
-              if(scope.piedata){   
+              if(scope.incomingdata){   
                 scope.settings.isResponsive = false;
                 scope.settings.customHeight = heightdimention;
-                 app.charts.pie.pie.customDimentions(scope.settings);
+                scope.chart.customDimentions(scope.settings);
               }
          });  
  
           scope.$watch('isresponsive', function(isresponsive){ //Watch chart bgColor
-              if(scope.piedata){   
+              if(scope.incomingdata){   
                 if(!isresponsive ){
                      scope.settings.isResponsive = true;
-                    app.charts.pie.pie.setResponsive(scope.settings);
+                    scope.chart.setResponsive(scope.settings);
                   } 
               }
          });  
@@ -69,7 +69,8 @@ angular.module('pieChartDirectiveModule',[]).directive('pieChart',function(){
         link: link,
         restrict: 'E',
         scope: { 
-          piedata: '=',
+          incomingdata: '=',
+          chart:'=',
           radiusdata: '=',
           chartbgcolor: '=',
           startingcolorband: '=',

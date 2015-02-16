@@ -4,8 +4,6 @@ var app = angular.module('app', [
   'pieChartControlerModule'
 ]);
 
-//Charts functions are assigned in the main app obj
-app.charts = Vtool.charts; 
 
 //Routers
 app.config(['$routeProvider', function($routeProvider) {

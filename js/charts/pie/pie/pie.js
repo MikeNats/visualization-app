@@ -370,12 +370,10 @@ function createPieChart( ){
          return{
             init : function(data){
                 chart.exe(data);
+                return chart.controls;
              },
             initFromIframe : function(data,controls){
                 chart.exeFromIframe(data,controls);
-             },
-             getSettings : function(){
-                return chart.controls;
              },
              setIneerRadius : function(){
                 chart.initializeArcObject();

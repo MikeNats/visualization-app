@@ -1,29 +1,36 @@
 //Pie chart controller.Has a dependancy, the  pieChartDirectiveModule module. PieChartControlerModule fetch the data from the given url attache them in the global scope  and trigers the pieChartDirectiveModule 
-angular.module('pieChartControlerModule',['pathModule', 'pieChartDirectiveModule']).controller('pieController',['$scope','pathValue',function($scope,pathValue){
+ 
 
+angular.module('pieChartControlerModule',['pieChartDirectiveModule','fetcDataFromCsvServiceFactoryModule',]).controller('pieController',['$scope','fetchDataFromCsvFactory',
+   function($scope,fetchDataFromCsvFactory){
+
+
+ $scope.responsive = false;
   $scope.radius = 10;
-  $scope.responsive = false;
-   d3.csv( pathValue, function(error, data) {
-            if(!error){
-                $scope.pieDataVar = app.charts.commonFunctionality.secureCSVData(data,false);
-                $scope.$apply();
-                app.charts.pie.pie.init($scope.pieDataVar);
-                $scope.privateSettings = app.charts.pie.pie.getSettings();
-            }else{
-                throw error;  
-            } 
-         }); 
-  $scope.isResponsive = function(){
-     if($scope.responsive){
-       $scope.responsive = false
-     }else{
-       $scope.responsive = true
-     }
-     
+  fetchDataFromCsvFactory.get().then(function(response){
+        $scope.chartObject = Vtool.charts.pie.pie;
+        $scope.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);    
+       
+        $scope.privateSettings = $scope.chartObject.init($scope.fecheddata);
+   
+   });
+   $scope.isResponsive = function(){
+     var state =  function(){
+        if($scope.responsive){
+            return false;
+        }else{
+           return true;
+        }
+     } 
+     $scope.responsive =  state();
+   }
 
-  }
+}]); 
 
-}]);
+
+
+
+
 
 
 
