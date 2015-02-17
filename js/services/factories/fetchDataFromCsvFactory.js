@@ -24,8 +24,8 @@ angular.module('fetcDataFromCsvServiceFactoryModule',['pathModule']).factory('fe
                           incomingData = {};                 
                        }
 
-                      return incomingDataArray; 
-                });
+                      return incomingDataArray;  
+                }); 
         }
     }
 }]); 

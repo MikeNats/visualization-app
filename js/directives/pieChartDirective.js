@@ -1,7 +1,7 @@
 //pieChartDirectiveModule create the directive of  pieChart tag, trigers the chart 
-angular.module('pieChartDirectiveModule',[]).directive('pieChart',function(){
+angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
     function link(scope, el, attr){  
-
+      
 
          scope.$watch('radiusdata', function(radiusdata){ //Watch radius
               if(scope.incomingdata){
@@ -9,7 +9,7 @@ angular.module('pieChartDirectiveModule',[]).directive('pieChart',function(){
                  scope.chart.setIneerRadius();
               }
          }); 
-
+ 
  
         scope.$watch('chartbgcolor', function(chartbgcolor){ //Watch chart bgColor
               if(scope.incomingdata){   
@@ -19,7 +19,8 @@ angular.module('pieChartDirectiveModule',[]).directive('pieChart',function(){
  
 
         scope.$watch('startingcolorband', function(startingcolorband){ //Watch chart bgColor
-              if(scope.incomingdata){  
+              if(scope.incomingdata){
+
                  scope.settings.lightbgColor = startingcolorband;
                  scope.chart.setColorSpectrum(scope.settings);
               }
@@ -44,7 +45,7 @@ angular.module('pieChartDirectiveModule',[]).directive('pieChart',function(){
                 scope.settings.isResponsive = false;
                 scope.settings.customWidth = widthdimention;
                  scope.chart.customDimentions(scope.settings);
-              }
+              } 
          });        
 
           scope.$watch('heightdimention', function(heightdimention){ //Watch chart bgColor
@@ -64,6 +65,20 @@ angular.module('pieChartDirectiveModule',[]).directive('pieChart',function(){
               }
          });  
 
+
+          /*scope.$watch('isresponsive', function(labelangle){ //Watch chart label angle
+              if(scope.incomingdata){   
+                if(!automatedLabelAngle){
+                     scope.settings.cutomAngle = labelangle;
+                    //scope.chart.setResponsive(scope.settings);
+                  } 
+              }
+         }); */
+
+
+
+          
+
     }
     return {
         link: link,
@@ -79,7 +94,8 @@ angular.module('pieChartDirectiveModule',[]).directive('pieChart',function(){
           widthdimention:'=',
           heightdimention: '=',
           isresponsive: '=',
-          settings: '='
+          settings: '=',
+          labelangle: '='
          }
      };
 }) 

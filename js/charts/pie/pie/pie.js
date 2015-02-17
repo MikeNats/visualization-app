@@ -34,7 +34,7 @@ function createPieChart( ){
 
         //Initizlize arc for our lineIndicators
         chart.initializeArcObjectLines = function(){
-            chart.arcObjcLine = d3.svg.arc()
+            chart.arcObjcLine = d3.svg.arc() 
                 .outerRadius(chart.outerRadius)
                 .innerRadius(0);
         },
@@ -131,7 +131,8 @@ function createPieChart( ){
                 
                     return chart.persentage + '%';  
                 })
-                .style("color","#fff");
+                .style("color","#fff")
+                .style("font-size",chart.controls.fontSize+'px');
             chart.positionDetails();
         },
 
@@ -154,9 +155,8 @@ function createPieChart( ){
          //Positions details into pie
         chart.positionDetails = function(){
             chart.details.transition().duration(200).attr("transform", function(d) {                   
-                     d.innerRadius = chart.controls.innerRadius * 2;
-                     d.outerRadius = chart.outerRadius * 2;
-                    return "translate(" +  chart.arcObjcText.centroid(d) + ")";        
+                    
+                    return "translate(" + chart.arcObjcText.centroid(d) + ")";        
                 })
 
         },
@@ -267,6 +267,44 @@ function createPieChart( ){
             chart.centerCycle();
             chart.resetDimentionsOfContentTable();
 
+                      
+
+                var tableContainerWidth = d3.select('.tableContainer').node().getBBox().width;
+                var tableContainerHeight = d3.select('.tableContainer').node().getBBox().height;
+                var w = d3.select('.tableContainer g').node().getBBox().width+10
+                var numberOfTableG = d3.selectAll('.tableContainer g').pop().length;
+                 var skata = w*( 4.9);
+                var distanceFromLeft =  d3.select(window)[0][0].innerHeight/4;
+                
+                /* d3.select('.tableContainer').attr("transform", function() {     
+                              return "translate("+ ((d3.select(window)[0][0].innerWidth - skata)/2) +"," + ( d3.select(window)[0][0].innerHeight-50) + ")";      
+                  });
+
+                  d3.selectAll('.tableContainer g').attr("transform", function(d,i) {
+
+                             if(i<=3){
+
+                                  return "translate("+ ((i*w)) +"," +0 + ")"; 
+
+                             }else if(3<i<=7){
+
+                                   d3.select('.tableContainer').attr("transform", function() {     
+                                       return "translate("+ ((d3.select(window)[0][0].innerWidth - skata)/2) +"," + ( d3.select(window)[0][0].innerHeight-90) + ")";      
+                                   }); 
+                                  
+                                  return "translate("+ (  ( (i-4)*w )  ) +"," +40+ ")";
+
+                             }else if(7<i<=11){
+
+                                  d3.select('.tableContainer').attr("transform", function() {     
+                                      return "translate("+ ((d3.select(window)[0][0].innerWidth - skata)/2) +"," + ( d3.select(window)[0][0].innerHeight-120) + ")";      
+                                  }); 
+                                  
+                                  return "translate("+ ( ( (i-8)*w ) ) +"," +80 + ")";
+                            }
+                                   
+                  }); */
+
         },
 
         chart.resetDimentionsOfContentTable = function(){
@@ -277,9 +315,14 @@ function createPieChart( ){
            transform = transform.replace('translate', "");//remove all ]
 
            if(chart.controls.isResponsive){
+
+
+
                 d3.select(chart.controls.target+' .tableContainer').attr('transform',"translate("+ (+transform *1.8) +",10)" );
+
+            
           }else{
-                d3.select(chart.controls.target+' .tableContainer').attr('transform',"translate("+ (+transform *2.3) +",10)" );
+                d3.select(chart.controls.target+' .tableContainer').attr('transform',"translate("+ (+transform *3.3) +",10)" );
           }  
 
       
@@ -315,6 +358,7 @@ function createPieChart( ){
                
 
                 if(chart.controls.isResponsive){ 
+
                     chart.resize(data);
                 }
 
@@ -345,7 +389,7 @@ function createPieChart( ){
             chart.controls.contentTableShow = true;
             chart.controls.hasSubcategories = false;
             chart.controls.isPersentage = false;
-            chart.controls.target = 'pie-Chart';
+            chart.controls.target = 'dthree-Chart';
         },
 
 

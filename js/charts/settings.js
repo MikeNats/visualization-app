@@ -38,6 +38,7 @@ function chartSettings(){
       lightbgColor : 'green',//UI
       darkbgColor : 'yellow',//UI
       barDistance : .2,//UI
+      fontSize: 15,
 
       //Table Content settings
       contentTableShow:true,//UI
@@ -52,7 +53,8 @@ function chartSettings(){
 
       //Dimentions Settings
       svgWidth : function(){
-        if(settings.isResponsive){
+        if(this.isResponsive){
+          console.log('skata');
            return  d3.select(window)[0][0].innerWidth;
          }else{
            return this.customWidth;
@@ -60,7 +62,7 @@ function chartSettings(){
       },
 
      svgHeight: function(){
-       if(settings.isResponsive){
+       if(this.isResponsive){
            return d3.select(window)[0][0].innerHeight;
         }else{
             return this.customHeight;
@@ -114,11 +116,13 @@ function chartSettings(){
       xAxisLabelAngle :0,//UI
       xAxisFontSize : 10,
       xAxisLabaleX:9,
-      xAxisLabelY:2,  
+      xAxisLabelY:2, 
+      cutomAngle :45, 
 
 
       xAxisPositionDxDy : function (){
           var label = {};
+
           if(this.xAxisLabelAngle==0){
              if(this.isNegative){
                 label.dx = -0.28;

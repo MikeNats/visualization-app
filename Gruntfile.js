@@ -11,9 +11,9 @@ module.exports = function(grunt) {
         my_target: {
             files: {
                 'index.html': 'index.html',
-                'views/piechartTemplate.html': 'views/unMinified/piechartTemplate.html',
+                'views/chartTemplate.html': 'views/unMinified/chartTemplate.html',
                 'app/index.html': 'index.html',
-                'app/views/piechartTemplate.html': 'views/unMinified/piechartTemplate.html'
+                'app/views/chartTemplate.html': 'views/unMinified/chartTemplate.html'
             }
         }
     },
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
  
     //Validation of all js files
     //jshint: {
-    //  all: ['Gruntfile.js', 'js/**/*.js']
+    //  all: ['Gruntfile.js', 'js/**/*.js'] 
    // },
 
     //Compress and consolidate into one folder all the js files
@@ -70,11 +70,12 @@ module.exports = function(grunt) {
              'js/charts/area/stack/stack.js',
              'js/charts/line/line/line.js',
              'js/charts/pie/pie/pie.js',
-             'js/services/valueServiceForCsvPath.js',
+             'js/services/services/valueServiceCsvPathForChart.js',
              'js/services/factories/fetchDataFromCsvFactory.js',
-             'js/directives/pieChartDirective.js',
-             'js/controllers/pieChartController.js',
              'js/controllers/uiChartController.js',
+             'js/directives/pieChartDirective.js',
+             'js/controllers/areaChartController.js',
+             'js/controllers/pieChartController.js',
              'js/Vtool.js',
              'js/app.js',
 
@@ -99,11 +100,12 @@ module.exports = function(grunt) {
              'js/charts/area/stack/stack.js',
              'js/charts/line/line/line.js',
              'js/charts/pie/pie/pie.js',
-             'js/services/valueServiceForCsvPath.js',
-                          'js/services/factories/fetchDataFromCsvFactory.js',
+             'js/services/services/valueServiceCsvPathForChart.js',
+             'js/services/factories/fetchDataFromCsvFactory.js',
+             'js/controllers/uiChartController.js',
              'js/directives/pieChartDirective.js',
+             'js/controllers/areaChartController.js',
              'js/controllers/pieChartController.js',
-                          'js/controllers/uiChartController.js',
              'js/Vtool.js',
              'js/app.js',
 

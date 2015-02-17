@@ -1,38 +1,48 @@
 
-<section class="large-16 mainSubContainer columns"  >
-      <article>
 
-	      <pie-chart  radiusdata="radius" incomingdata='fecheddata'  chart='chartObject' settings='privateSettings' chartbgcolor='backgroundColor' startingcolorband='colorBandStarts' endingcolorband='colorBandFinish' widthdimention='widthInput'   heightdimention='heightInput' isresponsive='responsive' lettercolor='lettersColor' ></pie-chart>
-	  </article>
+<section class="large-16 mainSubContainer columns" >
+      <article id='chartContainer'>
+      <dthree-chart  radiusdata="chart.radius" automated labelangle='chart.showXAxisLabelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart>
+	  </article> 
+ 
 
-
-	  <aside id='chartUi' class='largin-16 columns' >
+ 
+	  <aside id='chartUi' class='largin-16 columns' ng-controller='uiController'>
 	      <div class='uiContainer columns large-16'>
 			   
 				 
 				<div class='large-3  medium-4 small-16  columns toolContainer'>
-				   <fieldset class='columns large-16'>
+				   <fieldset class='columns large-16' ng-show='chart.showRadius'>
 					   <label>Radius</label> 
-					   <input type="range" ng-model="radius">
+					   <input type="range" ng-model="chart.radius">
 				   	</fieldset>
+				   	<fieldset class='columns large-16' ng-show='chart.showXAxisLabelAngle'>
+					   <label>xAxis Label Angle</label> 
+					    <select  ng-model="chart.labelAngle">  
+			            	<option value='0'>0</option>
+						    <option value='45'>45</option>
+						    <option value='60'>60</option>
+						    <option value='90'>90</option>
+		               </select>
+				   	</fieldset>	
 	           	   <fieldset class='columns large-16'>
 							<label>Responsive</label>
-					   		<input type="checkbox"  ng-click='isResponsive()'  checked> 
+					   		<input type="checkbox"  ng-click='chart.isResponsive()'  checked> 
 						
-							<fieldset ng-show='responsive'>
+							<fieldset ng-show='chart.responsive'>
 								<label>Width: </label>
-								<input ng-model='widthInput' type="text" />
+								<input ng-model='chart.widthInput' type="text" />
 								<label>Height: </label>
-								<input  ng-model='heightInput' type="text" />
+								<input  ng-model='chart.heightInput' type="text" />
 							</fieldset>
 					</fieldset>
 
 				</div> 
-	       		<div class='large-3  medium-4 small-16  columns  toolContainer'>
+	       		<div class='large-3  medium-4 small-16  columns  toolContainer' >
 
 		            <fieldset class='columns large-16'>
 			            <label>Select Background Color</label> 
-			             <select  ng-model="backgroundColor">   	
+			             <select  ng-model="chart.backgroundColor">   	
 			            	<option value='#000' style='background-color:#000;' ></option>
 						    <option value='#fff' style='background-color:#fff;' ></option>
 						    <option value='#696969' style='background-color:#696969;' ></option>
@@ -45,7 +55,7 @@
 		   
 	       		  <fieldset class='columns large-16'>
 		            <label>Colour Spectrum From : </label>   
-			           <select  ng-model="colorBandFinish">  
+			           <select  ng-model="chart.colorBandFinish">  
 			            	<option value='#000' style='background-color:#000;' ></option>
 						    <option value='#fff' style='background-color:#fff;' ></option>
 						    <option value='#696969' style='background-color:#696969;' ></option>
@@ -61,7 +71,7 @@
 
 	       		    <fieldset class='columns large-16'> 
 	       		        <label>Colour Spectrum To : </label>   
-			            <select  ng-model="colorBandStarts">  
+			            <select  ng-model="chart.colorBandStarts">  
 			            	<option value='#000' style='background-color:#000;' ></option>
 						    <option value='#fff' style='background-color:#fff;' ></option>
 						    <option value='#696969' style='background-color:#696969;' ></option>
@@ -78,7 +88,7 @@
 		
      		       <fieldset class='columns large-16'> 		
 		 		       <label>Letter Color</label>   
-			           <select  ng-model="lettersColor">  
+			           <select  ng-model="chart.lettersColor">  
 			            	<option value='#000' style='background-color:#000;' ></option>
 						    <option value='#fff' style='background-color:#fff;' ></option>
 						    <option value='#696969' style='background-color:#696969;' ></option>
@@ -95,4 +105,4 @@
 
     	</div>
 	  </aside> 
-  </section>
+  </section>	 

@@ -1,0 +1,1 @@
+angular.module('pathModule',[]).value('pathValue', './csv/area/stack/data.csv');  

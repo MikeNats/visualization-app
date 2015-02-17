@@ -478,6 +478,7 @@ function commonChartFunctionality () {
                      currentContentTable.attr("transform",function(){
                         return  "translate("+ ( +d3.select('.chartContainer').node().getBBox().width + yAxisLeftWidth+ controls.marginLeft()/2  ) +','+0+')'; 
                     });
+
                 }else{
                     charts.tableFunctionality.positionMobileTable(currentContentTable);
                 }   
@@ -491,41 +492,58 @@ function commonChartFunctionality () {
                   .enter().append("g")
                   .attr("class" ,function(d,i){
 
-                    return 'legent legent'+i;
+                     return 'legent legent'+i;
                   })
                 charts.tableFunctionality.legendText = charts.tableFunctionality.legend.append("text") //append text
                   .attr("class", "tableContentText")
-                  .attr("x",20)
-                  .attr("y", 9)
+                  .attr("x",controls.fontSize+5)
+                  .attr("y", function(){
+
+                      return (controls.fontSize/4)+4;
+                  })
                   .attr("dy", ".35em")
                   .attr('text-anchor',"start")
                   .text(function(d,i) {  return categoriesList[i]; })
                   .style('font-size', function(i){
-                      return controls.tableLabelsFontSize +'px';
+                      return controls.fontSize-2 +'px';
                   })
                 charts.tableFunctionality.legend.append("rect")// append rect that defines the category color
-                  .attr("width", 15)  
+                  .attr("width", function(){
+                      return 15* (controls.fontSize/15);
+                  })  
+
                   .attr("x", 0)
                   .attr('class',function(i){
 
                     return 'tableRect tableRect'+i;
+
                   })
-                  .attr("height", 15)
+                  .attr("height", function(){
+
+                      return 15* (controls.fontSize/15);
+
+                  })
                   .style("fill", function(d,i){
 
                        return colorRange(categoriesList[i]);
                   });
                 charts.tableFunctionality.legend.attr("transform", function(d, i) {
-                  return "translate("+ 0 +"," + i * 20 + ")";      
+                  return "translate("+ 0 +"," + i * (15* (controls.fontSize/15) +5) + ")";      
                 });
 
+               
+
             },
+
 
             //Position Table when viewport is mobile;
             positionMobileTable : function(currentContentTable){  
 
                 var y = parseInt(d3.select('.chartContainer').node().getBBox().height) + parseInt(d3.select('.y.axis').node().getBBox().width);
                 currentContentTable.attr("transform", "translate("+ 0 +','+ y +')'); 
+
+                
+
             }
       },
 
@@ -541,15 +559,19 @@ function commonChartFunctionality () {
 
             //Rotates Label according to viewport Width
             setLabelAngle :  function(controls){//Sets xAxisLabel when window is resizing 
-
-               if( Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() > controls.tabletViewPort &&  Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() < controls.desktopViewPort){ 
-                    return 45;
-                }else if(Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() < controls.tabletViewPort && Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() > controls.mobileViewPort){
-                    return 65;
-                }else if(Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() < controls.mobileViewPort){
-                    return 90;
+                if(controls.automatedLabelAngle){
+                     if( Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() > controls.tabletViewPort &&  Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() < controls.desktopViewPort){ 
+                          return 45;
+                      }else if(Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() < controls.tabletViewPort && Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() > controls.mobileViewPort){
+                          return 65;
+                      }else if(Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth() < controls.mobileViewPort){
+                          return 90;
+                      }else{
+                            return 0;    
+                      }
                 }else{
-                      return 0;    
+
+                  return controls.cutomAngle;
                 }
             },
 

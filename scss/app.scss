@@ -1,4 +1,4 @@
-
+@import  "scss/fonts/fonts";
 // *** Foundation compoments ***//
 @import 
 "foundation", 
@@ -12,9 +12,9 @@
   
  //General 
  "scss/settings",  
- "scss/global", 
+ "scss/mainApp/global", 
    
       
  //Charts   
  "scss/charts/charts", 
- "scss/chartUI/chartUI";      
+ "scss/chartUI/chartUI";       

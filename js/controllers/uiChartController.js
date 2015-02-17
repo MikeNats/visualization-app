@@ -1,21 +1,20 @@
-angular.module('uiChartControlerModule',[]).controller('uiChartController',['$scope',function($scope){
+
+var uiControllerModule = angular.module('chartControlerModule',['chartDirectiveModule','fetcDataFromCsvServiceFactoryModule']);
+
+uiControllerModule.controller('uiController',['$scope',function($scope){
 
 
-    $scope.responsive = false;
-    $scope.radius = 10;
-     $scope.isResponsive = function(){
-       var state =  function(){
-          if($scope.responsive){
-              return false;
-          }else{
-             return true;
-          }
-       } 
-       $scope.responsive =  state();
-     }
+  $scope.chart.responsive = false;
+  $scope.chart.radius = 10;
+  $scope.chart.isResponsive = function(){ 
+     var state =  function(){
+        if($scope.chart.responsive){
+            return false; 
+        }else{
+           return true;
+        }
+     } 
+     $scope.chart.responsive =  state();
+   }
 
 }]); 
-
-
-
-
