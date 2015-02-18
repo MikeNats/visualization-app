@@ -9,6 +9,8 @@ uiControllerModule.controller('pieChartController',['$scope','fetchDataFromCsvFa
           $scope.chart.chartObject = Vtool.charts.pie.pie;
           $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     
           $scope.chart.privateSettings = $scope.chart.chartObject.init($scope.chart.fecheddata);
+    
+ 
      });
 }]); 
 

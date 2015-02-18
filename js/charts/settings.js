@@ -25,7 +25,7 @@ function chartSettings(){
       isPersentage : true,//UI
       hasSubcategories : true,
       isNegative : false,
-      automatedLabelAngle : true,//UI  
+      automatedLabelAngle : false,//UI  
       
       //Sorting settings
       sortMaxToMinAxisVariable :false,//UI

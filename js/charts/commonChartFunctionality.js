@@ -11,7 +11,7 @@ function commonChartFunctionality () {
             //Append's svg and g container
             appendSvg : function(controls){// Appends svg and a g childs
 
-                        return d3.select(controls.target).append("svg").attr("width", function(){
+                        return d3.select(controls.target).append("svg").attr('id','skata').attr("width", function(){
                             if(controls.isResponsive){
                                 return '100%';
                              }else{
@@ -105,6 +105,7 @@ function commonChartFunctionality () {
                           .attr("dy",  controls.xAxisPositionDxDy().dy +'em')
                           .attr("x", 0)
                           .attr("transform", function(d) {
+                            console.log('da')
                               return "rotate("+ controls.xAxisLabelAngle +")";})
                           .style('font-size', controls.xAxisFontSize+'px');
 

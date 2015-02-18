@@ -7,6 +7,14 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
               if(scope.incomingdata){
                  scope.settings.innerRadius = radiusdata  ;
                  scope.chart.setIneerRadius();
+                 var svg = document.getElementById('skata'),
+xml = new XMLSerializer().serializeToString(svg),
+data = "data:image/svg+xml;base64," + btoa(xml),
+img = new Image()
+ 
+img.setAttribute('src', data)
+document.body.appendChild(img)
+
               }
          }); 
  
@@ -66,14 +74,15 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
          });  
 
 
-          /*scope.$watch('isresponsive', function(labelangle){ //Watch chart label angle
+        scope.$watch('labelangle', function(labelangle){ //Watch chart label angle
               if(scope.incomingdata){   
-                if(!automatedLabelAngle){
-                     scope.settings.cutomAngle = labelangle;
-                    //scope.chart.setResponsive(scope.settings);
-                  } 
+              
+                     scope.settings.xAxisLabelAngle = labelangle;
+                     console.log('skata');
+                     scope.chart.setlabelXAxisLabelAngle(scope.settings);
+              
               }
-         }); */
+         }); 
 
 
 

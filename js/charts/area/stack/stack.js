@@ -324,6 +324,12 @@ function createAreaChartStack(){
                   Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
                   Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.points,chart.incomingData,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
                    chart.positionChartArea(); 
+            },
+            setlabelXAxisLabelAngle: function(controls){
+
+              console.log(chart.XAxis);
+              console.log(chart.xAxis);
+              Vtool.charts.commonFunctionality.xAxisFunctionality.positionXAxis(chart.XAxis,chart.xAxis,controls);
             }
       }  
 
