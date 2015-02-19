@@ -17,6 +17,6 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'areaChartController',
   }). 
   otherwise({
-    redirectTo: '/pie' 
+    redirectTo: '/area' 
   }); 
 }]);

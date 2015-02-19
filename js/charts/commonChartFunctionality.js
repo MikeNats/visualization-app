@@ -57,6 +57,13 @@ function commonChartFunctionality () {
                        return data
             },
 
+            setColorOfLetters: function(color){
+                    d3.select('svg').style('fill', color);           
+            },
+            setSvgBGcolor : function(data){
+                d3.select('svg').style('background', data);
+             },
+
             //***********  X Bottom Axis  ***********//
 
             xAxisFunctionality : {
@@ -74,10 +81,16 @@ function commonChartFunctionality () {
                   setXAxis: function(XAxis,xAxis,controls){
 
                        charts.xAxisFunctionality.appendXAxisLabel(XAxis,xAxis,controls); 
-                       charts.xAxisFunctionality.positionXAxis(XAxis,xAxis,controls);   
+                       charts.xAxisFunctionality.positionXAxis(XAxis,xAxis,controls);
+                      
+
                   },
 
-
+                  setAxisColor : function(controls){
+        
+                    d3.selectAll('.axis  line').style('stroke',controls.axiscolor);
+                    d3.selectAll('.axis .domain').style('stroke',controls.axiscolor);
+                  },
                   //Appends  axis's label
                   appendXAxisLabel : function(XAxis,xAxis,controls){      
 
@@ -87,7 +100,7 @@ function commonChartFunctionality () {
                           .attr("y", controls.xAxisLabaleY)
                           .attr("x",controls.xAxisLabaleX)
                           .attr("dy", ".35em")
-                          .style("text-anchor", "end")
+                          .style("text-anchor", "start")
                           .attr('class','xBottomLabel')
                           .text(controls.xAxisLabelName)
                           .attr('font-size',controls.xAxisFontSize);
@@ -105,15 +118,17 @@ function commonChartFunctionality () {
                           .attr("dy",  controls.xAxisPositionDxDy().dy +'em')
                           .attr("x", 0)
                           .attr("transform", function(d) {
-                            console.log('da')
                               return "rotate("+ controls.xAxisLabelAngle +")";})
                           .style('font-size', controls.xAxisFontSize+'px');
 
                     d3.select(controls.target+' .xBottomLabel').attr("transform", function(d) {
                               return "rotate("+0+")";})
-                         .attr('x',d3.select(controls.target+' .x.axis').node().getBBox().width );
+                         .attr('x',d3.select('svg .x.axis .domain').node().getBBox().width );
 
                  },
+                setXAxisBottomTitleName : function(xbottomaxistitle){
+                   d3.select('.xBottomLabel').text(xbottomaxistitle);
+                },
 
           },
 
@@ -213,11 +228,15 @@ function commonChartFunctionality () {
                         .attr("y", controls.yAxisLabelY)
                         .attr("x",controls.yAxisLabelX)
                         .attr("dy", "-.39em")
-                        .style("text-anchor", "end")
-                        .attr('class','xBottomLabel')
+                        .style("text-anchor", "start")
+                        .attr('class','yLeftLabel')
                         .text(controls.yAxisLabelName)
                         .attr('font-size',controls.yAxisLabelFontSize);
                 },
+
+               setYAxisLefttleName  : function(yleftaxistitle){
+                   d3.select('.yLeftLabel').text(yleftaxistitle);
+               },
 
 
 
@@ -377,10 +396,22 @@ function commonChartFunctionality () {
                     }
                   }
                   Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,svg,grid,scaledBarXcoord,scaledBarYcoord);
-
+                   Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
+                    Vtool.charts.commonFunctionality.xAxisFunctionality.setAxisColor(controls);
                   return grid;
 
                 },
+                styleGrid: function(controls){
+                  d3.selectAll('.grid .tick line').style('stroke',controls.gridcolor).style('stroke-dasharray',controls.gridDasharray).style('stroke-width',controls.gridWidth).style('shape-rendering', 'crispedges');
+                 },
+
+                showHideGrid:function(controls){
+                    if(controls.gridAppend){
+                       d3.selectAll('.grid').style('display','block');
+                    }else{
+                       d3.selectAll('.grid').style('display','none');
+                    }
+               },
 
                //Positions and  resizes  Grids handler
                 positionGrid :  function(controls,svg,grid,scaledBarXcoord,scaledBarYcoord){
@@ -403,7 +434,7 @@ function commonChartFunctionality () {
               //position Vertical Grid    
               positionVerticalGrid : function(svg,grid,scaledBarXcoord,controls){// position Vertical Grid
                    
-                      grid.verticalGrid.attr("transform", "translate(0," + controls.relativeHeight() + ")")
+                      grid.verticalGrid.transition().duration(600).attr("transform", "translate(0," + controls.relativeHeight() + ")")
                         .call(charts.gridFunctionality.make_x_axis(svg,scaledBarXcoord,controls)
                             .tickSize(-controls.relativeHeight(), 0, 0)
                             .tickFormat("")
@@ -416,7 +447,8 @@ function commonChartFunctionality () {
                       return d3.svg.axis()
                         .scale(scaledBarXcoord )
                         .orient("bottom")
-                        .ticks(controls.verticalGridTiks);
+                        .ticks(controls.verticalGridTiks)    
+;
               },
 
               //Append Horizontal Grid
@@ -429,11 +461,10 @@ function commonChartFunctionality () {
               //Postision Horizontal Grid
               postisionHorizontalGrid : function(svg,grid,scaledBarYcoord,controls ){
 
-                    grid.horizontalGrid.call(charts.gridFunctionality.make_y_axis(svg,scaledBarYcoord,controls )
+                    grid.horizontalGrid.transition().duration(600).call(charts.gridFunctionality.make_y_axis(svg,scaledBarYcoord,controls )
                         .tickSize(- controls.relativeWidth(), 0, 0)
                         .tickFormat(""))
-                        .attr('opacity', controls.horizontalGridStrokeOpacity)
-
+                        .attr('opacity', controls.horizontalGridStrokeOpacity);
               },
 
               // create  Vertical axis used as grid line
@@ -442,8 +473,10 @@ function commonChartFunctionality () {
                         return d3.svg.axis()
                         .scale(scaledBarYcoord)
                         .orient("left")
-                        .ticks(controls.horizontalGridTiks)  
+                        .ticks(controls.horizontalGridTiks)
               },
+
+
 
 
         },
@@ -555,7 +588,7 @@ function commonChartFunctionality () {
             //Return viewportWidth  
             checkViewPortWidth : function(controls){ //Checks and update viewport width
 
-                    return d3.select(window)[0][0].innerWidth;
+                    return angular.element(document.querySelector('#chartContainer'))[0].offsetWidth;
             },
 
             //Rotates Label according to viewport Width
@@ -579,7 +612,7 @@ function commonChartFunctionality () {
             //sets Svg Height
             setSvgDimention : function(controls){
 
-                d3.select(controls.target+' svg').attr('height',(d3.select(window)[0][0].innerHeight)-10);
+                d3.select(controls.target+' svg').attr('height',(angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)-10);
 
             },
       },
@@ -701,7 +734,7 @@ function commonChartFunctionality () {
                     .data(function (d) {  return d.values; })
                     .enter().append("circle")
                     .attr("class", "point"+className)  
-                    .attr("r", "4px")
+                    .attr("r", "1px")
                     .style("fill", function (d) { return 'transparent'; })
                     .style("stroke", "black")
                     .style("cursor", "pointer")
@@ -729,7 +762,8 @@ function commonChartFunctionality () {
 
               positionCyclesOnAppex : function(controls,container,data,scaledLineXcoord,scaledLineYcoord){
                   var  className = controls.target.substr(1);
-                    container.selectAll(".point"+className).attr("cx", function (d) { 
+                    container.selectAll(".point"+className).transition().duration(500).attr("cx", function (d) { 
+                     
                       if(controls.isLineChart){
                           return scaledLineXcoord(d.mainCategoryName) + scaledLineXcoord.rangeBand()/2; 
                       }else{

@@ -56,7 +56,7 @@ module.exports = function(grunt) {
              'js/lybs/angular-route.min.js',
              'js/lybs/d3.min.js',
              'bower_components/modernizr/modernizr.js',
-             'js/charts/settings.js',
+
              'js/charts/commonChartFunctionality.js',
              'js/charts/bar/groupedHorizontal/groupedHorizontal.js',
              'js/charts/bar/groupedVertical/groupedVertical.js' ,
@@ -76,6 +76,7 @@ module.exports = function(grunt) {
              'js/directives/pieChartDirective.js',
              'js/controllers/areaChartController.js',
              'js/controllers/pieChartController.js',
+             'js/charts/settings.js',
              'js/Vtool.js',
              'js/app.js',
 
@@ -86,7 +87,7 @@ module.exports = function(grunt) {
              'js/lybs/angular-route.min.js',
              'js/lybs/d3.min.js',
              'bower_components/modernizr/modernizr.js',
-             'js/charts/settings.js',
+
              'js/charts/commonChartFunctionality.js',
              'js/charts/bar/groupedHorizontal/groupedHorizontal.js',
              'js/charts/bar/groupedVertical/groupedVertical.js' ,
@@ -106,6 +107,7 @@ module.exports = function(grunt) {
              'js/directives/pieChartDirective.js',
              'js/controllers/areaChartController.js',
              'js/controllers/pieChartController.js',
+             'js/charts/settings.js',
              'js/Vtool.js',
              'js/app.js',
 

@@ -1,27 +1,28 @@
 //pieChartDirectiveModule create the directive of  pieChart tag, trigers the chart 
 angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
     function link(scope, el, attr){  
-      
+    
+
+    /*var svg = document.getElementById('skata'),
+        xml = new XMLSerializer().serializeToString(svg),
+        data = "data:image/svg+xml;base64," + btoa(xml),
+        img = new Image()     
+        img.setAttribute('src', data)
+        document.body.appendChild(img)
+      */  
 
          scope.$watch('radiusdata', function(radiusdata){ //Watch radius
               if(scope.incomingdata){
                  scope.settings.innerRadius = radiusdata  ;
                  scope.chart.setIneerRadius();
-                 var svg = document.getElementById('skata'),
-xml = new XMLSerializer().serializeToString(svg),
-data = "data:image/svg+xml;base64," + btoa(xml),
-img = new Image()
- 
-img.setAttribute('src', data)
-document.body.appendChild(img)
+               }
 
-              }
          }); 
  
  
         scope.$watch('chartbgcolor', function(chartbgcolor){ //Watch chart bgColor
               if(scope.incomingdata){   
-                 scope.chart.setSvgBGcolor(chartbgcolor);
+                Vtool.charts.commonFunctionality.setSvgBGcolor(chartbgcolor);
               }
          }); 
  
@@ -44,7 +45,7 @@ document.body.appendChild(img)
          scope.$watch('lettercolor', function(lettercolor){ //Watch chart bgColor
               if(scope.incomingdata){   
                  scope.settings.letter = lettercolor;
-                 scope.chart.setColorOfLetters(lettercolor);
+                 Vtool.charts.commonFunctionality.setColorOfLetters(lettercolor);
               }
          }); 
 
@@ -52,7 +53,7 @@ document.body.appendChild(img)
               if(scope.incomingdata){   
                 scope.settings.isResponsive = false;
                 scope.settings.customWidth = widthdimention;
-                 scope.chart.customDimentions(scope.settings);
+                 scope.chart.setCustomDimentions(scope.settings);
               } 
          });        
 
@@ -60,7 +61,7 @@ document.body.appendChild(img)
               if(scope.incomingdata){   
                 scope.settings.isResponsive = false;
                 scope.settings.customHeight = heightdimention;
-                scope.chart.customDimentions(scope.settings);
+                scope.chart.setCustomDimentions(scope.settings);
               }
          });  
  
@@ -76,17 +77,85 @@ document.body.appendChild(img)
 
         scope.$watch('labelangle', function(labelangle){ //Watch chart label angle
               if(scope.incomingdata){   
-              
                      scope.settings.xAxisLabelAngle = labelangle;
-                     console.log('skata');
                      scope.chart.setlabelXAxisLabelAngle(scope.settings);
               
               }
          }); 
 
+            scope.$watch('xbottomaxistitle', function(xbottomaxistitle){ //Watch chart xbottom Title
+              if(scope.incomingdata){   
+                     scope.settings.xAxisLabelName = xbottomaxistitle;
+                     Vtool.charts.commonFunctionality.xAxisFunctionality.setXAxisBottomTitleName(xbottomaxistitle);
+              
+              }
+         }); 
+
+        scope.$watch('yleftaxistitle', function(yleftaxistitle){ //Watch chart yleft Title
+              if(scope.incomingdata){   
+                     scope.settings.yAxisLabelName = yleftaxistitle;
+                     Vtool.charts.commonFunctionality.yAxisFunctionality.setYAxisLefttleName(yleftaxistitle);
+              
+              }
+         });    
+
+         scope.$watch('interpolation', function(interpolation){ //Watch chart shape interpolation
+              if(scope.incomingdata){   
+                     scope.settings.interpolation = interpolation;
+                     scope.chart.setInterpolation(scope.settings);
+              
+              }
+         });   
+
+         scope.$watch('stacktype', function(stacktype){ //Watch chart stack type
+              if(scope.incomingdata){   
+                  scope.settings.stackLayout = stacktype;
+                  scope.chart.staStackLayOut(scope.incomingdata,scope.settings);
+
+              
+              }
+         });
 
 
-          
+        scope.$watch('gridcolor', function(gridcolor){ //Watch chart grid color
+              if(scope.incomingdata){   
+                  scope.settings.gridcolor = gridcolor;
+                  Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(scope.settings);              
+              }
+         });
+
+          scope.$watch('gridtype', function(gridtype){ //Watch chart grid type
+              if(scope.incomingdata){   
+                  scope.settings.gridDasharray = gridtype;
+                  Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(scope.settings);              
+              }
+         });
+
+
+          scope.$watch('gridivition', function(gridivition){ //Watch chart grid type
+              if(scope.incomingdata){   
+                  scope.settings.horizontalGridTiks = gridivition;
+                  scope.settings.verticalGridTiks = gridivition;
+                  scope.chart.setGridSettings(scope.settings);              
+              }
+         });
+
+          scope.$watch('includegrid', function(includegrid){ //Watch chart grid type
+              if(scope.incomingdata){   
+                  scope.settings.gridAppend = includegrid;
+                  Vtool.charts.commonFunctionality.gridFunctionality.showHideGrid(scope.settings);              
+              }
+         });
+
+          scope.$watch('axiscolor', function(axiscolor){ //Watch chart grid type
+              if(scope.incomingdata){   
+                  scope.settings.axiscolor = axiscolor;
+                   Vtool.charts.commonFunctionality.xAxisFunctionality.setAxisColor( scope.settings);           
+              }
+         });
+
+
+
 
     }
     return {
@@ -94,6 +163,7 @@ document.body.appendChild(img)
         restrict: 'E',
         scope: { 
           incomingdata: '=',
+          xbottomaxistitle: '=',
           chart:'=',
           radiusdata: '=',
           chartbgcolor: '=',
@@ -104,7 +174,15 @@ document.body.appendChild(img)
           heightdimention: '=',
           isresponsive: '=',
           settings: '=',
-          labelangle: '='
+          labelangle: '=',
+          yleftaxistitle:'=',
+          interpolation:'=',
+          stacktype:'=',
+          gridcolor:'=',
+          gridtype:'=',
+          gridivition:'=',
+          includegrid:'=',
+          axiscolor:'='
          }
      };
 }) 

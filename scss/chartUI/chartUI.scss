@@ -1,19 +1,35 @@
- #chartUi{
- 	z-index:99;
- 	position:fixed;
- 	width:100%;
- 	padding: 2% 0  0% 0%;
- 	overflow:scroll;
-	background-color:#eee;
-	max-height:30%;
-	bottom:0;
-}
-fieldset{
-	padding:0;
-	margin:0;
-	border:none;
-}
+#chartUi {
+	background-color: #eee;
+	max-height: 96.538%;
+	overflow: scroll;
+	padding: 1% 0 0 0;
+	position: fixed;
+	padding:1%;
+	margin-top:1%;
+	right: 1%;
+	top: 0;
+	width: 28%;
+	z-index: 99;
+	.uiContainer{
 
-.toolContainer{
-	background-color:#ccc;
+
+
+		fieldset{
+			padding:0;
+			margin:0;
+			border:none;
+		}
+
+		select,input{
+			
+			border-radius:4px;
+		}
+
+		.toolContainer{
+			background-color:#ccc;
+			margin-bottom:15px;
+		    border-radius:4px; 
+		}
+	}
+
 }

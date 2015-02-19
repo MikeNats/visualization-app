@@ -3,8 +3,10 @@
 uiControllerModule.controller('pieChartController',['$scope','fetchDataFromCsvFactory',
    function($scope,fetchDataFromCsvFactory){
       $scope.chart={};
-      $scope.chart.showRadius = true;
-      $scope.chart.showXAxisLabelAngle = false
+      $scope.chart.showPieSettings = true;
+      $scope.chart.showAxisSettings = true;
+      $scope.chart.showAreaSettings = false;
+      $scope.chart.grid = false;
       fetchDataFromCsvFactory.get().then(function(response){
           $scope.chart.chartObject = Vtool.charts.pie.pie;
           $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     

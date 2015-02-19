@@ -1,40 +1,40 @@
-.axis {
-  font: 10px sans-serif;
-}
-
-.axis path,.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.barContainer:hover .line{
-
-  display:block;
-}
-.bar:hover{
-    cursor: pointer;
-}
-
-.barContainer .line{
-  border-top:1px dashed #000;
-  opacity:0;
-}
-
-.barContainer:hover .line{
-  border-top:1px dashed #000;
-
-}
-
-.tick{
-    stroke :grey;
-    stroke-width : 0.2px;
-    stroke-dasharray :3,3;
+#chartContainer{
+    position:fixed;
+    top:0;
+    left:0;
+    width:71%;
+    height:98%;
+    padding:1%;
 
 
-}
 
-.hide{
+    .axis {
+      font: 10px sans-serif;
+        path, line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        } 
+    }
 
-  opacity: 0!important;
+    .bar:hover{
+        cursor: pointer;
+    }
+
+    .barContainer {
+        .line{
+          display:block;
+          border-top:1px dashed #000;
+          opacity:0;
+        }
+    }
+
+    .barContainer:hover .line{
+      border-top:1px dashed #000;
+    }
+
+    .hide{
+      opacity: 0!important;
+    }
+
 }

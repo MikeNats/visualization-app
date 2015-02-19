@@ -76,6 +76,7 @@ function createPieChart( ){
            
             chart.max = d3.max( chart.value );
             chart.min = d3.min( chart.value);
+
         },
 
 
@@ -124,10 +125,11 @@ function createPieChart( ){
 
         //appends details into the pies
         chart.appendDetails =  function(){
+          var totalSum = chart.sumOfInputData(chart.value);
             chart.details = chart.arcs.append("svg:text") 
                 .attr("text-anchor", "middle")                     
                 .text(function(d, i) {     
-                    chart.persentage = Math.floor(( chart.value[i]*100 ) / chart.sumOfInputData(chart.value) );
+                    chart.persentage = (chart.value[i]*100 ) / totalSum ;
                 
                     return chart.persentage + '%';  
                 })
@@ -145,7 +147,9 @@ function createPieChart( ){
         // returns the sum of the input table
         chart.sumOfInputData =  function(input){
             var total = 0;
+
             for (var i=0;i<input.length;i++) {
+        
                     total += input[i];
             }
 
@@ -167,7 +171,7 @@ function createPieChart( ){
             .attr("class",    chart.className+"pointer")
             .style("fill", "none")
             .style("stroke", "black")
-            .attr("marker-end", "url(#circ)")
+            .attr("marker-end", "url(#circ)") 
           
             chart.positionLines();
         },
@@ -209,7 +213,7 @@ function createPieChart( ){
         //Centers the pie
         chart.centerCycle = function(){
             if(chart.controls.isResponsive){
-                d3.select('.chartContainer').attr("transform", "translate("+  ( ( d3.select(window)[0][0].innerWidth/2) - chart.controls.marginLeft() ) +","+ ( (d3.select(window)[0][0].innerHeight/2) - chart.controls.marginTop() )+")")
+                d3.select('.chartContainer').attr("transform", "translate("+  ( ( angular.element(document.querySelector('#chartContainer'))[0].offsetWidth/2) - chart.controls.marginLeft() ) +","+ ( ( angular.element(document.querySelector('#chartContainer'))[0].offsetWidth /2) - chart.controls.marginTop() )+")")
             }else{
 
                 d3.select('.chartContainer').attr("transform", "translate("+  ( ( chart.controls.customWidth/2.5) - chart.controls.marginLeft() ) +","+ ( (chart.controls.customHeight/2) - chart.controls.marginTop() )+")")
@@ -227,17 +231,17 @@ function createPieChart( ){
         //setts outer radius
         chart.setOuterRadius = function(){
             if(chart.controls.isResponsive){
-                if(d3.select(window)[0][0].innerWidth > d3.select(window)[0][0].innerHeight){
-                     if(d3.select(window)[0][0].innerHeight <= chart.controls.mobileViewPort ){     
-                         chart.outerRadius = d3.select(window)[0][0].innerHeight/4;
+                if( angular.element(document.querySelector('#chartContainer'))[0].offsetWidth  >  angular.element(document.querySelector('#chartContainer'))[0].offsetHeight){
+                     if (angular.element(document.querySelector('#chartContainer'))[0].offsetHeight <= chart.controls.mobileViewPort ){     
+                          angular.element(document.querySelector('#chartContainer'))[0].offsetHeight/4;
                      }else{
-                          chart.outerRadius = d3.select(window)[0][0].innerHeight/3;
+                           angular.element(document.querySelector('#chartContainer'))[0].offsetHeight/3;
                      }
                 }else{
-                     if(d3.select(window)[0][0].innerWidth <= chart.controls.mobileViewPort ){
-                         chart.outerRadius = d3.select(window)[0][0].innerWidth/4;
+                     if( angular.element(document.querySelector('#chartContainer'))[0].offsetWidth <= chart.controls.mobileViewPort ){
+                          angular.element(document.querySelector('#chartContainer'))[0].offsetWidth/4;
                      }else{
-                        chart.outerRadius = d3.select(window)[0][0].innerWidth/3;
+                         angular.element(document.querySelector('#chartContainer'))[0].offsetWidth/3;
                      }
                 }
             }else{         
@@ -256,7 +260,7 @@ function createPieChart( ){
             // chain of functions for responsive implementation   
         chart.responsive = function(){
             chart.controls.viewPortWidth = Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth();
-              d3.select('svg').attr('height', (d3.select(window)[0][0].innerHeight-5) ) ;
+              d3.select('svg').attr('height', ( angular.element(document.querySelector('#chartContainer'))[0].offsetHeight-5) ) ;
             chart.setOuterRadius();
             chart.initializeArcObject();
             chart.initializeArcObjectText();
@@ -269,14 +273,14 @@ function createPieChart( ){
 
                       
 
-                var tableContainerWidth = d3.select('.tableContainer').node().getBBox().width;
+              /*  var tableContainerWidth = d3.select('.tableContainer').node().getBBox().width;
                 var tableContainerHeight = d3.select('.tableContainer').node().getBBox().height;
                 var w = d3.select('.tableContainer g').node().getBBox().width+10
                 var numberOfTableG = d3.selectAll('.tableContainer g').pop().length;
                  var skata = w*( 4.9);
-                var distanceFromLeft =  d3.select(window)[0][0].innerHeight/4;
+                var distanceFromLeft =  d3.select('#chartContainer').node().getBBox().height/4;
                 
-                /* d3.select('.tableContainer').attr("transform", function() {     
+                 d3.select('.tableContainer').attr("transform", function() {     
                               return "translate("+ ((d3.select(window)[0][0].innerWidth - skata)/2) +"," + ( d3.select(window)[0][0].innerHeight-50) + ")";      
                   });
 
@@ -437,7 +441,7 @@ function createPieChart( ){
                     d3.select('svg').style('fill', color);
                     d3.selectAll('.line').style('stroke', color);
             },
-            customDimentions : function(controls){
+            setCustomDimentions : function(controls){
                   d3.select(controls.target+' svg').attr('width',controls.customWidth).attr('height',controls.customHeight);
                   chart.setOuterRadius();
                   chart.initializeArcObject();

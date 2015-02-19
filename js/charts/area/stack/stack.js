@@ -45,7 +45,7 @@ function createAreaChartStack(){
 
       //Define stack
       chart.defineStack = function(){
-         chart.stack =  d3.layout.stack()
+         chart.stack  =  d3.layout.stack()
           .offset(chart.controls.stackLayout)
           .values(function (d) {return d.values; })
           .x(function (d) { return chart.scaledAreaXcoord(d.xVariable) + chart.scaledAreaXcoord.rangeBand() / 2; })
@@ -116,13 +116,12 @@ function createAreaChartStack(){
         chart.areaPath =  chart.areaContainer.append("path")
           .attr("class", "streamPath")
           .style("fill", function (d,i) { return chart.colorRange(i); })
-          .style("stroke", "black")
-          .style("stroke-width", "0.5")
+
             .on("mouseover", function (d) {
-                d3.select(this).transition().duration(200).attr('cursor','pointer').attr('stroke','black').attr("r", "10px");       
+                d3.select(this).transition().duration(200).attr('cursor','pointer').attr('stroke','black').attr('stroke-width','0.5px').attr("r", "10px");       
             })
            .on("mouseout",  function (d) { 
-            d3.select(this).transition().duration(400).attr('cursor','normal').attr("r", "6px").attr('stroke','none');
+            d3.select(this).transition().duration(400).attr('cursor','normal').attr("r", "3px").attr('stroke','none');
       })
            chart.positionChartArea(data);
       },
@@ -130,7 +129,14 @@ function createAreaChartStack(){
 
      //position the area 
       chart.positionChartArea = function(){
-        chart.areaPath.attr("d", function (d) { return chart.area(d.values); })
+        if(chart.interpolationImplementation){
+            var animationTime=0;
+        }else{
+            var animationTime=500;
+
+
+        }
+        chart.areaPath.transition().duration(animationTime).attr("d", function (d) { return chart.area(d.values); })
        
      },
 
@@ -186,7 +192,7 @@ function createAreaChartStack(){
     // chain of functions for responsive implementation 
      chart.responsive = function(){
        chart.controls.viewPortWidth = Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth();
-       d3.select(chart.controls.target+' svg').attr('width','100%').attr('height',d3.select(window)[0][0].innerHeight-10);
+       d3.select(chart.controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight-10);
        chart.scaleValues();
       chart.dataObjectArray = [];
       chart.mapVariables(chart.incomingData); 
@@ -220,6 +226,7 @@ function createAreaChartStack(){
         if(chart.controls.isResponsive){ 
            chart.resize(data);
         }
+
     }
      //Chain of functions that build the chart
     chart.appendChart = function(data){
@@ -251,6 +258,7 @@ function createAreaChartStack(){
         }else{
               chart.controls.isPersentage = false;
         }
+        chart.interpolationImplementation = false;
         //chart.controls.url = "./csv/area/stack/data.csv";
         chart.controls.target = 'dthree-Chart';
     },
@@ -285,21 +293,12 @@ function createAreaChartStack(){
                 chart.initializeArcObject();
                 chart.positionBgColorToArc();
              },
-             setSvgBGcolor : function(data){
-                d3.select('svg').style('background', data);
-            },
-            setColorSpectrum : function(controls){
-              
+            setColorSpectrum : function(controls){  
                chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.categoriesList,controls);
-              
-               d3.selectAll('.streamPath').style("fill", function (d,i) {return chart.colorRange(i); })
+                d3.selectAll('.streamPath').style("fill", function (d,i) {return chart.colorRange(i); })
 
             },
-            setColorOfLetters: function(color){
-                    d3.select('svg').style('fill', color);
-                   
-            },
-            customDimentions : function(controls){
+            setCustomDimentions : function(controls){
                   chart.controls = controls;
                   d3.select(controls.target+' svg').attr('width',controls.customWidth).attr('height',controls.customHeight);
                   chart.scaleValues();
@@ -314,7 +313,7 @@ function createAreaChartStack(){
             },
             setResponsive : function(controls){
               chart.controls = controls
-              d3.select(controls.target+' svg').attr('width','100%').attr('height',d3.select(window)[0][0].innerHeight-10)
+              d3.select(controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight-10)
               chart.scaleValues();
                   chart.dataObjectArray = [];
                   chart.mapVariables(chart.incomingData); 
@@ -326,11 +325,57 @@ function createAreaChartStack(){
                    chart.positionChartArea(); 
             },
             setlabelXAxisLabelAngle: function(controls){
-
-              console.log(chart.XAxis);
-              console.log(chart.xAxis);
               Vtool.charts.commonFunctionality.xAxisFunctionality.positionXAxis(chart.XAxis,chart.xAxis,controls);
-            }
+            },
+         
+            setInterpolation : function(controls){
+              chart.controls = controls;
+              chart.interpolationImplementation = true;
+              chart.scaleValues();
+              chart.dataObjectArray = [];
+              chart.mapVariables(chart.incomingData); 
+              chart.positionAxis();
+              Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
+              chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
+              Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
+              Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.points,chart.incomingData,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
+              chart.positionChartArea();
+            }, 
+
+            staStackLayOut: function(incomingdata,controls){
+                chart.controls = controls;
+                chart.interpolationImplementation = false;
+                if(chart.controls.stackLayout == 'expand'){
+                    chart.controls.isPersentage = true;
+              }else{
+                  chart.controls.isPersentage = false;
+               }
+                chart.scaleValues();
+                chart.dataObjectArray = [];
+                chart.mapVariables(incomingdata);
+                d3.selectAll('.streamPath').data(chart.dataObjectArray)
+                       
+                chart.points = d3.selectAll(".pointthree-Chart").data(chart.dataObjectArray)
+                    
+                d3.selectAll(".seriesPoints").remove();    
+               chart.positionChartArea();
+               chart.positionAxis();
+               Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
+               chart.appendPointContainer();   
+               chart.appendLineTitle = Vtool.charts.commonFunctionality.areaAssets.appendLineTitle(incomingdata,chart.points,chart.controls, chart.scaledAreaXcoord,chart.scaledAreaYcoord);   
+               Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(incomingdata,chart.controls,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
+               Vtool.charts.commonFunctionality.areaAssets.appendCyclesOnAppex(incomingdata,chart.controls,chart.points,chart.scaledAreaXcoord,chart.scaledAreaYcoord,chart.colorRange,chart.tooltipContiner);
+
+            },
+            setGridSettings: function(controls){
+                Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
+                Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
+               
+            },
+
+           
+
+
       }  
 
 

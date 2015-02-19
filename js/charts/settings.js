@@ -11,7 +11,7 @@ function chartSettings(){
       //ViewPort settings
       viewPortWidth : function(){
 
-        return d3.select(window)[0][0].innerWidth;
+        return angular.element(document.querySelector('#chartContainer'))[0].offsetWidth;
 
       },
       desktopViewPort:1024,
@@ -30,7 +30,7 @@ function chartSettings(){
       //Sorting settings
       sortMaxToMinAxisVariable :false,//UI
       sortMaxToMinAxisVariable :false,//UI
-      sortMaxToMinAxisQuantitie :true,//UI
+      sortMaxToMinAxisQuantitie :false,//UI
       sortMinToMaxAxisQuantitie :false,//UI
 
       //Style settings
@@ -54,8 +54,7 @@ function chartSettings(){
       //Dimentions Settings
       svgWidth : function(){
         if(this.isResponsive){
-          console.log('skata');
-           return  d3.select(window)[0][0].innerWidth;
+           return angular.element(document.querySelector('#chartContainer'))[0].offsetWidth;
          }else{
            return this.customWidth;
         }
@@ -63,7 +62,7 @@ function chartSettings(){
 
      svgHeight: function(){
        if(this.isResponsive){
-           return d3.select(window)[0][0].innerHeight;
+           return angular.element(document.querySelector('#chartContainer'))[0].offsetHeight;
         }else{
             return this.customHeight;
         }
@@ -111,6 +110,7 @@ function chartSettings(){
 
 
      //X Axis Settings
+      axiscolor:'#000',
       xAxisTicks : 8,//UI
       xAxisLabelName: 'XAxis Title',//UI
       xAxisLabelAngle :0,//UI
@@ -194,7 +194,7 @@ function chartSettings(){
     yAxisLabelName : 'YAxis Title.',//UI
     yAxisLabelFontSize : 11,
     yAxisLabelAngle:0,//UI
-    yAxisLabelX:0,
+    yAxisLabelX:-57,
     yAxisLabelY:-3,
 
     yAxisPositionDxDy: function(){
@@ -232,6 +232,9 @@ function chartSettings(){
 
     //Grid Settings Settings
     gridAppend :true,//UI
+    gridcolor:'#ccc',
+    gridDasharray:'1,1',
+    gridWidth:'1px',
 
     //Grid Horizontal Settings 
     horizontalGridAappend :true,//UI
