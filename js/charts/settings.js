@@ -30,7 +30,7 @@ function chartSettings(){
       //Sorting settings
       sortMaxToMinAxisVariable :false,//UI
       sortMaxToMinAxisVariable :false,//UI
-      sortMaxToMinAxisQuantitie :false,//UI
+      sortMaxToMinAxisQuantitie :true,//UI
       sortMinToMaxAxisQuantitie :false,//UI
 
       //Style settings
