@@ -1,12 +1,15 @@
 
-body *,text{
+body *,text,a,button,.button{
   font-family:$base-FontFamily;
 
 
 }
 body{
 	
-	  background-color: #333;
+background-attachment: fixed;
+background-color: #333;
+/*background-image: url("../img/bg.png");*/
+background-position: 282% 186%;
 
 }
 .main,.mainSubContainer{
@@ -14,3 +17,50 @@ body{
 	margin:0;
 	padding:0;
 } 
+
+nav{
+	
+	margin-top:1%;
+	button{
+
+		background-color:#eee;
+		color:#333;
+	}
+
+    .activeMainMenuButton{
+		background-color: #999;
+		border-radius: 6px;
+		color: #fff;
+	}
+	button:hover, button:focus, .button:hover, .button:focus{
+		background-color:#eee;
+		color:#333;
+
+	}
+	.button.back{
+        @include  transition($timing:linear , $duration:0.5s);
+		background:url(../img/back.png) no-repeat 50% 50% #999;
+		color:#999;
+		display: block;
+		float: left;
+		height: 55px;
+		margin-right: 10px;
+
+	}
+	.button.back.noBG{
+
+		background-image:none;
+		color:#eee;
+	}
+    .button.back.noBG:hover{
+		background-image:none;
+		background-color:#eee;
+		color:#333; 
+    }
+	.button.back:hover{
+		@include  transition($timing:ease , $duration:0.6s);
+		color:#999;
+		background:url(../img/back.png) no-repeat 40% 50% #999;
+
+	}
+}

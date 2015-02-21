@@ -1,35 +1,64 @@
-#chartUi {
-	background-color: #eee;
-	max-height: 96.538%;
-	overflow: scroll;
-	padding: 1% 0 0 0;
-	position: fixed;
-	padding:1%;
-	margin-top:1%;
-	right: 1%;
-	top: 0;
-	width: 28%;
-	z-index: 99;
-	.uiContainer{
+.contentPanel{
+	position:fixed;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+
+		#chartUi {
+
+			  background-color: #eeeeee;
+			  min-height: 85%;
+			  max-height: 85%;
+			  overflow: scroll;
+			  padding: 1%;
+			  position: absolute;
+			  right: 1%;
+			  top: 13%;
+			  width: 25%;
+			  z-index: 99;
 
 
+			.uiContainer{
+				.toolContainer{
+						@include  transition($timing:ease , $duration:0.4s);
+						box-shadow:0 1px 2px -1px #000000;
+						 h3{
+							cursor:pointer
+						 }
+						.toolSubContainer {
+							@include  transition($timing:ease , $duration:0.4s);
+						}
+					   .colapse{
+							@include  transition($timing:ease , $duration:0.4s);
+						    height:0;
+						   overflow:hidden;
+						}
+				}
+				.toolContainer:hover{
+					box-shadow:0 1px 4px -1px #000000;
 
-		fieldset{
-			padding:0;
-			margin:0;
-			border:none;
+				}
+
+
+				fieldset{
+					padding:0;
+					margin:0;
+					border:none;
+				}
+
+				select,input{
+					
+					border-radius:4px;
+				}
+
+				.toolContainer{
+					background-color:#ccc;
+					margin-bottom:15px;
+				    border-radius:4px; 
+				}
+			}
+
 		}
-
-		select,input{
-			
-			border-radius:4px;
-		}
-
-		.toolContainer{
-			background-color:#ccc;
-			margin-bottom:15px;
-		    border-radius:4px; 
-		}
-	}
 
 }

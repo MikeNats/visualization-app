@@ -129,7 +129,7 @@ function createPieChart( ){
             chart.details = chart.arcs.append("svg:text") 
                 .attr("text-anchor", "middle")                     
                 .text(function(d, i) {     
-                    chart.persentage = ((chart.value[i]*100 ) / totalSum).toFixed(2) ;
+                    chart.persentage = ((chart.value[i]*100 ) / totalSum).toFixed(1) ;
                 
                     return chart.persentage + '%';  
                 })
@@ -148,7 +148,7 @@ function createPieChart( ){
         chart.sumOfInputData =  function(input){
             var total = 0;
 
-            for (var i=0;i<input.length;i++) {
+            for (var i=0;i<input.length;i++) { 
         
                     total += input[i];
             }

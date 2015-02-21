@@ -11,14 +11,20 @@ module.exports = function(grunt) {
         my_target: {
             files: {
                 'index.html': 'index.html',
+                'views/indexTemplate.html': 'views/unMinified/indexTemplate.html',
+                'views/chartsTemplate.html': 'views/unMinified/chartsTemplate.html', 
+                'views/selectChartsTemplate.html': 'views/unMinified/selectChartsTemplate.html',              
                 'views/chartTemplate.html': 'views/unMinified/chartTemplate.html',
-                'app/index.html': 'index.html',
-                'app/views/chartTemplate.html': 'views/unMinified/chartTemplate.html'
+                'app/index.html': 'index.html', 
+                'app/views/indexTemplate.html': 'views/unMinified/indexTemplate.html',
+                'app/views/chartsTemplate.html': 'views/unMinified/chartsTemplate.html',
+                'app/views/selectChartsTemplate.html': 'views/unMinified/selectChartsTemplate.html',
+                'app/views/chartTemplate.html': 'views/unMinified/chartsTemplate.html', 
             }
         }
     },
 
-
+ 
     //Compiles Compress and consolidate into one folder all the sass files
     sass: {
       options: {
@@ -56,7 +62,6 @@ module.exports = function(grunt) {
              'js/lybs/angular-route.min.js',
              'js/lybs/d3.min.js',
              'bower_components/modernizr/modernizr.js',
-
              'js/charts/commonChartFunctionality.js',
              'js/charts/bar/groupedHorizontal/groupedHorizontal.js',
              'js/charts/bar/groupedVertical/groupedVertical.js' ,
@@ -73,21 +78,23 @@ module.exports = function(grunt) {
              'js/services/services/valueServiceCsvPathForChart.js',
              'js/services/factories/fetchDataFromCsvFactory.js',
              'js/controllers/uiChartController.js',
+             'js/controllers/chartsController.js',
              'js/directives/pieChartDirective.js',
+             'js/controllers/mainMenuController.js',
+             'js/controllers/selectChartController.js',
              'js/controllers/areaChartController.js',
              'js/controllers/pieChartController.js',
              'js/charts/settings.js',
              'js/Vtool.js',
              'js/app.js',
 
-          ],
+          ], 
           'app/js/all.min.js': 
           [
              'js/lybs/angular.min.js',
              'js/lybs/angular-route.min.js',
              'js/lybs/d3.min.js',
              'bower_components/modernizr/modernizr.js',
-
              'js/charts/commonChartFunctionality.js',
              'js/charts/bar/groupedHorizontal/groupedHorizontal.js',
              'js/charts/bar/groupedVertical/groupedVertical.js' ,
@@ -105,6 +112,9 @@ module.exports = function(grunt) {
              'js/services/factories/fetchDataFromCsvFactory.js',
              'js/controllers/uiChartController.js',
              'js/directives/pieChartDirective.js',
+             'js/controllers/mainMenuController.js',
+             'js/controllers/chartsController.js',
+             'js/controllers/selectChartController.js',
              'js/controllers/areaChartController.js',
              'js/controllers/pieChartController.js',
              'js/charts/settings.js',

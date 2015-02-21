@@ -1,13 +1,15 @@
 #chartContainer{
-    position:fixed;
-    top:0;
-    left:0;
-    width:71%;
-    height:98%;
-    padding:1%;
+    height: 85%;
+    left: 0;
+    padding: 0 1%;
+    position: absolute;
+    top: 13%;
+    width: 74%;
 
 
-
+      h2{
+        color:#eee;
+      }    
     .axis {
       font: 10px sans-serif;
         path, line {
@@ -37,4 +39,23 @@
       opacity: 0!important;
     }
 
+}
+#chartContainer.charts{
+    
+    width:100%;
+    #imgcontainer{
+
+       #verticalalign1 #horizontalalign1 #horizontalalign2 {
+
+           h1{
+                margin-top:-15%;
+                marin-bottom:40px;
+           }
+           #center1 {
+                a{
+                    padding-bottom:10px;
+                }
+            }
+        }    
+    }
 }

@@ -1,0 +1,29 @@
+<section class="large-16 contentPanel columns" >
+         <nav ng-controller='mainMenuController'>
+
+			<a title='Back' class='button back' href='#/charts' ng-class="{activeMainMenuButton : menu.charts}" ng-click='menu.chartsSelected();'><br/></a>
+			<a title='Charts' class='button back noBG' href='#/charts' ng-class="{activeMainMenuButton : menu.maps}" ng-click='menu.mapsSelected();'>Charts</a>
+			<button ng-class="{activeMainMenuButton : menu.maps}" ng-click='menu.mapsSelected();'>Select</button>
+         </nav>
+	    <article id='chartContainer'  >
+	   
+			   	<h2>Preview</h2> 
+
+	    </article>  
+
+		<aside id='chartUi' class='largin-16 columns' ng-controller='uiController'>
+		   	
+
+		   <div class='large-16   columns styles  toolContainer' >
+			    	<h2>Select</h2>
+			    	
+			    </div>
+			 
+		     <div class='uiContainer columns large-16'  > 
+	           	<div class='large-16   columns styles  toolContainer' >
+	           	</div>
+	         </div>
+
+		</aside>
+
+</section>	 

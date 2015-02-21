@@ -1,4 +1,8 @@
-@import  "scss/fonts/fonts";
+// *** Top Priority ***//
+@import  "scss/fonts/fonts",
+          "scss/settings";  
+
+
 // *** Foundation compoments ***//
 @import 
 "foundation", 
@@ -11,10 +15,11 @@
  @import 
   
  //General 
- "scss/settings",  
+
  "scss/mainApp/global", 
    
       
- //Charts   
+ //Charts  
+ "scss/indexPage/index",  
  "scss/charts/charts", 
- "scss/chartUI/chartUI";       
+ "scss/chartUI/chartUI";        

@@ -1,0 +1,43 @@
+<section class="large-16 contentPanel columns" >
+         <nav ng-controller='mainMenuController'>
+
+			<a title='Back' class='button back' href='#/index' ng-class="{activeMainMenuButton : menu.charts}" ng-click='menu.chartsSelected();'><br/></a>
+			<button ng-class="{activeMainMenuButton : menu.maps}" ng-click='menu.mapsSelected();'>Charts</button>
+ 
+         </nav>
+	    <article id='chartContainer' class='charts' >
+	    	
+			 <div id="imgcontainer">
+			 	<div id="verticalalign1">
+			   		<div id="horizontalalign1"> 
+			   			<div id="horizontalalign2">
+			   				<h1>Charts</h1> 
+			   				<div id="center1">
+
+			   				<a title='Update Project' class='columns large-6 medium-6 small-16' href='#'><h3>Update</h3></a>
+							<a title='Create Project' class='columns large-6 medium-6 small-16' href='#/charts/select'><h3>Create</h3></a>
+
+			   				 </div>
+			  			</div>
+			  		</div> 
+			  	</div>
+			 </div>  
+
+	    </article>  
+
+		<!--<aside id='chartUi' class='largin-16 columns' ng-controller='uiController'>
+		   	
+
+		   <div class='large-16   columns styles  toolContainer' >
+			    	<h2>Settings</h2>
+			    	
+			    </div>
+			 
+		     <div class='uiContainer columns large-16'  > 
+	           	<div class='large-16   columns styles  toolContainer' >
+	           	</div>
+	         </div>
+
+		</aside>-->
+
+</section>	 

@@ -612,7 +612,7 @@ function commonChartFunctionality () {
             //sets Svg Height
             setSvgDimention : function(controls){
 
-                d3.select(controls.target+' svg').attr('height',(angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)-10);
+                d3.select(controls.target+' svg').attr('height',(angular.element(document.querySelector('#chartContainer'))[0].offsetHeight));
 
             },
       },
@@ -754,7 +754,7 @@ function commonChartFunctionality () {
                   })
                   .on("mouseout",  function (d) {  
                       d3.select(this).transition()        
-                            .duration(200).attr("r", "4px").attr("opacity", "1");    
+                            .duration(200).attr("r", "1px").attr("opacity", "1");    
                       Vtool.charts.commonFunctionality.areaAssets.removeTooltip(controls,tooltip); })
                       Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(controls,container,data,scaledLineXcoord,scaledLineYcoord);  
 

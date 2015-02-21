@@ -9,14 +9,23 @@ var app = angular.module('app', [
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
   when('/pie', {
-    templateUrl: 'views/chartTemplate.html',
+    templateUrl: 'views/chartTemplate.html', 
     controller: 'pieChartController',  
   }).
-  when('/area', {
+  when('/charts', {
+    templateUrl: 'views/chartsTemplate.html', 
+    controller: 'chartsController',
+  }).
+  when('/charts/select', {
+    templateUrl: 'views/selectChartsTemplate.html', 
+    controller: 'selectChartController',
+  }). 
+  when('/charts/select/area', {
     templateUrl: 'views/chartTemplate.html', 
     controller: 'areaChartController',
   }). 
   otherwise({
-    redirectTo: '/area' 
+    redirectTo: '/index',
+    templateUrl: 'views/indexTemplate.html' 
   }); 
 }]);

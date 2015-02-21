@@ -121,7 +121,7 @@ function createAreaChartStack(){
                 d3.select(this).transition().duration(200).attr('cursor','pointer').attr('stroke','black').attr('stroke-width','0.5px').attr("r", "10px");       
             })
            .on("mouseout",  function (d) { 
-            d3.select(this).transition().duration(400).attr('cursor','normal').attr("r", "3px").attr('stroke','none');
+            d3.select(this).transition().duration(400).attr('cursor','normal').attr("r", "0.5px").attr('stroke','none');
       })
            chart.positionChartArea(data);
       },
@@ -192,7 +192,7 @@ function createAreaChartStack(){
     // chain of functions for responsive implementation 
      chart.responsive = function(){
        chart.controls.viewPortWidth = Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth();
-       d3.select(chart.controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight-10);
+       d3.select(chart.controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight);
        chart.scaleValues();
       chart.dataObjectArray = [];
       chart.mapVariables(chart.incomingData); 
@@ -313,7 +313,7 @@ function createAreaChartStack(){
             },
             setResponsive : function(controls){
               chart.controls = controls
-              d3.select(controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight-10)
+              d3.select(controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)
               chart.scaleValues();
                   chart.dataObjectArray = [];
                   chart.mapVariables(chart.incomingData); 
