@@ -5,7 +5,6 @@ uiControllerModule.controller('mainMenuController',['$scope',function($scope){
   $scope.menu.maps = false; 
   $scope.menu.charts = false;
 
-  console.log('skata')
   $scope.menu.mapsSelected = function(){
     $scope.menu.maps = true; 
     $scope.menu.charts = false;
@@ -15,6 +14,10 @@ uiControllerModule.controller('mainMenuController',['$scope',function($scope){
     $scope.menu.maps = false; 
     $scope.menu.charts = true;
   }
+
+
+
+
 
   
 }]);  

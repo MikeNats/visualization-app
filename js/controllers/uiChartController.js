@@ -3,32 +3,22 @@ var uiControllerModule = angular.module('chartControlerModule',['chartDirectiveM
 
 uiControllerModule.controller('uiController',['$scope',function($scope){
 
-
+//Accordeon
     $scope.accordeon={};
-    $scope.tab1=true;
-    $scope.tab2=true;
-    $scope.tab3=true;
-    $scope.tabfunc1 = function(){
-           $scope.tab1 = !$scope.tab1;
-           $scope.tab2 = true;
-           $scope.tab3 = true;
-    };
-        $scope.tabfunc2 = function(){
-           $scope.tab2 = !$scope.tab2;
-           $scope.tab1 = true;
-           $scope.tab3 = true;
-    };
-   
-       $scope.tabfunc3 = function(){
-           $scope.tab3 = !$scope.tab3;
-           $scope.tab2 = true;
-           $scope.tab1 = true;
+    $scope.accordeon.activeTab = function($event){
+        if(angular.element($event.currentTarget).hasClass('colapse') ){
+            angular.element($event.currentTarget).removeClass('colapse');
+        }else{
+           angular.element(document.querySelectorAll('.accTitle')).removeClass('colapse');         
+           angular.element($event.currentTarget).addClass('colapse');
+
+        }
 
     };
    
    
 
-  $scope.chart.isResponsive = function(){ d
+  $scope.chart.isResponsive = function(){ 
      var state =  function(){
         if($scope.chart.responsive){
             return false; 
@@ -37,6 +27,7 @@ uiControllerModule.controller('uiController',['$scope',function($scope){
         }
      } 
      $scope.chart.responsive =  state();
+     
    }
 
    $scope.chart.isGridVisible  = function(){

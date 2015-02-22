@@ -10,7 +10,7 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
         img.setAttribute('src', data)
         document.body.appendChild(img)
       */  
-
+       
          scope.$watch('radiusdata', function(radiusdata){ //Watch radius
               if(scope.incomingdata){
                  scope.settings.innerRadius = radiusdata  ;

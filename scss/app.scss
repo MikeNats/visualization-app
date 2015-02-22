@@ -13,13 +13,18 @@
 // *** VTool compoments *** //  
 
  @import 
-  
  //General 
+ "scss/global", 
+       
+ //Navigation  
+ "scss/navigation/navigation", 
 
- "scss/mainApp/global", 
-   
-      
- //Charts  
- "scss/indexPage/index",  
- "scss/charts/charts", 
- "scss/chartUI/chartUI";        
+ //LeftPanel
+ "scss/mainPanel/indexPanel", 
+ "scss/mainPanel/panel",
+ "scss/mainPanel/chartsPanel",
+ "scss/mainPanel/selectPanel",
+ "scss/mainPanel/chartPanel", 
+
+ //RightPanel
+ "scss/rightPanel/chartUI";        
