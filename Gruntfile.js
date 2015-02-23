@@ -59,7 +59,9 @@ module.exports = function(grunt) {
           'js/all.min.js': 
           [
              'js/lybs/angular.min.js',
+             'js/lybs/angular-animate.js',
              'js/lybs/angular-route.min.js',
+             'js/lybs/router-ui.js',
              'js/lybs/d3.min.js',
              'bower_components/modernizr/modernizr.js',
              'js/charts/commonChartFunctionality.js',
@@ -92,7 +94,9 @@ module.exports = function(grunt) {
           'app/js/all.min.js': 
           [
              'js/lybs/angular.min.js',
+             'js/lybs/angular-animate.js',
              'js/lybs/angular-route.min.js',
+             'js/lybs/router-ui.js',
              'js/lybs/d3.min.js',
              'bower_components/modernizr/modernizr.js',
              'js/charts/commonChartFunctionality.js',

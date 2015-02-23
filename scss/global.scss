@@ -1,8 +1,11 @@
 
-body *,text,a,button,.button{
+body *,text,a,button,.button,h1,h2,h3,h4,h5{
   font-family:$base-FontFamily;
 
 
+}
+h2{
+  font-size:2.1rem;
 }
 body{
 	
@@ -17,4 +20,59 @@ background-position: 282% 186%;
 	margin:0;
 	padding:0;
 } 
+
+
+.slide{
+	
+	height:100%;
+}
+
+.slide.ng-enter #chartContainer,.slide.ng-leave.ng-leave-active  #chartContainer{
+opacity: 0;
+  -webkit-transform:scale(0);
+  -moz-transform:scale(0);
+   -ms-transform:scale(0);
+  transform:scale(0);
+
+   @include  transition($timing:ease , $duration:0.3s);
+}
+
+.slide.ng-enter  #chartUi, .slide.ng-enter .contentPanel #chartUi{
+opacity: 0;
+ // -webkit-transform:scale(0);
+//  -moz-transform:scale(0);
+//   -ms-transform:scale(0);
+//  transform:scale(0);
+  right:-200%;
+   @include  transition($timing:ease , $duration:0.3s);
+}
+
+
+
+
+.slide #chartContainer,.slide #chartUi, .slide.ng-enter.ng-enter-active #chartContainer, .slide.ng-enter.ng-enter-active #chartUi{
+  opacity: 1;
+  	@include  transition($timing:ease , $duration:0.6s);
+  -webkit-transform:scale(1);
+  -moz-transform:scale(1);
+   -ms-transform:scale(1);
+  transform:scale(1);
+
+} 
+
+.slide #chartUi, .slide.ng-enter.ng-enter-active #chartUi{
+  opacity: 1;
+  	@include  transition($timing:ease , $duration:0.6s);
+ // -webkit-transform:scale(1);
+ // -moz-transform:scale(1);
+  // -ms-transform:scale(1);
+ // transform:scale(1);
+   right:1%;
+} 
+
+.slide .contentPanel.chart #chartContainer{
+
+    @include  transition($timing:ease , $duration:0.6s);
+     transition-delay-function:3s;
+}
 

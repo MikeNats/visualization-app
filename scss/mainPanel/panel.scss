@@ -12,7 +12,10 @@
         position: absolute;
         top: 13%;
         width: 74%;
-
+button{
+  
+  background-color:$blue;
+}
 
         h2{
             color:$secondaryLetterColor;
@@ -35,7 +38,7 @@
         }
         #center1 {
           border-radius:5px;
-          background-color:#999;
+          background-color:$eee;
           a{
               padding-bottom:10px; 
               img{
@@ -56,7 +59,7 @@
 
 
 @media only screen and (max-width: 60.063em) { 
-  .contentPanel.chart{
+  .contentPanel.chart,  .contentPanel.select{
     float:left;
     position:static;
     #chartContainer {

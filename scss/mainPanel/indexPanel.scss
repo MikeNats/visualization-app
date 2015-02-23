@@ -1,3 +1,10 @@
+.contentPanel.index #chartContainer{
+	
+	width:100%;
+	top:0;
+	height:100%;
+}
+
 #imgcontainer {
 	height: 100%;
 	left: 0;
@@ -34,7 +41,7 @@
 
 					margin-bottom:15px;
 					margin-top:-10px;
-					color:#ccc;
+					color:$white;
 				}
 
 
@@ -44,17 +51,19 @@
 					float: left;
 					height: auto;
 					width:  100%;
-					background-color: #999;
+					background-color: $eee;
 					border: 1px solid $borderColor;
 					padding: 3%;
 				    border-radius: 4px;
 					a{
-						background-color: $secondaryBGColor;
+						background-color: $blue;
 						border-radius: 2px;
-						padding: 10px 10px 26px;
+
+						padding: 10px 35px 35px 26px;
+						border-radius:4px;
 					    @include  transition($timing:linear , $duration:0.2s);
 						h3{
-
+						   color:$white;
 							line-height: 150%;
 							margin-top: 0;
 						}
@@ -88,6 +97,7 @@
 	}
 
 }
+
 
 @media only screen and (max-width: 40.063em) {
 	
@@ -137,6 +147,13 @@
 }
 
 @media only screen and (max-width: 40.063em) { 
+
+.contentPanel.index #chartContainer {
+  padding: 0 1%;
+  position: static;
+ float:left;
+ width:100%
+}
 .contentPanel.index  #imgcontainer #verticalalign1 #horizontalalign1 #horizontalalign2 h1{
       
             margin-top:30px;
@@ -145,6 +162,7 @@
             width:100%;
     }
 }
+
 
 
 

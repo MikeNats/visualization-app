@@ -6,11 +6,11 @@ uiControllerModule.controller('uiController',['$scope',function($scope){
 //Accordeon
     $scope.accordeon={};
     $scope.accordeon.activeTab = function($event){
-        if(angular.element($event.currentTarget).hasClass('colapse') ){
-            angular.element($event.currentTarget).removeClass('colapse');
+        if(angular.element($event.currentTarget).parent().hasClass('colapse') ){
+            angular.element($event.currentTarget).parent().removeClass('colapse');
         }else{
            angular.element(document.querySelectorAll('.accTitle')).removeClass('colapse');         
-           angular.element($event.currentTarget).addClass('colapse');
+           angular.element($event.currentTarget).parent().addClass('colapse');
 
         }
 

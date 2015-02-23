@@ -1,31 +1,64 @@
 //Initialization of angulars main module and its dipendancies
 var app = angular.module('app', [ 
-  'ngRoute',
-  'chartControlerModule'
-]);
+  'ngRoute','ngAnimate',
+  'chartControlerModule','ui.router'
+]).run(
+  [ '$rootScope', '$state', '$stateParams',
+    function ($rootScope,   $state,   $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+    }
+  ]
+).config(
+  [          '$stateProvider', '$urlRouterProvider',
+    function ($stateProvider,   $urlRouterProvider) {
+
+      /////////////////////////////
+      // Redirects and Otherwise //
+      /////////////////////////////
+
+      $urlRouterProvider
+      .otherwise('/');
+
+      //////////////////////////
+      // State Configurations //
+      //////////////////////////
+
+      $stateProvider
+        // Home //
+        .state("index", {
+          // Use a url of "/" to set a state as the "index".
+          url: "/",
+          templateUrl: 'views/indexTemplate.html', 
+ 
+        })
+        // charts //
+        .state('charts', {
+          url: '/charts',
+          templateUrl: 'views/chartsTemplate.html', 
+          controller: 'chartsController',
+              
+        })
+        // select //
+        .state('select', {
+          url: '/charts/select',
+          templateUrl: 'views/selectChartsTemplate.html', 
+          controller: 'selectChartController',
+              
+        })
+        // area //
+        .state('area', {
+          url: '/charts/select/area',
+          templateUrl: 'views/chartTemplate.html', 
+          controller: 'areaChartController',         
+        })
+        // area //
+        .state('pie', {
+          url: '/charts/select/pie',
+          templateUrl: 'views/chartTemplate.html', 
+          controller: 'pieChartController',
+              
+        })
+    }]);
 
 
-//Routers
-app.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.
-  when('/pie', {
-    templateUrl: 'views/chartTemplate.html', 
-    controller: 'pieChartController',  
-  }).
-  when('/charts', {
-    templateUrl: 'views/chartsTemplate.html', 
-    controller: 'chartsController',
-  }).
-  when('/charts/select', {
-    templateUrl: 'views/selectChartsTemplate.html', 
-    controller: 'selectChartController',
-  }). 
-  when('/charts/select/area', {
-    templateUrl: 'views/chartTemplate.html', 
-    controller: 'areaChartController',
-  }). 
-  otherwise({
-    redirectTo: '/index',
-    templateUrl: 'views/indexTemplate.html' 
-  }); 
-}]);

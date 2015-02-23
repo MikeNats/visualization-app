@@ -30,15 +30,15 @@ function chartSettings(){
       //Sorting settings
       sortMaxToMinAxisVariable :false,//UI
       sortMaxToMinAxisVariable :false,//UI
-      sortMaxToMinAxisQuantitie :true,//UI
-      sortMinToMaxAxisQuantitie :false,//UI
+      sortMaxToMinAxisQuantitie :false,//UI
+      sortMinToMaxAxisQuantitie :true,//UI
 
       //Style settings
       bgColor : '#fff',//UI
       lightbgColor : 'green',//UI
       darkbgColor : 'yellow',//UI
       barDistance : .2,//UI
-      fontSize: 15,
+      fontSize: 14,
 
       //Table Content settings
       contentTableShow:true,//UI

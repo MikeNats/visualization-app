@@ -127,12 +127,14 @@ function createPieChart( ){
         chart.appendDetails =  function(){
           var totalSum = chart.sumOfInputData(chart.value);
             chart.details = chart.arcs.append("svg:text") 
-                .attr("text-anchor", "middle")                     
+                .attr("text-anchor", "middle") 
+                .attr('class','cycleLables')                    
                 .text(function(d, i) {     
                     chart.persentage = ((chart.value[i]*100 ) / totalSum).toFixed(1) ;
                 
                     return chart.persentage + '%';  
                 })
+               .style('text-decoration','underline')
                 .style("color","#fff")
                 .style("font-size",chart.controls.fontSize+'px');
             chart.positionDetails();
@@ -158,9 +160,25 @@ function createPieChart( ){
 
          //Positions details into pie
         chart.positionDetails = function(){
-            chart.details.transition().duration(200).attr("transform", function(d) {                   
-                    
-                    return "translate(" + chart.arcObjcText.centroid(d) + ")";        
+            chart.details.transition().duration(200).attr("transform", function(d,i) {                   
+                 var distance = d3.select('.cycleLables').node().getBBox().width;
+                 
+                  if(i>4) {
+                     if(i%2){
+                       var x =  chart.arcObjcText.centroid(d)[0] + (i*5) ;
+
+                     }else{
+
+                      var x =  chart.arcObjcText.centroid(d)[0] -distance ;
+                     }
+
+                      
+                  } else{
+
+                    x =chart.arcObjcText.centroid(d)[0];
+                  }
+                
+                    return "translate(" +  x+','+ chart.arcObjcText.centroid(d)[1] + ")";        
                 })
 
         },
