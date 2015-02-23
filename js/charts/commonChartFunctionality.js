@@ -395,7 +395,7 @@ function commonChartFunctionality () {
                         grid.verticalGrid  = Vtool.charts.commonFunctionality.gridFunctionality.appendVerticalGrid(svg,scaledBarXcoord,controls);
                     }
                   }
-                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,svg,grid,scaledBarXcoord,scaledBarYcoord);
+                   Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,svg,grid,scaledBarXcoord,scaledBarYcoord);
                    Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
                     Vtool.charts.commonFunctionality.xAxisFunctionality.setAxisColor(controls);
                   return grid;
@@ -447,8 +447,7 @@ function commonChartFunctionality () {
                       return d3.svg.axis()
                         .scale(scaledBarXcoord )
                         .orient("bottom")
-                        .ticks(controls.verticalGridTiks)    
-;
+                        .ticks(controls.verticalGridTiks);
               },
 
               //Append Horizontal Grid
@@ -462,7 +461,7 @@ function commonChartFunctionality () {
               postisionHorizontalGrid : function(svg,grid,scaledBarYcoord,controls ){
 
                     grid.horizontalGrid.transition().duration(600).call(charts.gridFunctionality.make_y_axis(svg,scaledBarYcoord,controls )
-                        .tickSize(- controls.relativeWidth(), 0, 0)
+                        .tickSize(-controls.relativeWidth(), 0, 0)
                         .tickFormat(""))
                         .attr('opacity', controls.horizontalGridStrokeOpacity);
               },
