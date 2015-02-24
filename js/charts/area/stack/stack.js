@@ -273,7 +273,7 @@ function createAreaChartStack(){
          }
 
         //Executes the chart insideIframe
-        chart.exeFromIframe = function(data,controls){
+        chart.exeUserSettings = function(data,controls){
             chart.controls = controls;
             chart.incomingData = data;
             chart.overrideLocalSettings ();            

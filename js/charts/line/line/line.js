@@ -81,6 +81,7 @@ function createLineChart(){
 
      },
 
+
      //Append  area container
      chart.appendChartContainer = function(){
       chart.chartContainer = chart.svg.append('g')
@@ -115,9 +116,16 @@ function createLineChart(){
      }, 
 
     
+  
      //Position lines
      chart.positionChartLines = function(){
-          chart.Line.attr("d", function(d) {return chart.linePath(d.values); })
+      if(chart.interpolationImplementation){
+            var animationTime=0;
+        }else{
+            var animationTime=500;
+        
+        }
+          chart.Line.transition().duration(animationTime).attr("d", function(d) {return chart.linePath(d.values); })
 
      },
 
@@ -267,88 +275,54 @@ function createLineChart(){
             },
             setCustomDimentions : function(controls){
                   chart.controls = controls;
-                   chart.controls.viewPortWidth = Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth();
-                   d3.select(controls.target+' svg').attr('width',controls.customWidth).attr('height',controls.customHeight);
-                   chart.scaleValues();
-                   chart.scaleValues();
+                  chart.controls.viewPortWidth = Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth();
+                  d3.select(controls.target+' svg').attr('width',controls.customWidth).attr('height',controls.customHeight);
+                  chart.scaleValues();
+                  chart.scaleValues();
                   chart.mapVariables(chart.incomingData); 
                   chart.positionAxis();
                   Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineYcoord);
-                   chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
-        
-
-        
-        
-        Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineYcoord);
-
-        Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.LineContainer,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineYcoord);
-
-chart.positionChartLines();
+                  chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);    
+                  Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.LineContainer,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  chart.positionChartLines();
     
             },
             setResponsive : function(controls){
-              chart.controls = controls
-              d3.select(controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)
-              chart.scaleValues();
+                  chart.controls = controls
+                  d3.select(controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)
+                  chart.scaleValues();
                   chart.dataObjectArray = [];
                   chart.mapVariables(chart.incomingData); 
                   chart.positionAxis();
-                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineXcoord);
+                  chart.points = d3.selectAll(".pointthree-Chart");
+                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineYcoord);
                   chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
-                  Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineXcoord);
-                  Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.points,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineXcoord);
-                   chart.positionChartArea(); 
+                  Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.points,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  chart.positionChartLines(); 
             },
             setlabelXAxisLabelAngle: function(controls){
-              Vtool.charts.commonFunctionality.xAxisFunctionality.positionXAxis(chart.XAxis,chart.xAxis,controls);
+                  Vtool.charts.commonFunctionality.xAxisFunctionality.positionXAxis(chart.XAxis,chart.xAxis,controls);
             },
          
             setInterpolation : function(controls){
-              chart.controls = controls;
-              chart.interpolationImplementation = true;
-              chart.scaleValues();
-              chart.dataObjectArray = [];
-              chart.mapVariables(chart.incomingData); 
-              chart.positionAxis();
-              Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineXcoord);
-              chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
-              Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineXcoord);
-              Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.points,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineXcoord);
-              chart.positionChartArea();
+                  chart.controls = controls;
+                  chart.interpolationImplementation = true;
+                  chart.scaleValues();
+                 chart.mapVariables(chart.incomingData); 
+                 chart.positionAxis();
+                 chart.points = d3.selectAll(".pointthree-Chart");
+                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
+                 Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                 Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.points,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineYcoord);
+               chart.positionChartLines(); 
             }, 
-
-            staStackLayOut: function(incomingdata,controls){
-                chart.controls = controls;
-                chart.interpolationImplementation = false;
-                if(chart.controls.stackLayout == 'expand'){
-                    chart.controls.isPersentage = true;
-              }else{
-                  chart.controls.isPersentage = false;
-               }
-                chart.scaleValues();
-                chart.dataObjectArray = [];
-                chart.mapVariables(incomingdata);
-                d3.selectAll('.streamPath').data(chart.dataObjectArray)
-                       
-                chart.points = d3.selectAll(".pointthree-Chart").data(chart.dataObjectArray)
-                    
-                d3.selectAll(".seriesPoints").remove();    
-               chart.positionChartArea();
-               chart.positionAxis();
-               Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineXcoord);
-               chart.appendPointContainer();   
-               chart.appendLineTitle = Vtool.charts.commonFunctionality.areaAssets.appendLineTitle(incomingdata,chart.points,chart.controls, chart.scaledLineXcoord,chart.scaledLineXcoord);   
-               Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(incomingdata,chart.controls,chart.scaledLineXcoord,chart.scaledLineXcoord);
-               Vtool.charts.commonFunctionality.areaAssets.appendCyclesOnAppex(incomingdata,chart.controls,chart.points,chart.scaledLineXcoord,chart.scaledLineXcoord,chart.colorRange,chart.tooltipContiner);
-
-            },
             setGridSettings: function(controls){
-               console.log(chart.svg,chart.grid);
-                Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineXcoord);
-                Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
-
-               
-            },
+                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineYcoord); 
+                  Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
+            }, 
 
            
 

@@ -8,6 +8,8 @@ uiControllerModule.controller('areaChartController',['$scope','fetchDataFromCsvF
       $scope.chart.showAxisSettings = true;
       $scope.chart.showAreaSettings = true;
       $scope.chart.showGridSettings = true;
+      $scope.chart.stackTypeFiled=true;
+
       $scope.chart.gridDivition = 30;
       fetchDataFromCsvFactory.get().then(function(response){
           $scope.chart.chartObject = Vtool.charts.area.stack;

@@ -22,6 +22,7 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
  
         scope.$watch('chartbgcolor', function(chartbgcolor){ //Watch chart bgColor
               if(scope.incomingdata){   
+                 scope.settings.bgColor = chartbgcolor;
                 Vtool.charts.commonFunctionality.setSvgBGcolor(chartbgcolor);
               }
          }); 
@@ -29,7 +30,7 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
 
         scope.$watch('startingcolorband', function(startingcolorband){ //Watch chart bgColor
               if(scope.incomingdata){
-
+                
                  scope.settings.lightbgColor = startingcolorband;
                  scope.chart.setColorSpectrum(scope.settings);
               }
@@ -44,7 +45,7 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
  
          scope.$watch('lettercolor', function(lettercolor){ //Watch chart bgColor
               if(scope.incomingdata){   
-                 scope.settings.letter = lettercolor;
+                 scope.settings.letterColor = lettercolor;
                  Vtool.charts.commonFunctionality.setColorOfLetters(lettercolor);
               }
          }); 
@@ -153,6 +154,15 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
                    Vtool.charts.commonFunctionality.xAxisFunctionality.setAxisColor( scope.settings);           
               }
          });
+        
+        scope.$watch('opacity', function(opacity){ //Watch chart grid type
+              if(scope.incomingdata){ 
+                  scope.settings.opacity = opacity;
+                  Vtool.charts.commonFunctionality.setOpacity(scope.opacity);           
+              }
+         });
+
+          
 
 
 
@@ -182,7 +192,8 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
           gridtype:'=',
           gridivition:'=',
           includegrid:'=',
-          axiscolor:'='
+          axiscolor:'=',
+          opacity:'=',
          }
      };
 }) 

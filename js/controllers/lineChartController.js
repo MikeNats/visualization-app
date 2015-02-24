@@ -8,7 +8,8 @@ uiControllerModule.controller('lineChartController',['$scope','fetchDataFromCsvF
       $scope.chart.showAxisSettings = true;
       $scope.chart.showAreaSettings = true;
       $scope.chart.showGridSettings = true;
-      $scope.chart.gridDivition = 30;
+      $scope.chart.stackTypeFiled=false;
+      $scope.chart.gridDivition = 21;
      fetchDataFromCsvFactory.get().then(function(response){
           $scope.chart.chartObject = Vtool.charts.line.line;
           $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,true);     

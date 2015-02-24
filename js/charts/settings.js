@@ -34,11 +34,13 @@ function chartSettings(){
       sortMinToMaxAxisQuantitie :true,//UI
 
       //Style settings
-      bgColor : '#fff',//UI
+      bgColor : 'transparent',//UI
+      letterColor : '#fff',//UI
       lightbgColor : 'green',//UI
       darkbgColor : 'yellow',//UI
       barDistance : .2,//UI
       fontSize: 14,
+      opacity:100,
 
       //Table Content settings
       contentTableShow:true,//UI
@@ -110,7 +112,7 @@ function chartSettings(){
 
 
      //X Axis Settings
-      axiscolor:'#000',
+      axiscolor:'#fff',
       xAxisTicks : 8,//UI
       xAxisLabelName: 'XAxis Title',//UI
       xAxisLabelAngle :0,//UI

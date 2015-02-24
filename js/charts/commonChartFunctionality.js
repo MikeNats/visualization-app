@@ -11,13 +11,13 @@ function commonChartFunctionality () {
             //Append's svg and g container
             appendSvg : function(controls){// Appends svg and a g childs
 
-                        return d3.select(controls.target).append("svg").attr('id','skata').attr("width", function(){
+                        return d3.select(controls.target).append("svg").attr('id','d3Chart').style("background",controls.bgColor).style('fill', controls.letterColor).attr("width", function(){
                             if(controls.isResponsive){
                                 return '100%';
                              }else{
                                  return controls.customWidth;
                             }})
-                            .attr("height", controls.svgHeight() -3 ).style("background",controls.bgColor)
+                            .attr("height", controls.svgHeight() -3 )
                             .append("g").attr('class','gContainer').attr('width','100%').attr("transform", "translate(" + controls.marginLeft() + "," + controls.marginTop() + ")");
             },
 
@@ -25,7 +25,7 @@ function commonChartFunctionality () {
             appendChartContainer : function (svg,controls){
                   return svg.append("g")
                            .attr("class", "chartContainer")
-                           .attr("transform","translate(0,0)" );
+                           .attr("transform","translate(0,0)" ).style('opacity',function(){return controls.opacity/100});
             },
 
             //For security reasons we change the main variable (main category) of the fetched data to secure any human mistake in csv.
@@ -63,6 +63,10 @@ function commonChartFunctionality () {
             setSvgBGcolor : function(data){
                 d3.select('svg').style('background', data);
              },
+            setOpacity:function(opacity){
+                         d3.select(".chartContainer").style('opacity',function(){return  opacity/100});
+
+            },
 
             //***********  X Bottom Axis  ***********//
 
@@ -373,6 +377,7 @@ function commonChartFunctionality () {
                         .domain([0, categories.length])
                         .range([controls.darkbgColor , controls.lightbgColor]);
                   for(var i  in categories){
+
                         colorArray.push(colors(i));
                   } 
                   return colorArray;      

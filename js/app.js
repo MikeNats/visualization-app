@@ -13,6 +13,8 @@ var app = angular.module('app', [
   [          '$stateProvider', '$urlRouterProvider',
     function ($stateProvider,   $urlRouterProvider) {
 
+
+
       /////////////////////////////
       // Redirects and Otherwise //
       /////////////////////////////
@@ -64,6 +66,13 @@ var app = angular.module('app', [
           url: '/charts/select/line',
           templateUrl: 'views/chartTemplate.html', 
           controller: 'lineChartController',
+              
+        })
+        // Bar //
+        .state('bar', {
+          url: '/charts/select/bar',
+          templateUrl: 'views/chartTemplate.html', 
+          controller: 'barChartController',
               
         })
     }]);

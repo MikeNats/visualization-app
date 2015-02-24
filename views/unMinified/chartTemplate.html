@@ -9,7 +9,7 @@
 		    <span class='user right'>Tim Alen</span>
          </nav>
 	      <article id='chartContainer'>
-	      	<dthree-chart  id='dthree-chart' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.stackType' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
+	      	<dthree-chart  id='dthree-chart' opacity='chart.opacity' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.stackType' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
 		</article>  
  
 		<aside id='chartUi' class='largin-16 columns' ng-controller='uiController'>
@@ -28,8 +28,9 @@
 		    
 		       	<div class='toolSubContainer'  >
 					     <div class='large-16   AREA-CHART' ng-show='chart.showAreaSettings' >
-							<fieldset class='columns large-16' >
-								<label>Stack Type:</label>
+		
+							<fieldset class='columns large-16' ng-show='chart.stackTypeFiled'>
+								<label>Stack Type:</label> 
 								<select  ng-model="chart.stackType">  
 					            	<option value='zero' selected>zero</option>
 								    <option value='wiggle'>wiggle</option>
@@ -48,10 +49,20 @@
 				               </select>
 			   				</fieldset>
 						</div>
+						<div class='large-16   BAR-CHART' ng-show='chart.showOrientation' >
+								<fieldset>
+									<label>Orientation</label>
 
+									<select  ng-model="chart.chartOrientation">  
+						            	<option ng-click='chart.orientation();' value='vertical' selected>Vertical</option>
+									    <option ng-click='chart.orientation();' value='horizontal' >horizontal</option>
+									</select>
+								</fieldset>
+
+						</div>
 		   
 						<div class='large-16   PIE-CHART' ng-show='chart.showPieSettings'>
-						    <fieldset class='columns large-16' >
+							    <fieldset class='columns large-16' >
 							   <label>Radius</label> 
 							   <input type="range" ng-model="chart.radius">
 						    </fieldset>	   
@@ -65,10 +76,26 @@
 							    <option value='#DCDCDC' style='background-color:#DCDCDC;' ></option>
 							    <option value='#7DB618' style='background-color:#7DB618;' ></option>
 							    <option value='#FF7F50' style='background-color:#FF7F50;' ></option>   
-							   <option value='#0000FF' style='background-color:#0000FF;' ></option>  
+							   <option value='#0000FF' style='background-color:#0000FF;' ></option> 
+							   <option value='transparent'  >transparent</option>  
 				           </select>
-			  		    </fieldset>	   
-			   		    <fieldset class='columns large-16'>
+			  		    </fieldset>
+						<fieldset class='columns large-16'> 	
+			 		       <label>Letter Color</label>   
+				           <select  style='background:{{chart.lettersColor}}' ng-model="chart.lettersColor">  
+				            	<option value='#000' style='background-color:#000;' ></option>
+							    <option value='#fff' style='background-color:#fff;' ></option>
+							    <option value='#696969' style='background-color:#696969;' ></option>
+							    <option value='#DCDCDC' style='background-color:#DCDCDC;' ></option>
+							    <option value='#7DB618' style='background-color:#7DB618;' ></option>
+							    <option value='#FF7F50' style='background-color:#FF7F50;' ></option>   
+							    <option value='#0000FF' style='background-color:#0000FF;' ></option>  
+						        <option value='#FFD700' style='background-color:#FFD700;' ></option> 
+						        <option value='#EE82EE' style='background-color:#EE82EE;' ></option> 
+						        <option value='#FF0000' style='background-color:#FF0000;' ></option>     
+				           </select>
+				        </fieldset> 
+			   		    <fieldset class='columns large-16'  ng-show='chart.showspectrumSettings'>
 			                <label>Colour Spectrum From : </label>  
 				            <select  style='background:{{chart.colorBandFinish}}' ng-model="chart.colorBandFinish">  
 				            	<option value='#000' style='background-color:#000;' ></option>
@@ -83,7 +110,7 @@
 						        <option value='#FF0000' style='background-color:#FF0000;' ></option> 	 	   
 			                </select>
 			            </fieldset>
-			   		    <fieldset class='columns large-16'> 
+			   		    <fieldset class='columns large-16'  ng-show='chart.showspectrumSettings'> 
 			   		        <label>Colour Spectrum To : </label>   
 				            <select  style='background:{{chart.colorBandStarts}}' ng-model="chart.colorBandStarts">  
 				            	<option value='#000' style='background-color:#000;' ></option>
@@ -98,21 +125,11 @@
 						       <option value='#FF0000' style='background-color:#FF0000;' ></option>     
 				           </select>
 			            </fieldset>	
-					    <fieldset class='columns large-16'> 	
-			 		       <label>Letter Color</label>   
-				           <select  style='background:{{chart.lettersColor}}' ng-model="chart.lettersColor">  
-				            	<option value='#000' style='background-color:#000;' ></option>
-							    <option value='#fff' style='background-color:#fff;' ></option>
-							    <option value='#696969' style='background-color:#696969;' ></option>
-							    <option value='#DCDCDC' style='background-color:#DCDCDC;' ></option>
-							    <option value='#7DB618' style='background-color:#7DB618;' ></option>
-							    <option value='#FF7F50' style='background-color:#FF7F50;' ></option>   
-							    <option value='#0000FF' style='background-color:#0000FF;' ></option>  
-						        <option value='#FFD700' style='background-color:#FFD700;' ></option> 
-						        <option value='#EE82EE' style='background-color:#EE82EE;' ></option> 
-						        <option value='#FF0000' style='background-color:#FF0000;' ></option>     
-				           </select>
-				        </fieldset>         
+					    
+				        <fieldset class='columns large-16' >
+							<label>Opacity</label> 
+								<input type="range" ng-model="chart.opacity">
+						 </fieldset>
 			            <fieldset class='columns large-16'>
 								<label>Responsive</label>
 						   		<input type="checkbox"  ng-click='chart.isResponsive()'  checked> 

@@ -1,4 +1,3 @@
-
 var uiControllerModule = angular.module('chartControlerModule',['chartDirectiveModule','fetcDataFromCsvServiceFactoryModule']);
 
 uiControllerModule.controller('uiController',['$scope',function($scope){
@@ -39,24 +38,48 @@ uiControllerModule.controller('uiController',['$scope',function($scope){
         }
      } 
      $scope.chart.showgrid =  state();
-
+ 
    }
 
-
-
-
-
-
+  
+    $scope.chart.opacity = 100;
+    $scope.chart.showspectrumSettings=true;
     $scope.chart.responsive = false;
     $scope.chart.radius = 10;
     $scope.chart.labelAngle =45;
     $scope.chart.interpolation = 'cardinal';
-    $scope.chart.xBottomAxisTitle='YAxis Title.';
-    $scope.chart.yLeftAxisTitle='YAxis Title.';
+    $scope.chart.xBottomAxisTitle='X Axis Title';
+    $scope.chart.yLeftAxisTitle='Y Axis Title';
     $scope.chart.gridType='1,1';
     $scope.chart.stackType='zero';
 
 }]); 
+
+
+ test = angular.module('myModuleee', []);
+test.provider('chartSettngsService',function(){
+   
+  var settings ;
+
+    return {
+        setSettings: function (obj) {
+              settings = obj;
+        },
+        $get: function() {
+              return { 
+                  chartSettings : settings
+              };
+        }
+    };
+
+});
+
+test.config(['chartSettngsServiceProvider'], function( chartSettngsServiceProvider ) {
+    chartSettngsServiceProvider.setSettings(Vtool.charts.settings);
+   // console.log(chartSettngsServiceProvider.chartSettings);
+});
+
+
 
 
 angular.module('myModule', ['ui.bootstrap']);

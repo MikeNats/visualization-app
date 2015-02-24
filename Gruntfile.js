@@ -78,8 +78,10 @@ module.exports = function(grunt) {
             'js/charts/line/line/line.js',
             'js/charts/pie/pie/pie.js',
             'js/services/services/valueServiceCsvPathForChart.js',
+                     'js/services/provider/chartSettingsProvider.js',
             'js/services/factories/fetchDataFromCsvFactory.js',
             'js/controllers/uiChartController.js',
+
             'js/controllers/chartsController.js',
             'js/directives/pieChartDirective.js',
             'js/controllers/mainMenuController.js',
@@ -87,6 +89,8 @@ module.exports = function(grunt) {
             'js/controllers/areaChartController.js',
             'js/controllers/pieChartController.js',
             'js/controllers/lineChartController.js',
+            'js/controllers/barChartController.js',
+
             'js/charts/settings.js',
             'js/Vtool.js',
             'js/app.js',
@@ -94,9 +98,9 @@ module.exports = function(grunt) {
           ], 
           'app/js/all.min.js': 
           [
-             'js/lybs/angular.min.js',
+                  'js/lybs/angular.min.js',
             'js/lybs/angular-animate.js',
-            'js/lybs/angular-route.min.js', 
+            'js/lybs/angular-route.min.js',
             'js/lybs/router-ui.js',
             'js/lybs/d3.min.js',
             'bower_components/modernizr/modernizr.js',
@@ -114,8 +118,10 @@ module.exports = function(grunt) {
             'js/charts/line/line/line.js',
             'js/charts/pie/pie/pie.js',
             'js/services/services/valueServiceCsvPathForChart.js',
+                   'js/services/provider/chartSettingsProvider.js',
             'js/services/factories/fetchDataFromCsvFactory.js',
             'js/controllers/uiChartController.js',
+
             'js/controllers/chartsController.js',
             'js/directives/pieChartDirective.js',
             'js/controllers/mainMenuController.js',
@@ -123,11 +129,12 @@ module.exports = function(grunt) {
             'js/controllers/areaChartController.js',
             'js/controllers/pieChartController.js',
             'js/controllers/lineChartController.js',
+            'js/controllers/barChartController.js',
+
             'js/charts/settings.js',
             'js/Vtool.js',
             'js/app.js',
-
-          ]
+          ] 
         }
       }
     },

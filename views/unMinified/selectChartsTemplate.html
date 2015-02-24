@@ -13,10 +13,8 @@
 			        	<div class='pieDunat previewItem selected' ng-class='{show: chart.selected}' >
 			    				<img class='columns large-8 medium-8 small-8' src='./img/piechart.jpg' />
 								<img class='columns left large-8 medium-8 small-8' src='./img/donatChart.jpg' />
- 
-							
-			    		</div>
 
+			    		</div>
 
 			    		<div class='area previewItem' ng-class='{show: chart.selected}' >
 			    				<img class='columns large-5 medium-5 small-5' src='./img/area-zero.jpg' />
@@ -24,10 +22,17 @@
 								<img class='columns left large-5 medium-5 small-5' src='./img/area-expand.jpg' />
 			    		</div>
 
+			    	    <div class='line previewItem' ng-class='{show: chart.selected}' >
+			    	    	    <img class='columns large-8 medium-8 small-8' src='./img/line1.jpg' />
+			    				<img class='columns large-8 medium-8 small-8' src='./img/line2.jpg' />
+
+			    		</div>
+
 			    		<div class='selectTypeNav columns' class='columns large-16'>
 								<button  class='columns large-5 medium-6 small-16' >Download Sample Data</button> 
 								<button   class='columns large-5 medium-6 small-16'>Upload Data</button>
 							</div>
+
 
 	    </article>  
 
@@ -43,7 +48,7 @@
 					<ul class='chartsMenu'>
 	           			<li id='pieDunat' class='selected' ng-click='chart.select($event);'><h5>Pie-Donut </h5></li>
 	           			<li id='area' ng-click='chart.select($event);'><h5>Area</h5></li>
-	           			<li  ng-click='chart.select($event);'><h5>Line </h5></li>
+	           			<li id='line' ng-click='chart.select($event);'><h5>Line </h5></li>
 	           			<li  ng-click='chart.select($event);'><h5>Bars </h5></li>
 	           			
 	           			<li  ng-click='chart.select($event);'><h5>Stack Bars </h5></li>

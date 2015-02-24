@@ -4,7 +4,7 @@ uiControllerModule.controller('selectChartController',['$scope',
    function($scope){
     $scope.chart={};
     $scope.chart.selected=false;
-
+   console.log($scope.privateSettings)
     $scope.chart.select = function($event){
      
        if(!angular.element($event.currentTarget).hasClass('selected') ){
