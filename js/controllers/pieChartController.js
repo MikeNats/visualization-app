@@ -7,12 +7,14 @@ uiControllerModule.controller('pieChartController',['$scope','fetchDataFromCsvFa
       $scope.chart.showAxisSettings = false;
       $scope.chart.showAreaSettings = false;
       $scope.chart.grid = false;
-      $scope.chart.showGridSettings =false;
+      $scope.chart.showGridSettings =false; 
 
       fetchDataFromCsvFactory.get().then(function(response){
           $scope.chart.chartObject = Vtool.charts.pie.pie;
           $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     
- $scope.chart.privateSettings =  chartSettngsService.data ;
+          $scope.chart.privateSettings =  chartSettngsService.data ;
+          $scope.chart.privateSettings.chartType ='pie';
+          $scope.chart.chartType = $scope.chart.privateSettings.chartType;
           $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
     
  

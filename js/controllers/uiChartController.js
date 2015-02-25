@@ -1,8 +1,19 @@
-var uiControllerModule = angular.module('chartControlerModule',['chartDirectiveModule','fetcDataFromCsvServiceFactoryModule','settingsProviderModule']);
+var uiControllerModule = angular.module('chartControlerModule',[
+  'chartDirectiveModule',
+  'fetcDataFromCsvServiceFactoryModule',
+  'settingsProviderModule']);
 
-uiControllerModule.controller('uiController',['$scope','chartSettngsService',function($scope,chartSettngsService){
-
-//Accordeon
+uiControllerModule.controller('uiController',
+  ['$scope',
+   'chartSettngsService',
+   '$location',
+   function($scope,chartSettngsService,$location){
+   
+  $scope.chart.showspectrumSettings=true;
+    
+    $scope.reset = {};
+   $scope.reset.modified = false;
+//Accordeon 
   $scope.accordeon={};
   $scope.accordeon.activeTab = function($event){
       if(angular.element($event.currentTarget).parent().hasClass('colapse') ){
@@ -10,11 +21,8 @@ uiControllerModule.controller('uiController',['$scope','chartSettngsService',fun
       }else{
          angular.element(document.querySelectorAll('.accTitle')).removeClass('colapse');         
          angular.element($event.currentTarget).parent().addClass('colapse');
-
       }
-
-  };
-   
+  };  
   //Show/hide widh/height attributes 
   $scope.chart.isResponsive = function(){ 
      var state =  function(){
@@ -28,7 +36,7 @@ uiControllerModule.controller('uiController',['$scope','chartSettngsService',fun
    }
 
    //Show/Hide grid filed
-   $scope.chart.isGridVisible  = function(){
+   $scope.chart.isGridVisible  = function(){ 
      var state =  function(){
         if($scope.chart.showgrid){
             return false; 
@@ -37,26 +45,35 @@ uiControllerModule.controller('uiController',['$scope','chartSettngsService',fun
         }
      } 
      $scope.chart.showgrid =  state();
- 
    }
-  $scope.chart.resetSettings = function(){
-       
-        chartSettngsService.resetData();
 
-        angular.element(document.querySelector('#d3Chart')).remove();
-        $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,chartSettngsService.data);     
+//show reset button
+  $scope.reset.settingModified = function(){ 
+     $scope.reset.modified = true;
   }
-    $scope.chart.opacity = 100;
-    $scope.chart.userAppliedSettings=false
-    $scope.chart.showspectrumSettings=true;
-    $scope.chart.responsive = false;
-    $scope.chart.radius = 10;
-    $scope.chart.labelAngle =45;
-    $scope.chart.interpolation = 'cardinal';
-    $scope.chart.xBottomAxisTitle='X Axis Title';
-    $scope.chart.yLeftAxisTitle='Y Axis Title';
-    $scope.chart.gridType='1,1';
-    $scope.chart.stackType='zero';
+//Resets chart settings;
+  $scope.reset.resetSettings = function(){
+
+        chartSettngsService.resetData();
+        angular.element(document.querySelector('#d3Chart')).remove();
+        $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,chartSettngsService.data);
+        $scope.chart.privateSettings = chartSettngsService.data;
+          $scope.reset.modified = false;   
+  }
+
+
+$scope.chart.changeChart = function(view){
+
+      if(view == 'pie'){
+         $location.path('/charts/select/pie');
+      }else if(view == 'area'  ){
+         $location.path('/charts/select/area');
+      }else if(view == 'bar'){
+        $location.path('/charts/select/bar');
+      }else if(view == 'line'){
+          $location.path('/charts/select/line');
+      }
+}
 
 }]); 
 

@@ -14,6 +14,8 @@ uiControllerModule.controller('lineChartController',['$scope','fetchDataFromCsvF
           $scope.chart.chartObject = Vtool.charts.line.line;
           $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,true);     
           $scope.chart.privateSettings =  chartSettngsService.data ;
+          $scope.chart.privateSettings.chartType ='line';
+          $scope.chart.chartType = $scope.chart.privateSettings.chartType;
           $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
     
  

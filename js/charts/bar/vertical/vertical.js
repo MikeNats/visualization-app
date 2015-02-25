@@ -210,7 +210,6 @@ function createBarChartVertical(){
                 chart.positionBgColorToArc();
              },
             setColorSpectrum : function(controls){  
-                console.log('lATHOS');
                chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.incomingData,controls);
                 d3.selectAll('.bar').style( 'fill' ,function(d,i){
                       return chart.colorRange(i);
@@ -232,16 +231,11 @@ function createBarChartVertical(){
               chart.controls = controls
               d3.select(controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)
               chart.scaleValues();
-                
-                  chart.mapVariables(chart.incomingData); 
-                  chart.positionAxis();
-                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
-                  chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
-                 
-                   chart.positionBars(); 
-
-
-
+              chart.mapVariables(chart.incomingData); 
+              chart.positionAxis();
+              Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
+              chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);   
+               chart.positionBars(); 
             },
 
             setlabelXAxisLabelAngle: function(controls){

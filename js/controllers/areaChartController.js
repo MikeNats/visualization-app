@@ -9,13 +9,15 @@ uiControllerModule.controller('areaChartController',['$scope','fetchDataFromCsvF
       $scope.chart.showAreaSettings = true;
       $scope.chart.showGridSettings = true;
       $scope.chart.stackTypeFiled=true;
-
       $scope.chart.gridDivition = 30;
+      angular.element(document.querySelector('.areaContainer:last-child')).remove();
       fetchDataFromCsvFactory.get().then(function(response){
-
           $scope.chart.chartObject = Vtool.charts.area.stack;
+          $scope.chart.fecheddata =null;
           $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,true);     
-          $scope.chart.privateSettings =  chartSettngsService.data ;
+          $scope.chart.privateSettings =  chartSettngsService.data;
+          $scope.chart.privateSettings.chartType ='area';
+          $scope.chart.chartType = $scope.chart.privateSettings.chartType;
           $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
      });
 }]); 

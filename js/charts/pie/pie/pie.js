@@ -41,6 +41,7 @@ function createPieChart( ){
 
         //Initialize pie
         chart.InitializePieObject  = function(){
+          chart.pieObject  = null;
             chart.pieObject = d3.layout.pie()
                 .value(function (d) {
                   return d.mainCategoryValue;
@@ -63,6 +64,8 @@ function createPieChart( ){
 
         //maps data by brakeing them down into 2  tables
         chart.mapVariables = function(data){
+          chart.value=[];
+               chart.categoryName=[];
             chart.incomingData.forEach(function (d) {
               d.mainCategoryValue=+d.mainCategoryValue
                chart.value.push(d.mainCategoryValue);
@@ -91,7 +94,7 @@ function createPieChart( ){
 
         //append Pie Chart Arcs
         chart.appendPieChartArcs = function(){
-         
+         chart.arcs =null;
              chart.arcs = chart.arcsContainer.selectAll(".arc")
                 .data(chart.pieObject(chart.incomingData))
                 .enter()
@@ -185,6 +188,7 @@ function createPieChart( ){
 
         //appends the lines
         chart.appendLines = function(){
+           chart.lines = null;
             chart.lines = chart.arcs.append("path")
             .attr("class",    chart.className+"pointer")
             .style("fill", "none")
@@ -421,6 +425,9 @@ function createPieChart( ){
 
          //Executes the chart
          chart.exe = function(data){
+               chart.colorBoxRange = [], 
+             chart.value = [],
+              chart.categoryName = [],
             chart.incomingData = data;
             chart.cerateLocalSettings();
             chart.overrideLocalSettings ();            

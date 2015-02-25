@@ -16,6 +16,8 @@ uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFa
          $scope.chart.chartObject = Vtool.charts.bar.vertical;
          $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     
          $scope.chart.privateSettings = chartSettngsService.data ;
+         $scope.chart.privateSettings.chartType ='bar';
+         $scope.chart.chartType = $scope.chart.privateSettings.chartType;
          $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
      });
       $scope.chart.setOrientation = function(){

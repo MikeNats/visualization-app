@@ -730,7 +730,8 @@ function commonChartFunctionality () {
 
 
       },
-     areaAssets : {
+      
+      areaAssets : {
 
             appendCyclesOnAppex : function(data,controls,container,scaledLineXcoord,scaledLineYcoord,colorRange,tooltip){
 

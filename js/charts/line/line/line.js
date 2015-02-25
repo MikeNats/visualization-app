@@ -7,7 +7,7 @@
 
 function createLineChart(){
  
-   var chart= {}
+   var chart = {}
 
 
       // returns a function that calculates the x coordinate of the given charts points. Given a value as input  returns the scaled  value in the range for a given data of domain with offset of 0.
@@ -263,10 +263,6 @@ function createLineChart(){
              },
             exeUserSettings : function(data,controls){
                 chart.exeUserControls(data,controls);
-             },
-             setIneerRadius : function(){
-                chart.initializeArcObject();
-                chart.positionBgColorToArc();
              },
             setColorSpectrum : function(controls){  
                chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.categoriesList,controls);
