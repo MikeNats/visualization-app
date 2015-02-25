@@ -9,7 +9,7 @@
 		    <span class='user right'>Tim Alen</span>
          </nav>
 	      <article id='chartContainer'>
-	      	<dthree-chart  id='dthree-chart' opacity='chart.opacity' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.stackType' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
+	      	<dthree-chart  id='dthree-chart' modified='chart.userAppliedSettings'  opacity='chart.opacity' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.stackType' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
 		</article>  
  
 		<aside id='chartUi' class='largin-16 columns' ng-controller='uiController'>
@@ -220,7 +220,7 @@
 			            </fieldset>
 					</div>
 			    </div>
-			    
+			    <button ng-class='activeReset :chart.userAppliedSettings' class='alert columns large-16' ng-click='chart.resetSettings();'>reset</button>
 	    	</div>
 		</aside>
 

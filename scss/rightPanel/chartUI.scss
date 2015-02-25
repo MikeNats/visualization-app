@@ -14,6 +14,15 @@
 			  width: 25%;
 			  z-index: 99;
 			  border-radius:5px;
+			  .alert{
+				  opacity:0.4;
+				  box-shadow:0 1px 4px -1px #000000;
+				  border-radius:2px;
+			  }
+			  .activeReset.alert{
+
+			    opacity:1;
+			  }
 			.publish{
 
 				  background-color: #92c23d;

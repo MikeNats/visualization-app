@@ -39,8 +39,15 @@ uiControllerModule.controller('uiController',['$scope','chartSettngsService',fun
      $scope.chart.showgrid =  state();
  
    }
- 
+  $scope.chart.resetSettings = function(){
+       
+        chartSettngsService.resetData();
+
+        angular.element(document.querySelector('#d3Chart')).remove();
+        $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,chartSettngsService.data);     
+  }
     $scope.chart.opacity = 100;
+    $scope.chart.userAppliedSettings=false
     $scope.chart.showspectrumSettings=true;
     $scope.chart.responsive = false;
     $scope.chart.radius = 10;
