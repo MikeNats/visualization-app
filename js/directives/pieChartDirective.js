@@ -1,5 +1,5 @@
 //pieChartDirectiveModule create the directive of  pieChart tag, trigers the chart 
-angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
+angular.module('chartDirectiveModule',[]).directive('dthreeChart',['chartSettngsService', function(chartSettngsService){
     function link(scope, el, attr){  
     
 
@@ -158,11 +158,10 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
         scope.$watch('opacity', function(opacity){ //Watch chart grid type
               if(scope.incomingdata){ 
                   scope.settings.opacity = opacity;
+                  chartSettngsService.setData(scope.settings);
                   Vtool.charts.commonFunctionality.setOpacity(scope.opacity);           
               }
          });
-
-          
 
 
 
@@ -196,4 +195,4 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',function(){
           opacity:'=',
          }
      };
-}) 
+}]) 

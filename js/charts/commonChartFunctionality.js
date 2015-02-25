@@ -23,6 +23,7 @@ function commonChartFunctionality () {
 
             //Appends g container for the chart
             appendChartContainer : function (svg,controls){
+            
                   return svg.append("g")
                            .attr("class", "chartContainer")
                            .attr("transform","translate(0,0)" ).style('opacity',function(){return controls.opacity/100});

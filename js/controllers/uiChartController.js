@@ -1,22 +1,21 @@
-var uiControllerModule = angular.module('chartControlerModule',['chartDirectiveModule','fetcDataFromCsvServiceFactoryModule']);
+var uiControllerModule = angular.module('chartControlerModule',['chartDirectiveModule','fetcDataFromCsvServiceFactoryModule','settingsProviderModule']);
 
-uiControllerModule.controller('uiController',['$scope',function($scope){
+uiControllerModule.controller('uiController',['$scope','chartSettngsService',function($scope,chartSettngsService){
 
 //Accordeon
-    $scope.accordeon={};
-    $scope.accordeon.activeTab = function($event){
-        if(angular.element($event.currentTarget).parent().hasClass('colapse') ){
-            angular.element($event.currentTarget).parent().removeClass('colapse');
-        }else{
-           angular.element(document.querySelectorAll('.accTitle')).removeClass('colapse');         
-           angular.element($event.currentTarget).parent().addClass('colapse');
+  $scope.accordeon={};
+  $scope.accordeon.activeTab = function($event){
+      if(angular.element($event.currentTarget).parent().hasClass('colapse') ){
+          angular.element($event.currentTarget).parent().removeClass('colapse');
+      }else{
+         angular.element(document.querySelectorAll('.accTitle')).removeClass('colapse');         
+         angular.element($event.currentTarget).parent().addClass('colapse');
 
-        }
+      }
 
-    };
+  };
    
-   
-
+  //Show/hide widh/height attributes 
   $scope.chart.isResponsive = function(){ 
      var state =  function(){
         if($scope.chart.responsive){
@@ -25,10 +24,10 @@ uiControllerModule.controller('uiController',['$scope',function($scope){
            return true;
         }
      } 
-     $scope.chart.responsive =  state();
-     
+     $scope.chart.responsive =  state();   
    }
 
+   //Show/Hide grid filed
    $scope.chart.isGridVisible  = function(){
      var state =  function(){
         if($scope.chart.showgrid){
@@ -40,8 +39,7 @@ uiControllerModule.controller('uiController',['$scope',function($scope){
      $scope.chart.showgrid =  state();
  
    }
-
-  
+ 
     $scope.chart.opacity = 100;
     $scope.chart.showspectrumSettings=true;
     $scope.chart.responsive = false;
@@ -56,28 +54,7 @@ uiControllerModule.controller('uiController',['$scope',function($scope){
 }]); 
 
 
- test = angular.module('myModuleee', []);
-test.provider('chartSettngsService',function(){
-   
-  var settings ;
 
-    return {
-        setSettings: function (obj) {
-              settings = obj;
-        },
-        $get: function() {
-              return { 
-                  chartSettings : settings
-              };
-        }
-    };
-
-});
-
-test.config(['chartSettngsServiceProvider'], function( chartSettngsServiceProvider ) {
-    chartSettngsServiceProvider.setSettings(Vtool.charts.settings);
-   // console.log(chartSettngsServiceProvider.chartSettings);
-});
 
 
 

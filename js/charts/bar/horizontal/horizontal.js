@@ -196,9 +196,6 @@ function createBarChartHorizontal(){
                 chart.exe(data);
                 return chart.controls;
              },
-             SKATA:function(){
-
-             },
             exeUserSettings : function(data,controls){
                 chart.exeUserControls(data,controls);
              },

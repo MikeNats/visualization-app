@@ -1,4 +1,4 @@
-<section class="large-16 contentPanel chart columns" >
+<section class="large-16 contentPanel chart columns"  >
    
          <nav ng-controller='mainMenuController'>
 
@@ -31,7 +31,7 @@
 		
 							<fieldset class='columns large-16' ng-show='chart.stackTypeFiled'>
 								<label>Stack Type:</label> 
-								<select  ng-model="chart.stackType">  
+								<select ng-model="chart.stackType">  
 					            	<option value='zero' selected>zero</option>
 								    <option value='wiggle'>wiggle</option>
 								    <option value='silhouette'>silhouette</option>
@@ -69,7 +69,7 @@
 						</div>	 
 			            <fieldset class='columns large-16'>
 				            <label>Select Background Color</label> 
-				             <select style='background:{{chart.backgroundColor}}' ng-model="chart.backgroundColor">   	
+				             <select   style='background:{{chart.backgroundColor}}' ng-model="chart.backgroundColor">   	
 				            	<option value='#000' style='background-color:#000;' ></option>
 							    <option value='#fff' style='background-color:#fff;' ></option>
 							    <option value='#696969' style='background-color:#696969;' ></option>
@@ -220,6 +220,7 @@
 			            </fieldset>
 					</div>
 			    </div>
+			    
 	    	</div>
 		</aside>
 

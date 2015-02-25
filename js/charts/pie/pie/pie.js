@@ -428,7 +428,7 @@ function createPieChart( ){
          }
 
         //Executes the chart insideIframe
-        chart.exeFromIframe = function(data,controls){
+        chart.exeUserControls = function(data,controls){
             chart.controls = controls;
             chart.incomingData = data;
             chart.overrideLocalSettings ();            
@@ -442,8 +442,8 @@ function createPieChart( ){
                 chart.exe(data);
                 return chart.controls;
              },
-            initFromIframe : function(data,controls){
-                chart.exeFromIframe(data,controls);
+            exeUserSettings : function(data,controls){
+                chart.exeUserControls(data,controls);
              },
              setIneerRadius : function(){
                 chart.initializeArcObject();

@@ -85,7 +85,7 @@ function createLineChart(){
      //Append  area container
      chart.appendChartContainer = function(){
       chart.chartContainer = chart.svg.append('g')
-       .attr('class','chartContainer');
+       .attr('class','chartContainer').style('opacity',function(){return chart.controls.opacity/100});;
      },
 
 
@@ -247,7 +247,7 @@ function createLineChart(){
          },
 
         //Executes the chart insideIframe
-        chart.exeFromIframe = function(data,controls){
+        chart.exeUserControls = function(data,controls){
             chart.controls = controls;
             chart.incomingData = data;
             chart.overrideLocalSettings ();            
@@ -261,8 +261,8 @@ function createLineChart(){
                 chart.exe(data);
                 return chart.controls;
              },
-            initFromIframe : function(data,controls){
-                chart.exeFromIframe(data,controls);
+            exeUserSettings : function(data,controls){
+                chart.exeUserControls(data,controls);
              },
              setIneerRadius : function(){
                 chart.initializeArcObject();

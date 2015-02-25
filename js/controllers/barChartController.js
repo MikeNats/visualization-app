@@ -1,7 +1,7 @@
 //Pie chart controller.Has a dependancy, the  pieChartDirectiveModule module. PieChartControlerModule fetch the data from the given url attache them in the global scope  and trigers the pieChartDirectiveModule 
 
-uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFactory',
-   function($scope,fetchDataFromCsvFactory){
+uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFactory','chartSettngsService',
+   function($scope,fetchDataFromCsvFactory,chartSettngsService){
       $scope.chart={};
       $scope.chart.showPieSettings = false;
       $scope.chart.showgrid = true;
@@ -13,10 +13,10 @@ uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFa
       $scope.chart.gridDivition = 30;
       $scope.chart.chartOrientation ='vertical';
       fetchDataFromCsvFactory.get().then(function(response){
-          $scope.chart.chartObject = Vtool.charts.bar.vertical;
-          $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     
-          $scope.chart.privateSettings = $scope.chart.chartObject.init($scope.chart.fecheddata);     
-          //$scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
+         $scope.chart.chartObject = Vtool.charts.bar.vertical;
+         $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     
+         $scope.chart.privateSettings = chartSettngsService.data ;
+         $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
      });
       $scope.chart.setOrientation = function(){
          $scope.chart.orientation();
