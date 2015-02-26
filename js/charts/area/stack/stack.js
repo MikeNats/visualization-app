@@ -7,7 +7,7 @@
 function createAreaChartStack(){
 
    
-    var chart= {}
+      var chart = {}
 
       chart.dataObject = [],
       chart.dataObjectArray = [],
@@ -45,6 +45,7 @@ function createAreaChartStack(){
 
       //Define stack
       chart.defineStack = function(){
+        chart.stack = null;
          chart.stack  =  d3.layout.stack()
           .offset(chart.controls.stackLayout)
           .values(function (d) {return d.values; })
@@ -55,6 +56,7 @@ function createAreaChartStack(){
 
       //Define stack area
       chart.defineArea = function(){
+        chart.area = null;
         chart.area = d3.svg.area().interpolate(chart.controls.interpolation)
           .x(function (d) { return chart.scaledAreaXcoord(d.xVariable) + chart.scaledAreaXcoord.rangeBand() / 2; })
           .y0(function (d) { return chart.scaledAreaYcoord(d.y0); })
@@ -97,13 +99,15 @@ function createAreaChartStack(){
 
      //Append  area container
      chart.appendChartContainer = function(){
+      chart.chartContainer =null;
       chart.chartContainer = chart.svg.append('g')
-       .attr('class','chartContainer');
+       .attr('class','chartContainer').style('opacity',function(){return chart.controls.opacity/100});
      },
      
 
      //Appends chart container
      chart.appendChartAreaContainer = function(){
+       chart.areaContainer =  null;
       chart.areaContainer = chart.chartContainer.selectAll(".areaContainer")
             .data(chart.dataObjectArray)
           .enter().append("g")
@@ -113,6 +117,7 @@ function createAreaChartStack(){
 
      //append the area 
      chart.appendChartArea = function(data){
+      chart.areaPath =  null;
         chart.areaPath =  chart.areaContainer.append("path")
           .attr("class", "streamPath")
           .style("fill", function (d,i) { return chart.colorRange(i); })
@@ -143,6 +148,7 @@ function createAreaChartStack(){
 
     //appends points container on appex
      chart.appendPointContainer =  function(){
+       chart.points = null;
        chart.points = chart.svg.selectAll(".seriesPoints")
             .data(chart.dataObjectArray)
             .enter().append("g")
@@ -207,6 +213,7 @@ function createAreaChartStack(){
     
    // chain of functions when data is fetched from csv 
     chart.dataIsFetched = function(data){
+        chart.dataObjectArray = [];
         Vtool.charts.commonFunctionality.sortDataFunctionality.shortData(data,chart.controls);     
 
         chart.mapVariables(data); 
@@ -231,8 +238,9 @@ function createAreaChartStack(){
      //Chain of functions that build the chart
     chart.appendChart = function(data){
         chart.scaleValues();
+        chart.svg = null;
         chart.svg = Vtool.charts.commonFunctionality.appendSvg(chart.controls);
-        chart.dataIsFetched(data);
+        chart.dataIsFetched(data); 
     },
 
         //Instatiation of charts settings and overides for  for local use
@@ -273,7 +281,7 @@ function createAreaChartStack(){
          }
 
         //Executes the chart insideIframe
-        chart.exeFromIframe = function(data,controls){
+        chart.exeUserControls = function(data,controls){
             chart.controls = controls;
             chart.incomingData = data;
             chart.overrideLocalSettings ();            
@@ -286,8 +294,8 @@ function createAreaChartStack(){
                 chart.exe(data);
                 return chart.controls;
              },
-            initFromIframe : function(data,controls){
-                chart.exeFromIframe(data,controls);
+            exeUserSettings : function(data,controls){
+                chart.exeUserControls(data,controls);
              },
              setIneerRadius : function(){
                 chart.initializeArcObject();
@@ -368,6 +376,7 @@ function createAreaChartStack(){
 
             },
             setGridSettings: function(controls){
+               console.log(chart.svg,chart.grid);
                 Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
                 Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
                

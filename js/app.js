@@ -13,6 +13,8 @@ var app = angular.module('app', [
   [          '$stateProvider', '$urlRouterProvider',
     function ($stateProvider,   $urlRouterProvider) {
 
+
+
       /////////////////////////////
       // Redirects and Otherwise //
       /////////////////////////////
@@ -32,7 +34,7 @@ var app = angular.module('app', [
           templateUrl: 'views/indexTemplate.html', 
  
         })
-        // charts //
+        // charts // 
         .state('charts', {
           url: '/charts',
           templateUrl: 'views/chartsTemplate.html', 
@@ -52,11 +54,25 @@ var app = angular.module('app', [
           templateUrl: 'views/chartTemplate.html', 
           controller: 'areaChartController',         
         })
-        // area //
+        // pie //
         .state('pie', {
           url: '/charts/select/pie',
           templateUrl: 'views/chartTemplate.html', 
           controller: 'pieChartController',
+              
+        })
+        // line //
+        .state('line', {
+          url: '/charts/select/line',
+          templateUrl: 'views/chartTemplate.html', 
+          controller: 'lineChartController',
+              
+        })
+        // Bar //
+        .state('bar', {
+          url: '/charts/select/bar',
+          templateUrl: 'views/chartTemplate.html', 
+          controller: 'barChartController',
               
         })
     }]);

@@ -11,21 +11,22 @@ function commonChartFunctionality () {
             //Append's svg and g container
             appendSvg : function(controls){// Appends svg and a g childs
 
-                        return d3.select(controls.target).append("svg").attr('id','skata').attr("width", function(){
+                        return d3.select(controls.target).append("svg").attr('id','d3Chart').style("background",controls.bgColor).style('fill', controls.letterColor).attr("width", function(){
                             if(controls.isResponsive){
                                 return '100%';
                              }else{
                                  return controls.customWidth;
                             }})
-                            .attr("height", controls.svgHeight() -3 ).style("background",controls.bgColor)
+                            .attr("height", controls.svgHeight() -3 )
                             .append("g").attr('class','gContainer').attr('width','100%').attr("transform", "translate(" + controls.marginLeft() + "," + controls.marginTop() + ")");
             },
 
             //Appends g container for the chart
             appendChartContainer : function (svg,controls){
+            
                   return svg.append("g")
                            .attr("class", "chartContainer")
-                           .attr("transform","translate(0,0)" );
+                           .attr("transform","translate(0,0)" ).style('opacity',function(){return controls.opacity/100});
             },
 
             //For security reasons we change the main variable (main category) of the fetched data to secure any human mistake in csv.
@@ -63,6 +64,10 @@ function commonChartFunctionality () {
             setSvgBGcolor : function(data){
                 d3.select('svg').style('background', data);
              },
+            setOpacity:function(opacity){
+                         d3.select(".chartContainer").style('opacity',function(){return  opacity/100});
+
+            },
 
             //***********  X Bottom Axis  ***********//
 
@@ -373,6 +378,7 @@ function commonChartFunctionality () {
                         .domain([0, categories.length])
                         .range([controls.darkbgColor , controls.lightbgColor]);
                   for(var i  in categories){
+
                         colorArray.push(colors(i));
                   } 
                   return colorArray;      
@@ -395,7 +401,7 @@ function commonChartFunctionality () {
                         grid.verticalGrid  = Vtool.charts.commonFunctionality.gridFunctionality.appendVerticalGrid(svg,scaledBarXcoord,controls);
                     }
                   }
-                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,svg,grid,scaledBarXcoord,scaledBarYcoord);
+                   Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,svg,grid,scaledBarXcoord,scaledBarYcoord);
                    Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
                     Vtool.charts.commonFunctionality.xAxisFunctionality.setAxisColor(controls);
                   return grid;
@@ -447,8 +453,7 @@ function commonChartFunctionality () {
                       return d3.svg.axis()
                         .scale(scaledBarXcoord )
                         .orient("bottom")
-                        .ticks(controls.verticalGridTiks)    
-;
+                        .ticks(controls.verticalGridTiks);
               },
 
               //Append Horizontal Grid
@@ -462,7 +467,7 @@ function commonChartFunctionality () {
               postisionHorizontalGrid : function(svg,grid,scaledBarYcoord,controls ){
 
                     grid.horizontalGrid.transition().duration(600).call(charts.gridFunctionality.make_y_axis(svg,scaledBarYcoord,controls )
-                        .tickSize(- controls.relativeWidth(), 0, 0)
+                        .tickSize(-controls.relativeWidth(), 0, 0)
                         .tickFormat(""))
                         .attr('opacity', controls.horizontalGridStrokeOpacity);
               },
@@ -725,7 +730,8 @@ function commonChartFunctionality () {
 
 
       },
-     areaAssets : {
+      
+      areaAssets : {
 
             appendCyclesOnAppex : function(data,controls,container,scaledLineXcoord,scaledLineYcoord,colorRange,tooltip){
 

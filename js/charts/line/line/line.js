@@ -6,21 +6,21 @@
 
 
 function createLineChart(){
-
-   var chart= {}
+ 
+   var chart = {}
 
 
       // returns a function that calculates the x coordinate of the given charts points. Given a value as input  returns the scaled  value in the range for a given data of domain with offset of 0.
       chart.scaleLineXcoordinateAccordingToRelativeWidth = function(){
           chart.scaledLineXcoord = d3.scale.ordinal()
-          .rangeRoundBands([0, chart.controls.relativeWidth()], chart.controls.barDistance);
+          .rangeRoundBands([0, +chart.controls.relativeWidth()], chart.controls.barDistance);
       },
 
 
       // returns a function that calculates the y coordinate of the given charts points. Given a value  as input  returns the corresponding value in the range of  0 to .gContainer Height(relativeHeight) with offset of chart.barDistance.
       chart.scaleLineYcoordinateAccordingToRelativeHeight = function(){
           chart.scaledLineYcoord = d3.scale.linear()
-            .rangeRound([chart.controls.relativeHeight(), 0]);
+            .rangeRound([+chart.controls.relativeHeight(), 0]);
       },
 
 
@@ -81,10 +81,11 @@ function createLineChart(){
 
      },
 
+
      //Append  area container
      chart.appendChartContainer = function(){
       chart.chartContainer = chart.svg.append('g')
-       .attr('class','chartContainer');
+       .attr('class','chartContainer').style('opacity',function(){return chart.controls.opacity/100});;
      },
 
 
@@ -115,9 +116,16 @@ function createLineChart(){
      }, 
 
     
+  
      //Position lines
      chart.positionChartLines = function(){
-          chart.Line.attr("d", function(d) {return chart.linePath(d.values); })
+      if(chart.interpolationImplementation){
+            var animationTime=0;
+        }else{
+            var animationTime=500;
+        
+        }
+          chart.Line.transition().duration(animationTime).attr("d", function(d) {return chart.linePath(d.values); })
 
      },
 
@@ -162,6 +170,8 @@ function createLineChart(){
 // chain of functions for responsive implementation   
     chart.responsive = function(){     
        chart.controls.viewPortWidth = Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth();
+       d3.select(chart.controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight);
+       chart.scaleValues();
        chart.scaleValues();
       chart.mapVariables(chart.incomingData); 
       chart.positionAxis();
@@ -201,42 +211,118 @@ function createLineChart(){
       },
 
        //Chain of functions that build the chart
-     chart.appendChart = function(){
+     chart.appendChart = function(data){
         chart.scaleValues();
         chart.svg = Vtool.charts.commonFunctionality.appendSvg(chart.controls);
-        chart.fetchData();
+         chart.dataIsFetched(data);
     },
 
 
     //Instatiation of charts settings and overides for  for local use
     chart.cerateLocalSettings = function(){
         chart.controls = Object.create(Vtool.charts.settings);      
-        chart.controls.contentTableShow = false;
-        chart.controls.hasSubcategories = true;
-        chart.controls.isPersentage = false;
-                chart.controls.isLineChart=true;
-        // interpolation : linear, cardinal, monotone, step-before, step-after    
-        chart.controls.interpolation = 'cardinal';  
-        chart.controls.url = "./csv/line/line/data.csv";
-        chart.controls.target = '#chart07';
+        
     },
 
 
-    //Executes the chart
-     chart.exe = function(){
-        chart.cerateLocalSettings();
-        chart.appendChart();
-     }
+        //override Local Settings
+        chart.overrideLocalSettings = function(){
+ 
+        chart.controls.contentTableShow = false;
+        chart.controls.hasSubcategories = true;
+        chart.controls.isPersentage = false;
+        chart.controls.isLineChart=true;
+        // interpolation : linear, cardinal, monotone, step-before, step-after    
+        chart.controls.interpolation = 'cardinal';  
+        chart.controls.url = "./csv/line/line/data.csv";
+        chart.controls.target = 'dthree-Chart';
+    },
+ 
+         //Executes the chart
+         chart.exe = function(data){
+            chart.incomingData = data;
+            chart.cerateLocalSettings();
+            chart.overrideLocalSettings ();            
+            chart.appendChart(data);
+         },
 
+        //Executes the chart insideIframe
+        chart.exeUserControls = function(data,controls){
+            chart.controls = controls;
+            chart.incomingData = data;
+            chart.overrideLocalSettings ();            
+            chart.appendChart(data);
+         }
 
     //Object Chart returns init and local settings
+     //Object Chart returns init and local settings
      return{
-        init : function(){
-            chart.exe();
-         },
-         customSettings : function(){
-            return controls;
-        } 
+            init : function(data){
+                chart.exe(data);
+                return chart.controls;
+             },
+            exeUserSettings : function(data,controls){
+                chart.exeUserControls(data,controls);
+             },
+            setColorSpectrum : function(controls){  
+               chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.categoriesList,controls);
+                d3.selectAll('.dthree-Chartline').style("stroke", function (d,i) {return chart.colorRange(i); })
+
+            },
+            setCustomDimentions : function(controls){
+                  chart.controls = controls;
+                  chart.controls.viewPortWidth = Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth();
+                  d3.select(controls.target+' svg').attr('width',controls.customWidth).attr('height',controls.customHeight);
+                  chart.scaleValues();
+                  chart.scaleValues();
+                  chart.mapVariables(chart.incomingData); 
+                  chart.positionAxis();
+                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);    
+                  Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.LineContainer,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  chart.positionChartLines();
+    
+            },
+            setResponsive : function(controls){
+                  chart.controls = controls
+                  d3.select(controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)
+                  chart.scaleValues();
+                  chart.dataObjectArray = [];
+                  chart.mapVariables(chart.incomingData); 
+                  chart.positionAxis();
+                  chart.points = d3.selectAll(".pointthree-Chart");
+                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
+                  Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.points,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  chart.positionChartLines(); 
+            },
+            setlabelXAxisLabelAngle: function(controls){
+                  Vtool.charts.commonFunctionality.xAxisFunctionality.positionXAxis(chart.XAxis,chart.xAxis,controls);
+            },
+         
+            setInterpolation : function(controls){
+                  chart.controls = controls;
+                  chart.interpolationImplementation = true;
+                  chart.scaleValues();
+                 chart.mapVariables(chart.incomingData); 
+                 chart.positionAxis();
+                 chart.points = d3.selectAll(".pointthree-Chart");
+                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                  chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
+                 Vtool.charts.commonFunctionality.areaAssets.positionLineTitle(chart.incomingData,chart.controls,chart.scaledLineXcoord,chart.scaledLineYcoord);
+                 Vtool.charts.commonFunctionality.areaAssets.positionCyclesOnAppex(chart.controls,chart.points,chart.incomingData,chart.scaledLineXcoord,chart.scaledLineYcoord);
+               chart.positionChartLines(); 
+            }, 
+            setGridSettings: function(controls){
+                  Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledLineXcoord,chart.scaledLineYcoord); 
+                  Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
+            }, 
+
+           
+
+
       }  
 
 

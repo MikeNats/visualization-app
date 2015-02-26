@@ -1,23 +1,29 @@
+var uiControllerModule = angular.module('chartControlerModule',[
+  'chartDirectiveModule',
+  'fetcDataFromCsvServiceFactoryModule',
+  'settingsProviderModule']);
 
-var uiControllerModule = angular.module('chartControlerModule',['chartDirectiveModule','fetcDataFromCsvServiceFactoryModule']);
-
-uiControllerModule.controller('uiController',['$scope',function($scope){
-
-//Accordeon
-    $scope.accordeon={};
-    $scope.accordeon.activeTab = function($event){
-        if(angular.element($event.currentTarget).parent().hasClass('colapse') ){
-            angular.element($event.currentTarget).parent().removeClass('colapse');
-        }else{
-           angular.element(document.querySelectorAll('.accTitle')).removeClass('colapse');         
-           angular.element($event.currentTarget).parent().addClass('colapse');
-
-        }
-
-    };
+uiControllerModule.controller('uiController',
+  ['$scope',
+   'chartSettngsService',
+   '$location',
+   function($scope,chartSettngsService,$location){
    
-   
-
+  $scope.chart.showspectrumSettings=true;
+    
+    $scope.reset = {};
+   $scope.reset.modified = false;
+//Accordeon 
+  $scope.accordeon={};
+  $scope.accordeon.activeTab = function($event){
+      if(angular.element($event.currentTarget).parent().hasClass('colapse') ){
+          angular.element($event.currentTarget).parent().removeClass('colapse');
+      }else{
+         angular.element(document.querySelectorAll('.accTitle')).removeClass('colapse');         
+         angular.element($event.currentTarget).parent().addClass('colapse');
+      }
+  };  
+  //Show/hide widh/height attributes 
   $scope.chart.isResponsive = function(){ 
      var state =  function(){
         if($scope.chart.responsive){
@@ -26,11 +32,11 @@ uiControllerModule.controller('uiController',['$scope',function($scope){
            return true;
         }
      } 
-     $scope.chart.responsive =  state();
-     
+     $scope.chart.responsive =  state();   
    }
 
-   $scope.chart.isGridVisible  = function(){
+   //Show/Hide grid filed
+   $scope.chart.isGridVisible  = function(){ 
      var state =  function(){
         if($scope.chart.showgrid){
             return false; 
@@ -39,24 +45,42 @@ uiControllerModule.controller('uiController',['$scope',function($scope){
         }
      } 
      $scope.chart.showgrid =  state();
-
    }
 
+//show reset button
+  $scope.reset.settingModified = function(){ 
+     $scope.reset.modified = true;
+  }
+//Resets chart settings;
+  $scope.reset.resetSettings = function(){
+
+        chartSettngsService.resetData();
+        angular.element(document.querySelector('#d3Chart')).remove();
+        $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,chartSettngsService.data);
+        $scope.chart.privateSettings = chartSettngsService.data;
+          $scope.reset.modified = false;   
+  }
 
 
+$scope.chart.changeChart = function(view){
 
-
-
-    $scope.chart.responsive = false;
-    $scope.chart.radius = 10;
-    $scope.chart.labelAngle =45;
-    $scope.chart.interpolation = 'cardinal';
-    $scope.chart.xBottomAxisTitle='YAxis Title.';
-    $scope.chart.yLeftAxisTitle='YAxis Title.';
-    $scope.chart.gridType='1,1';
-    $scope.chart.stackType='zero';
+      if(view == 'pie'){
+         $location.path('/charts/select/pie');
+      }else if(view == 'area'  ){
+         $location.path('/charts/select/area');
+      }else if(view == 'bar'){
+        $location.path('/charts/select/bar');
+      }else if(view == 'line'){
+          $location.path('/charts/select/line');
+      }
+}
 
 }]); 
+
+
+
+
+
 
 
 angular.module('myModule', ['ui.bootstrap']);

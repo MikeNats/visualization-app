@@ -1,15 +1,26 @@
-<section class="large-16 contentPanel chart columns" >
+<section class="large-16 contentPanel chart columns"  >
    
          <nav ng-controller='mainMenuController'>
 
 			<a title='Back' class='button back' href='#/charts/select' ng-class="{activeMainMenuButton : menu.charts}" ng-click='menu.chartsSelected();'><br/></a>
 			<a title='Charts' class='button back noBG' href='#/charts' ng-class="{activeMainMenuButton : menu.maps}" ng-click='menu.mapsSelected();'>Chart</a>
 			<a  title='Select' class='button back noBG' href='#/charts/select' ng-class="{activeMainMenuButton : menu.maps}" ng-click='menu.mapsSelected();'>Type</a>
-			<button class='activeNode' ng-class="{activeMainMenuButton : menu.maps}" ng-click='menu.mapsSelected();'>Area</button>
+			
+			<select class='dropdownMenu columns large-2' ng-click='chart.changeChart(chart.privateSettings.chartType);' ng-model='chart.privateSettings.chartType'>	
+					<option value='pie'>Pie</option>
+					<option value='area'>Area</option>
+					<option  value='line'>Line</option>
+					<option  value='bar'>Bars</option>
+					<option  value='stack'> Stack Bars</option>
+					<option  value='grouped'>Grouped Bars</option>
+					<option value='negative'>Negative Values Bar</option>
+			</select>
+
+
 		    <span class='user right'>Tim Alen</span>
          </nav>
 	      <article id='chartContainer'>
-	      	<dthree-chart  id='dthree-chart' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.stackType' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
+	      	<dthree-chart  id='dthree-chart' modified='reset.modified'  opacity='chart.opacity' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.privateSettings.stackLayout' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' ng-model='chart.backgroundColor' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
 		</article>  
  
 		<aside id='chartUi' class='largin-16 columns' ng-controller='uiController'>
@@ -28,16 +39,17 @@
 		    
 		       	<div class='toolSubContainer'  >
 					     <div class='large-16   AREA-CHART' ng-show='chart.showAreaSettings' >
-							<fieldset class='columns large-16' >
-								<label>Stack Type:</label>
-								<select  ng-model="chart.stackType">  
+		
+							<fieldset class='columns large-16' ng-show='chart.stackTypeFiled' ng-click='reset.settingModified();'>
+								<label>Stack Type:</label> 
+								<select ng-model="chart.privateSettings.stackLayout" >  
 					            	<option value='zero' selected>zero</option>
 								    <option value='wiggle'>wiggle</option>
 								    <option value='silhouette'>silhouette</option>
 								    <option value='expand'>expand</option>				   
 				               </select>
 			   				</fieldset>		
-							<fieldset class='columns large-16' >
+							<fieldset class='columns large-16' ng-click='reset.settingModified();'>
 							<label>Interpolation:</label>
 								 <select  ng-model="chart.interpolation">  
 					            	<option value='linear'>linear</option>
@@ -48,27 +60,53 @@
 				               </select>
 			   				</fieldset>
 						</div>
+						<div class='large-16   BAR-CHART' ng-show='chart.showOrientation' >
+								<fieldset ng-click='reset.settingModified();'>
+									<label>Orientation</label>
 
+									<select  ng-model="chart.chartOrientation">  
+						            	<option ng-click='chart.orientation();' value='vertical' selected>Vertical</option>
+									    <option ng-click='chart.orientation();' value='horizontal' >horizontal</option>
+									</select>
+								</fieldset>
+
+						</div>
 		   
 						<div class='large-16   PIE-CHART' ng-show='chart.showPieSettings'>
-						    <fieldset class='columns large-16' >
+							    <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 							   <label>Radius</label> 
 							   <input type="range" ng-model="chart.radius">
 						    </fieldset>	   
 						</div>	 
-			            <fieldset class='columns large-16'>
+			            <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 				            <label>Select Background Color</label> 
-				             <select style='background:{{chart.backgroundColor}}' ng-model="chart.backgroundColor">   	
+				             <select   style='background:{{chart.backgroundColor}}' ng-model="chart.backgroundColor">   	
 				            	<option value='#000' style='background-color:#000;' ></option>
 							    <option value='#fff' style='background-color:#fff;' ></option>
 							    <option value='#696969' style='background-color:#696969;' ></option>
 							    <option value='#DCDCDC' style='background-color:#DCDCDC;' ></option>
 							    <option value='#7DB618' style='background-color:#7DB618;' ></option>
 							    <option value='#FF7F50' style='background-color:#FF7F50;' ></option>   
-							   <option value='#0000FF' style='background-color:#0000FF;' ></option>  
+							   <option value='#0000FF' style='background-color:#0000FF;' ></option> 
+							   <option value='transparent'  >transparent</option>  
 				           </select>
-			  		    </fieldset>	   
-			   		    <fieldset class='columns large-16'>
+			  		    </fieldset>
+						<fieldset class='columns large-16' ng-click='reset.settingModified();'> 	
+			 		       <label>Letter Color</label>   
+				           <select  style='background:{{chart.lettersColor}}' ng-model="chart.lettersColor">  
+				            	<option value='#000' style='background-color:#000;' ></option>
+							    <option value='#fff' style='background-color:#fff;' ></option>
+							    <option value='#696969' style='background-color:#696969;' ></option>
+							    <option value='#DCDCDC' style='background-color:#DCDCDC;' ></option>
+							    <option value='#7DB618' style='background-color:#7DB618;' ></option>
+							    <option value='#FF7F50' style='background-color:#FF7F50;' ></option>   
+							    <option value='#0000FF' style='background-color:#0000FF;' ></option>  
+						        <option value='#FFD700' style='background-color:#FFD700;' ></option> 
+						        <option value='#EE82EE' style='background-color:#EE82EE;' ></option> 
+						        <option value='#FF0000' style='background-color:#FF0000;' ></option>     
+				           </select>
+				        </fieldset> 
+			   		    <fieldset class='columns large-16'  ng-show='chart.showspectrumSettings' ng-click='reset.settingModified();'>
 			                <label>Colour Spectrum From : </label>  
 				            <select  style='background:{{chart.colorBandFinish}}' ng-model="chart.colorBandFinish">  
 				            	<option value='#000' style='background-color:#000;' ></option>
@@ -83,7 +121,7 @@
 						        <option value='#FF0000' style='background-color:#FF0000;' ></option> 	 	   
 			                </select>
 			            </fieldset>
-			   		    <fieldset class='columns large-16'> 
+			   		    <fieldset class='columns large-16'  ng-show='chart.showspectrumSettings' ng-click='reset.settingModified();'> 
 			   		        <label>Colour Spectrum To : </label>   
 				            <select  style='background:{{chart.colorBandStarts}}' ng-model="chart.colorBandStarts">  
 				            	<option value='#000' style='background-color:#000;' ></option>
@@ -98,29 +136,19 @@
 						       <option value='#FF0000' style='background-color:#FF0000;' ></option>     
 				           </select>
 			            </fieldset>	
-					    <fieldset class='columns large-16'> 	
-			 		       <label>Letter Color</label>   
-				           <select  style='background:{{chart.lettersColor}}' ng-model="chart.lettersColor">  
-				            	<option value='#000' style='background-color:#000;' ></option>
-							    <option value='#fff' style='background-color:#fff;' ></option>
-							    <option value='#696969' style='background-color:#696969;' ></option>
-							    <option value='#DCDCDC' style='background-color:#DCDCDC;' ></option>
-							    <option value='#7DB618' style='background-color:#7DB618;' ></option>
-							    <option value='#FF7F50' style='background-color:#FF7F50;' ></option>   
-							    <option value='#0000FF' style='background-color:#0000FF;' ></option>  
-						        <option value='#FFD700' style='background-color:#FFD700;' ></option> 
-						        <option value='#EE82EE' style='background-color:#EE82EE;' ></option> 
-						        <option value='#FF0000' style='background-color:#FF0000;' ></option>     
-				           </select>
-				        </fieldset>         
-			            <fieldset class='columns large-16'>
+					    
+				        <fieldset class='columns large-16' ng-click='reset.settingModified();'>
+							<label>Opacity</label> 
+								<input type="range" ng-model="chart.opacity">
+						 </fieldset>
+			            <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 								<label>Responsive</label>
-						   		<input type="checkbox"  ng-click='chart.isResponsive()'  checked> 
-								<fieldset ng-show='chart.responsive'>
+						   		<input type="checkbox"  ng-click='chart.isResponsive()'  ng-checked='chart.responsive' /> 
+								<fieldset ng-hide='chart.responsive' ng-click='reset.settingModified();'>
 									<label>Width: </label>
-									<input ng-model='chart.widthInput' type="text" />
+									<input ng-model='chart.widthInput' value='{{chart.widthInput}}' type="text" />
 									<label>Height: </label>
-									<input  ng-model='chart.heightInput' type="text" />
+									<input  ng-model='chart.heightInput' value='{{chart.heightInput}}' type="text" />
 								</fieldset>
 						</fieldset> 
 					</div>
@@ -129,7 +157,7 @@
 		       		
 					    <h3   ng-click='accordeon.activeTab($event)'>- Axis</h3>
 					    <div class='toolSubContainer'  >			  
-						<fieldset class='columns large-16'>
+						<fieldset class='columns large-16' ng-click='reset.settingModified();'>
 						   <label>xAxis Label Angle</label> 
 						    <select  ng-model="chart.labelAngle">  
 				            	<option value='0'>0</option>
@@ -139,17 +167,17 @@
 			               </select>
 						</fieldset>	
 
-					    <fieldset class='columns large-16' >
+					    <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 			  		        <label>xAxis Title:</label>
 			  		        <input type='text' ng-trim="false" ng-model='chart.xBottomAxisTitle'>
 			  		    </fieldset>
 
-					    <fieldset class='columns large-16' >
+					    <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 			  		        <label>YAxis Title:</label>
 			  		        <input type='text'  ng-trim="false" ng-model='chart.yLeftAxisTitle'>
 			  		    </fieldset>
 
-			  		    <fieldset class='columns large-16'> 	
+			  		    <fieldset class='columns large-16' ng-click='reset.settingModified();'> 	
 			 		       <label>Axis Color</label>   
 				           <select style='background:{{chart.axisColor}}'  ng-model="chart.axisColor">  
 				            	<option value='#000' style='background-color:#000;' ></option>
@@ -171,11 +199,11 @@
 			    <div class='large-16  accTitle columns Area toolContainer'  ng-show="chart.showGridSettings">
 			   		 <h3   ng-click='accordeon.activeTab($event)'>- Grid</h3>
 		       		 <div class='toolSubContainer'  >		   		  
-			   		    <fieldset class='columns large-16'>
+			   		    <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 							<label>Include Grid</label>
 						   	<input type="checkbox"  ng-click='chart.isGridVisible()'  checked> 
-							<fieldset  ng-show='chart.showgrid'>
-								<fieldset class='columns large-16'>
+							<fieldset  ng-show='chart.showgrid' >
+								<fieldset class='columns large-16' ng-click='reset.settingModified();'>
 						            <label>Set Grid Color</label> 
 						            <select style='background:{{chart.gridColor}}'  ng-model="chart.gridColor">   	
 						            	<option value='#000' style='background-color:#000;' ></option>
@@ -187,14 +215,14 @@
 									   <option value='#0000FF' style='background-color:#0000FF;' ></option>  
 						            </select>
 						  		</fieldset>
-							    <fieldset class='columns large-16'>
+							    <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 								    <label>Type of Grid</label> 
 						            <select  ng-model="chart.gridType">   
 						            	<option value='1,1' selected>Dotted</option>
 									    <option value='3,3'  >Dassed</option>
 									    <option value='0,0' >Solid</option>    
 						            </select>
-								    <fieldset class='columns large-16' >
+								    <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 									<label>Grid Divition</label> 
 									    <input type="range" ng-model="chart.gridDivition">
 								   </fieldset>
@@ -203,7 +231,8 @@
 			            </fieldset>
 					</div>
 			    </div>
+			    <button ng-show='reset.modified' class='alert activeReset columns large-16' ng-click='reset.resetSettings();'>Reset Customization</button>
 	    	</div>
 		</aside>
 
-</section>	 
+</section>	  

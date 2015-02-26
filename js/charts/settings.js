@@ -32,13 +32,16 @@ function chartSettings(){
       sortMaxToMinAxisVariable :false,//UI
       sortMaxToMinAxisQuantitie :false,//UI
       sortMinToMaxAxisQuantitie :true,//UI
+      ismodified:false,
 
       //Style settings
-      bgColor : '#fff',//UI
+      bgColor : 'transparent',//UI
+      letterColor : '#fff',//UI
       lightbgColor : 'green',//UI
       darkbgColor : 'yellow',//UI
       barDistance : .2,//UI
       fontSize: 14,
+      opacity:100,
 
       //Table Content settings
       contentTableShow:true,//UI
@@ -49,7 +52,7 @@ function chartSettings(){
       customWidth : 550,
       customHeight :300, 
       outerRadius : 150,
-      innerRadius : 10,
+      innerRadius : 40,
 
       //Dimentions Settings
       svgWidth : function(){
@@ -110,7 +113,7 @@ function chartSettings(){
 
 
      //X Axis Settings
-      axiscolor:'#000',
+      axiscolor:'#fff',
       xAxisTicks : 8,//UI
       xAxisLabelName: 'XAxis Title',//UI
       xAxisLabelAngle :0,//UI
@@ -191,7 +194,7 @@ function chartSettings(){
 
     //Y Axis Settings
     yAxisTopticks : 7,//UI
-    yAxisLabelName : 'YAxis Title.',//UI
+    yAxisLabelName : 'YAxis Title',//UI
     yAxisLabelFontSize : 11,
     yAxisLabelAngle:0,//UI
     yAxisLabelX:-57,
@@ -249,11 +252,12 @@ function chartSettings(){
     hoveredBarStrokeOpacity : 1,//UI
     hoveredBarStroke : 'red',//UI
     hoveredBarStrokeWidth :.4 ,//UI
-    
-
-
+   
+    interpolation:'cardinal',
+    stackLayout:'zero',
+    chartType:'pie',
   
-  animationTime:200
+  animationTime:200 
 
   }
  return settings;
