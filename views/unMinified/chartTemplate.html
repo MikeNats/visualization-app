@@ -17,10 +17,10 @@
 			</select>
 
 
-		    <span class='user right'>Tim Alen</span>
+
          </nav>
 	      <article id='chartContainer'>
-	      	<dthree-chart  id='dthree-chart' modified='reset.modified'  opacity='chart.opacity' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.privateSettings.stackLayout' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' ng-model='chart.backgroundColor' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
+	      	<dthree-chart  id='dthree-chart' modified='reset.modified' shortInput='chart.shortInput' opacity='chart.opacity' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.privateSettings.stackLayout' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' ng-model='chart.backgroundColor' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
 		</article>  
  
 		<aside id='chartUi' class='largin-16 columns' ng-controller='uiController'>
@@ -65,8 +65,8 @@
 									<label>Orientation</label>
 
 									<select  ng-model="chart.chartOrientation">  
-						            	<option ng-click='chart.orientation();' value='vertical' selected>Vertical</option>
-									    <option ng-click='chart.orientation();' value='horizontal' >horizontal</option>
+						            	<option ng-click='chart.setOrientation();' value='vertical' selected>Vertical</option>
+									    <option ng-click='chart.setOrientation();' value='horizontal' >horizontal</option>
 									</select>
 								</fieldset>
 
@@ -157,16 +157,7 @@
 		       		
 					    <h3   ng-click='accordeon.activeTab($event)'>- Axis</h3>
 					    <div class='toolSubContainer'  >			  
-						<fieldset class='columns large-16' ng-click='reset.settingModified();'>
-						   <label>xAxis Label Angle</label> 
-						    <select  ng-model="chart.labelAngle">  
-				            	<option value='0'>0</option>
-							    <option value='45' selected>45</option>
-							    <option value='60'>60</option>
-							    <option value='90'>90</option>
-			               </select>
-						</fieldset>	
-
+		
 					    <fieldset class='columns large-16' ng-click='reset.settingModified();'>
 			  		        <label>xAxis Title:</label>
 			  		        <input type='text' ng-trim="false" ng-model='chart.xBottomAxisTitle'>
@@ -176,6 +167,18 @@
 			  		        <label>YAxis Title:</label>
 			  		        <input type='text'  ng-trim="false" ng-model='chart.yLeftAxisTitle'>
 			  		    </fieldset>
+			  		    <fieldset class='columns large-16' ng-model='chart.shortInput' ng-show='chart.showSort'  ng-click='reset.settingModified();'>
+						   <label>Short Axis</label> 
+						   <select> 
+						   		<option value='sortMinToMaxAxisVariable' ng-show='chart.sortXaxis' >Min to Max (X-axis)</option>
+						   		<option value='sortMaxToMinAxisVariable' ng-show='chart.sortXaxis' >Max to Min (X-axis)</option>
+						   	    <option value='sortMinToMaxAxisQuantitie' ng-show='chart.sortYaxis' >Min to Max (Y-axis)</option>
+						   		<option value='sortMaxToMinAxisQuantitie' ng-show='chart.sortYaxis' >Max to Min (Y-axis)</option>
+						   </select>
+
+
+						</fieldset>	
+
 
 			  		    <fieldset class='columns large-16' ng-click='reset.settingModified();'> 	
 			 		       <label>Axis Color</label>   
@@ -192,6 +195,17 @@
 						        <option value='#FF0000' style='background-color:#FF0000;' ></option>     
 				           </select>
 				        </fieldset>
+
+				        <fieldset class='columns large-16' ng-click='reset.settingModified();'>
+						   <label>xAxis Label Angle</label> 
+						    <select  ng-model="chart.labelAngle">  
+				            	<option value='0'>0</option>
+							    <option value='45' selected>45</option>
+							    <option value='60'>60</option>
+							    <option value='90'>90</option>
+			               </select>
+						</fieldset>	
+
 					</div>	  
 
 				</div>	

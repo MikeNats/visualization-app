@@ -9,7 +9,7 @@ uiControllerModule.controller('areaChartController',['$scope','fetchDataFromCsvF
       $scope.chart.showAreaSettings = true;
       $scope.chart.showGridSettings = true;
       $scope.chart.stackTypeFiled=true;
-      $scope.chart.gridDivition = 30;
+      $scope.chart.showSort=false;
       angular.element(document.querySelector('.areaContainer:last-child')).remove();
       fetchDataFromCsvFactory.get().then(function(response){
           $scope.chart.chartObject = Vtool.charts.area.stack;

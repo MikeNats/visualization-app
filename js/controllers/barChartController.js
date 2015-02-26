@@ -11,7 +11,8 @@ uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFa
       $scope.chart.showspectrumSettings=true;
       $scope.chart.showOrientation = true;
       $scope.chart.gridDivition = 30;
-      $scope.chart.chartOrientation ='vertical';
+      $scope.chart.chartOrientation ='vertical';//<<<<<<<<<<<<<
+      $scope.chart.showSort=true;
       fetchDataFromCsvFactory.get().then(function(response){
          $scope.chart.chartObject = Vtool.charts.bar.vertical;
          $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     
@@ -20,20 +21,25 @@ uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFa
          $scope.chart.chartType = $scope.chart.privateSettings.chartType;
          $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
      });
-      $scope.chart.setOrientation = function(){
-         $scope.chart.orientation();
-      }
-
-      $scope.chart.orientation = function(){
-  
-         if($scope.chart.chartOrientation == 'vertical')
-              $scope.chart.chartObject = Vtool.charts.bar.vertical;
-          else{
-              $scope.chart.chartObject = Vtool.charts.bar.horizontal;
-          }
+   
+     $scope.chart.setOrientation = function(){
+         $scope.chart.ckeckOrientation();
          angular.element(document.querySelector('#d3Chart')).remove();
          $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);   
       }
+      $scope.chart.ckeckOrientation = function(){
+               if($scope.chart.chartOrientation == 'vertical'){
+                    $scope.chart.chartObject = Vtool.charts.bar.vertical;
+                    $scope.chart.sortYaxis =false;
+                    $scope.chart.sortXaxis =true;
+                }else{
+                    $scope.chart.chartObject = Vtool.charts.bar.horizontal;
+                    $scope.chart.sortYaxis =true;
+                    $scope.chart.sortXaxis =false;                    
+                }
+      }
+
+      $scope.chart.ckeckOrientation();
 }]); 
 
 
