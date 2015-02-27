@@ -15,7 +15,7 @@ function chartSettings(){
 
       },
       desktopViewPort:1024,
-      tabletViewPort:980,
+      tabletViewPort: 980,
       mobileViewPort : 480,
 
 
@@ -29,7 +29,7 @@ function chartSettings(){
       
       //Sorting settings
       sortMaxToMinAxisVariable :false,//UI
-      sortMaxToMinAxisVariable :true,//UI
+      sortMaxToMinAxisVariable :false,//UI
       sortMaxToMinAxisQuantitie :false,//UI
       sortMinToMaxAxisQuantitie :false,//UI
       ismodified:false,

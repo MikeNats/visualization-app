@@ -72,6 +72,8 @@ $scope.chart.changeChart = function(view){
         $location.path('/charts/select/bar');
       }else if(view == 'line'){
           $location.path('/charts/select/line');
+      }else if(view == 'grouped'){
+          $location.path('/charts/select/grouped'); 
       }
 }
 

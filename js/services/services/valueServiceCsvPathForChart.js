@@ -1,1 +1,1 @@
-angular.module('pathModule',[]).value('pathValue', './csv/bar/horizontal/data.csv');   
+angular.module('pathModule',[]).value('pathValue', './csv/bar/groupedVertical/data.csv');   

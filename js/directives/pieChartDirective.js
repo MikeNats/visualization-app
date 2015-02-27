@@ -213,6 +213,16 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',['chartSettngs
 
               }
          });
+        scope.$watch('shortinput', function(shortinput){
+             if(scope.incomingdata){
+                scope.settings =  Vtool.charts.commonFunctionality.sortDataFunctionality.setUserShortChoice(scope.settings,shortinput);
+               
+                scope.chart.shortAxis(scope.settings,scope.incomingdata);
+               // angular.element(document.querySelector('#d3Chart')).remove();
+              //  scope.chart.exeUserSettings(scope.incomingdata,scope.settings);
+            }
+
+        });
 
     }
     return {
@@ -241,7 +251,8 @@ angular.module('chartDirectiveModule',[]).directive('dthreeChart',['chartSettngs
           includegrid:'=',
           axiscolor:'=',
           opacity:'=',
-          modified:'='
+          modified:'=',
+          shortinput:'='
          }
      };
 }]) 

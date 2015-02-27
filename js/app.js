@@ -72,9 +72,14 @@ var app = angular.module('app', [
         .state('bar', {
           url: '/charts/select/bar',
           templateUrl: 'views/chartTemplate.html', 
-          controller: 'barChartController',
-              
+          controller: 'barChartController',    
         })
+        .state('grouped', {
+          url: '/charts/select/grouped', 
+          templateUrl: 'views/chartTemplate.html', 
+          controller: 'groupedBarChartController', 
+              
+      })
     }]);
 
 

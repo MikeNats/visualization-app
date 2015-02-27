@@ -9,18 +9,19 @@
 			<select class='dropdownMenu columns large-2' ng-click='chart.changeChart(chart.privateSettings.chartType);' ng-model='chart.privateSettings.chartType'>	
 					<option value='pie'>Pie</option>
 					<option value='area'>Area</option>
-					<option  value='line'>Line</option>
-					<option  value='bar'>Bars</option>
-					<option  value='stack'> Stack Bars</option>
-					<option  value='grouped'>Grouped Bars</option>
+					<option value='line'>Line</option>
+					<option value='bar'>Bars</option>
+					<option value='stack'> Stack Bars</option>
+					<option value='grouped'>Grouped Bars</option>
 					<option value='negative'>Negative Values Bar</option>
+
 			</select>
 
 
 
          </nav>
 	      <article id='chartContainer'>
-	      	<dthree-chart  id='dthree-chart' modified='reset.modified' shortInput='chart.shortInput' opacity='chart.opacity' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.privateSettings.stackLayout' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' ng-model='chart.backgroundColor' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
+	      	<dthree-chart  id='dthree-chart' modified='reset.modified' shortinput='chart.shortInput' opacity='chart.opacity' axiscolor='chart.axisColor' includegrid='chart.showgrid'  gridivition='chart.gridDivition'   gridtype='chart.gridType' gridcolor='chart.gridColor' radiusdata="chart.radius" stacktype='chart.privateSettings.stackLayout' interpolation='chart.interpolation' yleftaxistitle='chart.yLeftAxisTitle' xbottomaxistitle='chart.xBottomAxisTitle' labelangle='chart.labelAngle' incomingdata='chart.fecheddata'  chart='chart.chartObject' settings='chart.privateSettings' ng-model='chart.backgroundColor' chartbgcolor='chart.backgroundColor' startingcolorband='chart.colorBandStarts' endingcolorband='chart.colorBandFinish' widthdimention='chart.widthInput'   heightdimention='chart.heightInput' isresponsive='chart.responsive' lettercolor='chart.lettersColor' ></dthree-chart> 
 		</article>  
  
 		<aside id='chartUi' class='largin-16 columns' ng-controller='uiController'>
@@ -167,13 +168,13 @@
 			  		        <label>YAxis Title:</label>
 			  		        <input type='text'  ng-trim="false" ng-model='chart.yLeftAxisTitle'>
 			  		    </fieldset>
-			  		    <fieldset class='columns large-16' ng-model='chart.shortInput' ng-show='chart.showSort'  ng-click='reset.settingModified();'>
+			  		    <fieldset class='columns large-16'  ng-show='chart.showSort'  ng-click='reset.settingModified();'>
 						   <label>Short Axis</label> 
-						   <select> 
-						   		<option value='sortMinToMaxAxisVariable' ng-show='chart.sortXaxis' >Min to Max (X-axis)</option>
-						   		<option value='sortMaxToMinAxisVariable' ng-show='chart.sortXaxis' >Max to Min (X-axis)</option>
-						   	    <option value='sortMinToMaxAxisQuantitie' ng-show='chart.sortYaxis' >Min to Max (Y-axis)</option>
-						   		<option value='sortMaxToMinAxisQuantitie' ng-show='chart.sortYaxis' >Max to Min (Y-axis)</option>
+						   <select ng-model='chart.shortInput'>  
+						   		<option value='sortMinToMaxAxisVariable' ng-show='chart.sortAxis' >Min to Max Axis Variable Name</option>
+						   		<option value='sortMaxToMinAxisVariable' ng-show='chart.sortAxis' >Max to Min Axis Variable Name</option>
+						   	    <option value='sortMinToMaxAxisQuantitie' ng-show='chart.sortAxis' >Min to Max Axis Values</option>
+						   		<option value='sortMaxToMinAxisQuantitie' ng-show='chart.sortAxis' >Max to Min Axis Values</option>
 						   </select>
 
 
