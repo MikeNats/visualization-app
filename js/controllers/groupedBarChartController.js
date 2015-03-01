@@ -9,7 +9,7 @@ uiControllerModule.controller('groupedBarChartController',['$scope','fetchDataFr
       $scope.chart.showAxisSettings = true;
       $scope.chart.showAreaSettings = false;
       $scope.chart.showGridSettings = true;
-      $scope.chart.showspectrumSettings=true;
+      $scope.chart.showspectrumSettings=true; 
       $scope.chart.showOrientation = true;
       $scope.chart.gridDivition = 30; 
       $scope.chart.showSort=true;
