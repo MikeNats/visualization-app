@@ -11,8 +11,8 @@ uiControllerModule.controller('uiController',
    
   $scope.chart.showspectrumSettings=true;
     
-    $scope.reset = {};
-   $scope.reset.modified = false;
+
+
 //Accordeon 
   $scope.accordeon={};
   $scope.accordeon.activeTab = function($event){
@@ -50,17 +50,19 @@ uiControllerModule.controller('uiController',
 //show reset button
   $scope.reset.settingModified = function(){ 
      $scope.reset.modified = true;
+
   }
+
 //Resets chart settings;
   $scope.reset.resetSettings = function(){
 
         chartSettngsService.resetData();
-        angular.element(document.querySelector('#d3Chart')).remove();
-        $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,chartSettngsService.data);
-        $scope.chart.privateSettings = chartSettngsService.data;
+         $scope.chart.privateSettings = chartSettngsService.data;
+      //angular.element(document.querySelector('#d3Chart')).remove();
+      $scope.chart.chartObject.setResponsive($scope.chart.privateSettings);
+       
           $scope.reset.modified = false;   
   }
-
 
 $scope.chart.changeChart = function(view){
 
@@ -72,6 +74,10 @@ $scope.chart.changeChart = function(view){
         $location.path('/charts/select/bar');
       }else if(view == 'line'){
           $location.path('/charts/select/line');
+      }else if(view == 'grouped'){
+          $location.path('/charts/select/grouped'); 
+      }else if(view == 'stack'){
+          $location.path('/charts/select/stack'); 
       }
 }
 

@@ -90,7 +90,9 @@ module.exports = function(grunt) {
             'js/controllers/areaChartController.js',
             'js/controllers/pieChartController.js',
             'js/controllers/lineChartController.js',
-            'js/controllers/barChartController.js',
+            'js/controllers/barChartController.js', 
+            'js/controllers/groupedBarChartController.js',
+            'js/controllers/stackBarChartController.js',
             'js/app.js',
             
           ], 
@@ -129,6 +131,8 @@ module.exports = function(grunt) {
             'js/controllers/pieChartController.js',
             'js/controllers/lineChartController.js',
             'js/controllers/barChartController.js',
+            'js/controllers/groupedBarChartController.js',
+            'js/controllers/stackBarChartController.js', 
             'js/app.js',
           ] 
         }

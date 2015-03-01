@@ -376,7 +376,6 @@ function createAreaChartStack(){
 
             },
             setGridSettings: function(controls){
-               console.log(chart.svg,chart.grid);
                 Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledAreaXcoord,chart.scaledAreaYcoord);
                 Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
                

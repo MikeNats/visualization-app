@@ -206,7 +206,6 @@ function createBarChartHorizontal(){
             setColorSpectrum : function(controls){  
                chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.incomingData,controls);
                 d3.selectAll('.bar').style( 'fill' ,function(d,i){
-                  console.log('SWSTO');
                       return chart.colorRange(i);
                 })
 

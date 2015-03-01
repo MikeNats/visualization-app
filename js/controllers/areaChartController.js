@@ -3,13 +3,14 @@
 uiControllerModule.controller('areaChartController',['$scope','fetchDataFromCsvFactory','chartSettngsService',
    function($scope,fetchDataFromCsvFactory,chartSettngsService){
       $scope.chart={};
-      $scope.chart.showPieSettings = false;
+      $scope.reset={};
+             $scope.chart.showPieSettings = false;
       $scope.chart.showgrid = true;
       $scope.chart.showAxisSettings = true;
       $scope.chart.showAreaSettings = true;
       $scope.chart.showGridSettings = true;
       $scope.chart.stackTypeFiled=true;
-      $scope.chart.gridDivition = 30;
+      $scope.chart.showSort=false;
       angular.element(document.querySelector('.areaContainer:last-child')).remove();
       fetchDataFromCsvFactory.get().then(function(response){
           $scope.chart.chartObject = Vtool.charts.area.stack;
@@ -17,6 +18,7 @@ uiControllerModule.controller('areaChartController',['$scope','fetchDataFromCsvF
           $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,true);     
           $scope.chart.privateSettings =  chartSettngsService.data;
           $scope.chart.privateSettings.chartType ='area';
+          $scope.reset.modified = $scope.chart.privateSettings.ismodified;
           $scope.chart.chartType = $scope.chart.privateSettings.chartType;
           $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
      });

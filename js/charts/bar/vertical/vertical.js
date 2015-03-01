@@ -62,7 +62,8 @@ function createBarChartVertical(){
        chart.appendBars = function (data){
             chart.svg =  chart.svg.selectAll( 'rect' ).data( data ).enter().append('rect')
                 .style( 'fill' ,function(d,i){
-                      return chart.colorRange(i);
+
+                      return chart.colorRange(d.mainCategoryValue);
                 })
                 .attr("class", "bar") ;
                 chart.positionBars(data);              
@@ -71,7 +72,7 @@ function createBarChartVertical(){
  
         //Sets the position and the dimention of each bar
         chart.positionBars = function(data){ 
-              chart.svg.attr("x", function(d) { return chart.scaledBarXcoord( d.mainCategoryName ); })
+              chart.svg.transition().duration(300).attr("x", function(d) { return chart.scaledBarXcoord( d.mainCategoryName ); })
               .attr("width", chart.scaledBarXcoord.rangeBand() )
               .attr("y", function(d) {   return  chart.scaledBarYcoord( +d.mainCategoryValue ); })
               .attr("height", function(d) {  return chart.controls.relativeHeight() - chart.scaledBarYcoord( 
@@ -211,8 +212,8 @@ function createBarChartVertical(){
              },
             setColorSpectrum : function(controls){  
                chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.incomingData,controls);
-                d3.selectAll('.bar').style( 'fill' ,function(d,i){
-                      return chart.colorRange(i);
+                d3.selectAll('.bar').style( 'fill' ,function(d){
+                      return chart.colorRange(d.mainCategoryName);
                 })
 
             },
@@ -241,13 +242,28 @@ function createBarChartVertical(){
             setlabelXAxisLabelAngle: function(controls){
               Vtool.charts.commonFunctionality.xAxisFunctionality.positionXAxis(chart.XAxis,chart.xAxis,controls);
             },
-
-
             setGridSettings: function(controls){
                 Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
                 Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
                
             },
+            shortAxis:function(controls,data){
+
+                Vtool.charts.commonFunctionality.sortDataFunctionality.shortData(data,controls);
+                chart.scaleValues();
+                chart.mapVariables(data);
+                chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(data,chart.controls);
+                
+                chart.positionAxis();
+                
+                Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
+
+                chart.positionBars();
+                      d3.selectAll('.bar').style( 'fill' ,function(d,i){
+                            return chart.colorRange(d.mainCategoryName);
+                      })
+               
+            }
 
       }  
                     

@@ -15,7 +15,7 @@ function chartSettings(){
 
       },
       desktopViewPort:1024,
-      tabletViewPort:980,
+      tabletViewPort: 980,
       mobileViewPort : 480,
 
 
@@ -31,7 +31,7 @@ function chartSettings(){
       sortMaxToMinAxisVariable :false,//UI
       sortMaxToMinAxisVariable :false,//UI
       sortMaxToMinAxisQuantitie :false,//UI
-      sortMinToMaxAxisQuantitie :true,//UI
+      sortMinToMaxAxisQuantitie :false,//UI
       ismodified:false,
 
       //Style settings
@@ -53,7 +53,7 @@ function chartSettings(){
       customHeight :300, 
       outerRadius : 150,
       innerRadius : 40,
-
+      chartOrientation:'vertical',
       //Dimentions Settings
       svgWidth : function(){
         if(this.isResponsive){

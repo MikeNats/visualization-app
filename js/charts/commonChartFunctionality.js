@@ -51,7 +51,7 @@ function commonChartFunctionality () {
                           e.mainCategoryName = e[categoryName];
                           delete e[categoryName]; 
                           if(!hasSubcategories){
-                              e.mainCategoryValue = e[categoryValue];
+                              e.mainCategoryValue = +e[categoryValue];
                               delete e[categoryValue];
                            }
                        });
@@ -297,48 +297,82 @@ function commonChartFunctionality () {
 
              //Sort Axis
              shortData : function(data,controls){
-
                     Vtool.charts.commonFunctionality.sortDataFunctionality.sortXAxisVariables(data,controls);
                     Vtool.charts.commonFunctionality.sortDataFunctionality.sortXAxisQuantities(data,controls);
 
+
               },
 
-            //Sort X Axis Categories 
-            sortXAxisVariables : function(data,controls){
+              setUserShortChoice : function(controls,choice){
 
-                   if(controls.sortMaxToMinAxisVariable){ // max -> min
-                    //  data.sort(function(a, b) { return b.mainCategoryName - a.mainCategoryName; });
+                if(choice == 'sortMinToMaxAxisVariable'){
+                    controls.sortMinToMaxAxisVariable =true;
+                    controls.sortMixToMaxAxisVariable = false;
+                    controls.sortMaxToMinAxisQuantitie = false;
+                    controls.sortMinToMaxAxisQuantitie = false;
+                }else if(choice == 'sortMaxToMinAxisVariable'){
+                    controls.sortMinToMaxAxisVariable =false;
+                    controls.sortMaxToMinAxisVariable = true;
+                    controls.sortMaxToMinAxisQuantitie = false;
+                    controls.sortMinToMaxAxisQuantitie = false;
+                }else if(choice == 'sortMaxToMinAxisQuantitie'){
+                   controls.sortMaxToMinAxisVariable =false;
+                    controls.sortMixToMaxAxisVariable = false;
+                    controls.sortMaxToMinAxisQuantitie = true;
+                    controls.sortMinToMaxAxisQuantitie = false;
+                }else if(choice == 'sortMinToMaxAxisQuantitie'){
+                    controls.sortMaxToMinAxisVariable =false;
+                    controls.sortMixToMaxAxisVariable = false;
+                    controls.sortMaxToMinAxisQuantitie = false;
+                    controls.sortMinToMaxAxisQuantitie = true;
+                }
+                return controls;
+
+
+              },
+
+              //Sort X Axis Categories 
+              sortXAxisVariables : function(data,controls){
+
+                 if(controls.sortMaxToMinAxisVariable){ // max -> min
+                   
                           data.sort(function(a, b) { 
                             if (a.mainCategoryName > b.mainCategoryName) {
+                               
                               return 1;
                             }
                             if (a.mainCategoryName < b.mainCategoryName) {
+                      
                               return -1;
                             }   
                             return 0;                     
                          });
                     }
-                   if(controls.sortMinToMaxAxisVariable){// min -> max
-                       data.sort(function(a, b) {    
-                            if (a.mainCategoryName < b.mainCategoryName) {  
-                                return 1;                           
-                            }
-                           if (a.mainCategoryName > b.mainCategoryName) {  
-                                return -1;
-                            }                     
-                            return 0;                     
+                    if(controls.sortMinToMaxAxisVariable){// min -> max
+                      data.sort(function(a, b) {
+
+                        if (a.mainCategoryName < b.mainCategoryName) {
+                            return 1;
+                        }
+                        if (a.mainCategoryName > b.mainCategoryName) {
+                            return -1;
+                        }
+                            return 0;
                       });
-                   }
+                    }
+
                 },
 
             //Sort X Axis Quantities of Categories 
 
             sortXAxisQuantities : function(data,controls){
-                  if(controls.sortMaxToMinAxisQuantitie){ //max -> min
+                if(controls.sortMaxToMinAxisQuantitie){ //max -> min
                        data.sort(function(a, b) { 
                           if(controls.hasSubcategories){
+                        
                              return b.total - a.total; 
                           }else{
+                       
                                return b.mainCategoryValue - a.mainCategoryValue; 
                           }  
                       });
@@ -346,14 +380,20 @@ function commonChartFunctionality () {
                   if(controls.sortMinToMaxAxisQuantitie){
                       data.sort(function(b, a) { 
                           if(controls.hasSubcategories){
+                          
                               return b.total - a.total; 
                           }else{
+                                 
                                return b.mainCategoryValue - a.mainCategoryValue; 
                           }
 
                       });
                   }
-               }
+               },
+
+          
+
+       
          },
 
          //***********  Color Spectrum  *************//
@@ -440,7 +480,7 @@ function commonChartFunctionality () {
               //position Vertical Grid    
               positionVerticalGrid : function(svg,grid,scaledBarXcoord,controls){// position Vertical Grid
                    
-                      grid.verticalGrid.transition().duration(600).attr("transform", "translate(0," + controls.relativeHeight() + ")")
+                      grid.verticalGrid.transition().duration(200).attr("transform", "translate(0," + controls.relativeHeight() + ")")
                         .call(charts.gridFunctionality.make_x_axis(svg,scaledBarXcoord,controls)
                             .tickSize(-controls.relativeHeight(), 0, 0)
                             .tickFormat("")
@@ -466,7 +506,7 @@ function commonChartFunctionality () {
               //Postision Horizontal Grid
               postisionHorizontalGrid : function(svg,grid,scaledBarYcoord,controls ){
 
-                    grid.horizontalGrid.transition().duration(600).call(charts.gridFunctionality.make_y_axis(svg,scaledBarYcoord,controls )
+                    grid.horizontalGrid.transition().duration(200).call(charts.gridFunctionality.make_y_axis(svg,scaledBarYcoord,controls )
                         .tickSize(-controls.relativeWidth(), 0, 0)
                         .tickFormat(""))
                         .attr('opacity', controls.horizontalGridStrokeOpacity);
@@ -503,7 +543,7 @@ function commonChartFunctionality () {
 
               //set Table Position
              setTablePosition : function(currentContentTable,controls){// position content table
-                 if(charts.responsiveFunctionality.checkViewPortWidth() > controls.mobileViewPort){
+               //  if(charts.responsiveFunctionality.checkViewPortWidth() > controls.mobileViewPort){
 
                       if(d3.select('.y.axis.left')==null ){
 
@@ -515,12 +555,12 @@ function commonChartFunctionality () {
                       }
 
                      currentContentTable.attr("transform",function(){
-                        return  "translate("+ ( +d3.select('.chartContainer').node().getBBox().width + yAxisLeftWidth+ controls.marginLeft()/2  ) +','+0+')'; 
+                        return  "translate("+ ( +d3.select('.horizontalGrid').node().getBBox().width + yAxisLeftWidth+ controls.marginLeft()/2  ) +','+0+')'; 
                     });
 
-                }else{
-                    charts.tableFunctionality.positionMobileTable(currentContentTable);
-                }   
+             //   }else{
+              //      charts.tableFunctionality.positionMobileTable(currentContentTable);
+              //  }   
             },
 
             //Append Table Content
