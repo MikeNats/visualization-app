@@ -1,9 +1,9 @@
 //Pie chart controller.Has a dependancy, the  pieChartDirectiveModule module. PieChartControlerModule fetch the data from the given url attache them in the global scope  and trigers the pieChartDirectiveModule 
 
-uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFactory','chartSettngsService',
+uiControllerModule.controller('stackBarChartController',['$scope','fetchDataFromCsvFactory','chartSettngsService',
    function($scope,fetchDataFromCsvFactory,chartSettngsService){
       $scope.chart={};
-      $scope.reset={};
+      $scope.reset = {};
       $scope.chart.showPieSettings = false;
       $scope.chart.showgrid = true;
       $scope.chart.showAxisSettings = true;
@@ -11,14 +11,14 @@ uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFa
       $scope.chart.showGridSettings = true;
       $scope.chart.showspectrumSettings=true;
       $scope.chart.showOrientation = true;
-      $scope.chart.gridDivition = 30;
+      $scope.chart.gridDivition = 30; 
       $scope.chart.showSort=true;
       $scope.chart.sortAxis =true;    
       fetchDataFromCsvFactory.get().then(function(response){
          $scope.chart.chartOrientation = $scope.chart.ckeckInitialOrientation(); 
-         $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     
+         $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,true);     
          $scope.chart.privateSettings = chartSettngsService.data;
-         $scope.chart.privateSettings.chartType ='bar';
+         $scope.chart.privateSettings.chartType ='stack';
          $scope.reset.modified = $scope.chart.privateSettings.ismodified;
          $scope.chart.chartOrientation = chartSettngsService.data.chartOrientation
          $scope.chart.chartType = $scope.chart.privateSettings.chartType;
@@ -30,24 +30,23 @@ uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFa
          chartSettngsService.setData($scope.chart.privateSettings);
          angular.element(document.querySelector('#d3Chart')).remove();
          $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings); 
-           console.log(chartSettngsService.data)  
       }
       $scope.chart.ckeckInitialOrientation = function(){
                if(chartSettngsService.data.chartOrientation == 'horizontal'){
-                    $scope.chart.chartObject = Vtool.charts.bar.horizontal;
+                    $scope.chart.chartObject =Vtool.charts.bar.stackHorizontal
                     return  'horizontal';         
-                }else{
-                    $scope.chart.chartObject = Vtool.charts.bar.vertical;
+                }else{ 
+                    $scope.chart.chartObject = Vtool.charts.bar.stackVertical;
                      return 'vertical';              
                 }
       }
       $scope.chart.ckeckOrientation = function(){
                if($scope.chart.chartOrientation == 'horizontal'){
-                    $scope.chart.chartObject = Vtool.charts.bar.horizontal;
+                    $scope.chart.chartObject = Vtool.charts.bar.stackHorizontal;
                     $scope.chart.chartOrientation = 'horizontal';
 
                 }else{
-                    $scope.chart.chartObject = Vtool.charts.bar.vertical;
+                    $scope.chart.chartObject = Vtool.charts.bar.stackVertical;
                     $scope.chart.chartOrientation = 'vertical';
                     
                 }

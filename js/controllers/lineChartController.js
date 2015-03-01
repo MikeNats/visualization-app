@@ -3,6 +3,7 @@
 uiControllerModule.controller('lineChartController',['$scope','fetchDataFromCsvFactory','chartSettngsService',
    function($scope,fetchDataFromCsvFactory,chartSettngsService){
       $scope.chart={};
+      $scope.reset={};
       $scope.chart.showPieSettings = false;
       $scope.chart.showgrid = true;
       $scope.chart.showAxisSettings = true;
@@ -16,6 +17,7 @@ uiControllerModule.controller('lineChartController',['$scope','fetchDataFromCsvF
           $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,true);     
           $scope.chart.privateSettings =  chartSettngsService.data ;
           $scope.chart.privateSettings.chartType ='line';
+          $scope.reset.modified = $scope.chart.privateSettings.ismodified;
           $scope.chart.chartType = $scope.chart.privateSettings.chartType;
           $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
     
@@ -24,7 +26,7 @@ uiControllerModule.controller('lineChartController',['$scope','fetchDataFromCsvF
 }]); 
 
 
-
+ 
 
 
 

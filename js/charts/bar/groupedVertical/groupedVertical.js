@@ -231,7 +231,6 @@ function createBarChartGroupedVertical (settings,commonFunc){
       chart.controls.isPersentage = false;
       chart.controls.contentTableShow = true;
       chart.controls.hasSubcategories = true;
-      chart.controls.sortGroupedData = true;
       chart.controls.url = "./csv/bar/groupedVertical/data.csv";
         chart.controls.target = 'dthree-Chart';
 
@@ -313,7 +312,6 @@ function createBarChartGroupedVertical (settings,commonFunc){
 
                Vtool.charts.commonFunctionality.sortDataFunctionality.shortData(data,controls);
                 chart.scaleValues();
-                Vtool.charts.commonFunctionality.sortDataFunctionality.shortData(data,chart.controls);
                 chart.mapVariables(data,chart.categoriesList);    
                 chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.categoriesList,chart.controls);
                 chart.positionAxis();

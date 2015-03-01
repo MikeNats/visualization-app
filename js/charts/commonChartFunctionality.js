@@ -554,7 +554,7 @@ function commonChartFunctionality () {
                          var yAxisLeftWidth = 0;
                       }
 
-                     currentContentTable.transition().duration(200).attr("transform",function(){
+                     currentContentTable.attr("transform",function(){
                         return  "translate("+ ( +d3.select('.horizontalGrid').node().getBBox().width + yAxisLeftWidth+ controls.marginLeft()/2  ) +','+0+')'; 
                     });
 

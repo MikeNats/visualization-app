@@ -3,6 +3,7 @@
 uiControllerModule.controller('groupedBarChartController',['$scope','fetchDataFromCsvFactory','chartSettngsService',
    function($scope,fetchDataFromCsvFactory,chartSettngsService){
       $scope.chart={};
+      $scope.reset={};
       $scope.chart.showPieSettings = false;
       $scope.chart.showgrid = true;
       $scope.chart.showAxisSettings = true;
@@ -18,6 +19,7 @@ uiControllerModule.controller('groupedBarChartController',['$scope','fetchDataFr
          $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,true);     
          $scope.chart.privateSettings = chartSettngsService.data;
          $scope.chart.privateSettings.chartType ='grouped';
+         $scope.reset.modified = $scope.chart.privateSettings.ismodified;
          $scope.chart.chartOrientation = chartSettngsService.data.chartOrientation
          $scope.chart.chartType = $scope.chart.privateSettings.chartType;
          $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     

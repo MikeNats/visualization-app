@@ -178,7 +178,7 @@ function createBarChartGroupedHorizontal (){
       // chain of functions for responsive implementation 
      chart.responsive = function(){
         chart.controls.viewPortWidth = Vtool.charts.commonFunctionality.responsiveFunctionality.checkViewPortWidth();
-
+   d3.select(chart.controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)
        chart.scaleValues();
         chart.mapVariablesOnAxis(chart.incomingData,chart.categoriesList);
         chart.positionAxis();
@@ -190,7 +190,7 @@ function createBarChartGroupedHorizontal (){
     },
 
       //Chain of functions that are trigered when data have been fetched form csv 
-      chart.dataIsFeched = function(data){
+      chart.dataIsFetched = function(data){
         Vtool.charts.commonFunctionality.sortDataFunctionality.shortData(data,chart.controls);
         chart.buildRangeSubObjectBasedOnInput(data);        
         chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(data,chart.controls);
@@ -207,46 +207,125 @@ function createBarChartGroupedHorizontal (){
         }
      },
 
-
     //Chain of functions that build the chart
-    chart.appendChart = function(){
+    chart.appendChart = function(data){
         chart.scaleValues();
         chart.svg = Vtool.charts.commonFunctionality.appendSvg(chart.controls);
-        chart.fetchData();
+         chart.dataIsFetched(data);
     },
 
 
     //Instatiation of charts settings and overides for  for local use
     chart.cerateLocalSettings = function(){
         chart.controls = Object.create(Vtool.charts.settings);
-        chart.controls.isPersentage = false;
-        chart.controls.contentTableShow = true;
-        chart.controls.hasSubcategories = true;
-        chart.controls.url = "./csv/bar/groupedHorizontal/data.csv";
-        chart.controls.target = '#chart0';
+      
 
     },
+  chart.overrideLocalSettings = function(){
+      chart.controls.isPersentage = false;
+      chart.controls.contentTableShow = true;
+      chart.controls.hasSubcategories = true;
+      chart.controls.sortGroupedData = true;
+      chart.controls.url = "./csv/bar/groupedVertical/data.csv";
+        chart.controls.target = 'dthree-Chart';
 
+     }
 
-    //Executes the chart
-     chart.exe = function(){
+     //Executes the chart
+     chart.exe = function(data){
+        chart.incomingData = data;
         chart.cerateLocalSettings();
-        chart.appendChart();
+        chart.overrideLocalSettings ();            
+        chart.appendChart(data);
+     }
+
+    //Executes the chart insideIframe
+    chart.exeUserControls = function(data,controls){
+
+        chart.controls = controls;
+        chart.incomingData = data;
+        chart.overrideLocalSettings();  
+        chart.appendChart(data);
      }
 
     //Object Chart returns init and local settings
      return{
-        init : function(){
-            chart.exe();
-         },
-         customSettings : function(){
-            return controls;
-        } 
-      }  
+            init : function(data){
+                chart.exe(data);
+                return chart.controls;
+             },
+            exeUserSettings : function(data,controls){
+
+                chart.exeUserControls(data,controls);
+  
+             },
+            setColorSpectrum : function(controls){  
+              chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.categoriesList,controls);
+                chart.bars.style( 'fill' ,function(d,i){
+                     return chart.colorRange(d.value);
+                })
+
+                d3.selectAll('.tableRect').style( 'fill' ,function(d,i){
+                     return chart.colorRange(i);
+                })
+
+            },
+            setCustomDimentions : function(controls){
+                chart.controls = controls;
+                d3.select(controls.target+' svg').attr('width',controls.customWidth).attr('height',controls.customHeight);
+                chart.scaleValues();
+                chart.mapVariables(chart.incomingData,chart.categoriesList);
+                chart.positionAxis();
+                Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
+                chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
+                chart.positionBarContainer(chart.incomingData);
+                chart.positionBars(chart.incomingData);
+                Vtool.charts.commonFunctionality.tableFunctionality.setTablePosition(chart.contentTable, chart.controls);
+            },
+            setResponsive : function(controls){
+              chart.controls = controls;
+              d3.select(controls.target+' svg').attr('width','100%').attr('height',angular.element(document.querySelector('#chartContainer'))[0].offsetHeight)
+              chart.scaleValues();
+                chart.mapVariables(chart.incomingData,chart.categoriesList);
+                chart.positionAxis();
+                Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
+                chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
+                chart.positionBarContainer(chart.incomingData);
+                chart.positionBars(chart.incomingData);
+                Vtool.charts.commonFunctionality.tableFunctionality.setTablePosition(chart.contentTable, chart.controls);
+            },
+
+            setlabelXAxisLabelAngle: function(controls){
+              Vtool.charts.commonFunctionality.xAxisFunctionality.positionXAxis(chart.XAxis,chart.xAxis,controls);
+            },
+            setGridSettings: function(controls){
+                Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
+                Vtool.charts.commonFunctionality.gridFunctionality.styleGrid(controls);
+               
+            },
+            shortAxis:function(controls,data){
+
+               Vtool.charts.commonFunctionality.sortDataFunctionality.shortData(data,controls);
+                chart.scaleValues();
+                chart.mapVariables(data,chart.categoriesList);    
+                chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.categoriesList,chart.controls);
+                chart.positionAxis();
+                Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
+                chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
+                chart.positionBarContainer(data);
+                chart.positionBars(data);
+                Vtool.charts.commonFunctionality.tableFunctionality.setTablePosition(chart.contentTable, chart.controls);
+
+                chart.bars.style( 'fill' ,function(d){
+                      return chart.colorRange(d.name);
+                })
+                  d3.selectAll('.tableRect').style( 'fill' ,function(d,i){
+                     return chart.colorRange(i);
+                })
+               
+            }
+
+      } 
 
 
 }
-
-
-
-

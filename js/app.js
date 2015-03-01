@@ -64,7 +64,7 @@ var app = angular.module('app', [
         // line //
         .state('line', {
           url: '/charts/select/line',
-          templateUrl: 'views/chartTemplate.html', 
+          templateUrl: 'views/chartTemplate.html',  
           controller: 'lineChartController',
               
         })
@@ -74,12 +74,19 @@ var app = angular.module('app', [
           templateUrl: 'views/chartTemplate.html', 
           controller: 'barChartController',    
         })
+        // Grouped //
         .state('grouped', {
           url: '/charts/select/grouped', 
           templateUrl: 'views/chartTemplate.html', 
-          controller: 'groupedBarChartController', 
-              
-      })
+          controller: 'groupedBarChartController',         
+        })
+        // Stack //
+        .state('stack', {
+          url: '/charts/select/stack', 
+          templateUrl: 'views/chartTemplate.html', 
+          controller: 'stackBarChartController',         
+        })
+
     }]);
 
 
