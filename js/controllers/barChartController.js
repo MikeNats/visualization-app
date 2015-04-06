@@ -3,7 +3,6 @@
 uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFactory','chartSettngsService',
    function($scope,fetchDataFromCsvFactory,chartSettngsService){
       $scope.chart={};
-      $scope.reset={};
       $scope.chart.showPieSettings = false;
       $scope.chart.showgrid = true;
       $scope.chart.showAxisSettings = true;
@@ -19,7 +18,6 @@ uiControllerModule.controller('barChartController',['$scope','fetchDataFromCsvFa
          $scope.chart.fecheddata = Vtool.charts.commonFunctionality.secureCSVData(response,false);     
          $scope.chart.privateSettings = chartSettngsService.data;
          $scope.chart.privateSettings.chartType ='bar';
-         $scope.reset.modified = $scope.chart.privateSettings.ismodified;
          $scope.chart.chartOrientation = chartSettngsService.data.chartOrientation
          $scope.chart.chartType = $scope.chart.privateSettings.chartType;
          $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
