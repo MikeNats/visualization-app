@@ -1,4 +1,3 @@
-
 /** 
   * Horizontal  StackBar Chart - D3.js
   * Developed By Michail Tsougkranis 2014-2015.
@@ -336,6 +335,3 @@ function createBarChartStackHorizontal(){
 
 
 }
-
-
-

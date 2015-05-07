@@ -8,7 +8,7 @@ uiControllerModule.controller('stackBarChartController',['$scope','fetchDataFrom
       $scope.chart.showgrid = true;
       $scope.chart.showAxisSettings = true;
       $scope.chart.showAreaSettings = false;
-      $scope.chart.showGridSettings = true;
+      $scope.chart.showGridSettings = true; 
       $scope.chart.showspectrumSettings=true;
       $scope.chart.showOrientation = true;
       $scope.chart.gridDivition = 30; 
@@ -22,6 +22,7 @@ uiControllerModule.controller('stackBarChartController',['$scope','fetchDataFrom
          $scope.reset.modified = $scope.chart.privateSettings.ismodified;
          $scope.chart.chartOrientation = chartSettngsService.data.chartOrientation
          $scope.chart.chartType = $scope.chart.privateSettings.chartType;
+           console.log($scope.chart.fecheddata,$scope.chart.privateSettings);
          $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings);     
      });
    
@@ -29,6 +30,7 @@ uiControllerModule.controller('stackBarChartController',['$scope','fetchDataFrom
          $scope.chart.privateSettings.chartOrientation =  $scope.chart.ckeckOrientation();
          chartSettngsService.setData($scope.chart.privateSettings);
          angular.element(document.querySelector('#d3Chart')).remove();
+
          $scope.chart.chartObject.exeUserSettings($scope.chart.fecheddata,$scope.chart.privateSettings); 
       }
       $scope.chart.ckeckInitialOrientation = function(){

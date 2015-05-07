@@ -85,7 +85,7 @@ var app = angular.module('app', [
           url: '/charts/select/stack', 
           templateUrl: 'views/chartTemplate.html', 
           controller: 'stackBarChartController',         
-        })
+        }) 
 
     }]);
 

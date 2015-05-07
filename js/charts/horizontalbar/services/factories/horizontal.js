@@ -4,13 +4,14 @@
   * Barnardos Web Development Team. 
 */ 
 
+chartServices.factory('horizontalBarChart',[function(){
 
-function createBarChartHorizontal(){
-    
-      var chart = { };
+     "use strict";
 
-      // returns a function that calculates the x coordinate of the given charts bar. Given a value as input  returns the scaled  value in the range for a given data of domain  with offset of controls.style.barDistance.
-      chart.scaleBarsXcoordinateAccordingToRelativeWidth= function(){
+       var chart = { };
+
+      //Calculates the x coordinate of the given charts bar. Given a value as input  returns the scaled  value in the range for a given data of domain.
+      chart.scaleBarsXcoordinateAccordingToRelativeWidth = function(){
              chart.scaledBarXcoord = d3.scale.linear()
                .range([0,chart.controls.relativeWidth()]);
         },
@@ -190,9 +191,10 @@ function createBarChartHorizontal(){
          }
 
 
-    //Object Chart returns init and local settings
-     return{
-            init : function(data){
+
+        return {
+               
+             init : function(data){
                 chart.exe(data);
                 return chart.controls;
              },
@@ -206,7 +208,6 @@ function createBarChartHorizontal(){
             setColorSpectrum : function(controls){  
                chart.colorRange =  Vtool.charts.commonFunctionality.colorFunctionality.scaleColorSecturm(chart.incomingData,controls);
                 d3.selectAll('.bar').style( 'fill' ,function(d,i){
-                  console.log('SWSTO');
                       return chart.colorRange(i);
                 })
 
@@ -219,7 +220,6 @@ function createBarChartHorizontal(){
                   chart.positionAxis();
                   Vtool.charts.commonFunctionality.gridFunctionality.positionGrid(chart.controls,chart.svg,chart.grid,chart.scaledBarXcoord,chart.scaledBarYcoord);
                   chart.controls.xAxisLabelAngle = Vtool.charts.commonFunctionality.responsiveFunctionality.setLabelAngle(chart.controls);
-                  
                    chart.positionBars();
             },
             setResponsive : function(controls){
@@ -249,8 +249,9 @@ function createBarChartHorizontal(){
                
             },
 
-      }  
-                    
-}
+      } 
+    
+}]); 
+
 
 
