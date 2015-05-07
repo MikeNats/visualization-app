@@ -63,7 +63,7 @@ uiControllerModule.controller('uiController',
 
 
 $scope.chart.changeChart = function(view){
-
+ 
       if(view == 'pie'){
          $location.path('/charts/select/pie');
       }else if(view == 'area'  ){
@@ -72,6 +72,8 @@ $scope.chart.changeChart = function(view){
         $location.path('/charts/select/bar');
       }else if(view == 'line'){
           $location.path('/charts/select/line');
+       }else if(view == 'stack'){
+          $location.path('/charts/select/stack');   
       }else if(view == 'grouped'){
           $location.path('/charts/select/grouped'); 
       }
