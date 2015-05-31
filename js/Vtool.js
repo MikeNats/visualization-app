@@ -36,4 +36,3 @@ Vtool.charts.area.stack = createAreaChartStack();
 Vtool.charts.line.line =  createLineChart();
 Vtool.charts.pie.pie =  createPieChart();
 /************ Charts Initialization  *****************/
-//Vtool.charts.pie.pie.init();

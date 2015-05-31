@@ -369,8 +369,9 @@ function createPieChart( ){
                
                 chart.appendPieChartArcs();
 
+
                 chart.contentTable =  Vtool.charts.commonFunctionality.tableFunctionality.appendTable(chart.controls,data,chart.colorRange,chart.categoryName)
-               
+                 
                 chart.appendBgColorToArcs();
      
                 chart.appendDetails();
@@ -398,8 +399,11 @@ function createPieChart( ){
          chart.appendChart = function(data){
             chart.setOuterRadius();
             chart.scaleValues();
+
             chart.svg = Vtool.charts.commonFunctionality.appendSvg(chart.controls);
+
             chart.dataIsFetched(data);
+
         },
 
 
@@ -438,7 +442,8 @@ function createPieChart( ){
         chart.exeUserControls = function(data,controls){
             chart.controls = controls;
             chart.incomingData = data;
-            chart.overrideLocalSettings ();            
+            chart.overrideLocalSettings();  
+
             chart.appendChart(data);
          }
 
@@ -446,6 +451,7 @@ function createPieChart( ){
         //Object Chart returns init and local settings
          return{
             init : function(data){
+                
                 chart.exe(data);
                 return chart.controls;
              },

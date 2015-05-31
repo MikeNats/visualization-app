@@ -534,17 +534,20 @@ function commonChartFunctionality () {
               appendTable : function(controls,data,colorRange,categoriesList){// append Content Table
           
                   var currentContentTable =  d3.select(controls.target+' .gContainer').append("g")
-                     .attr("class", "tableContainer")
-                   Vtool.charts.commonFunctionality.tableFunctionality.setTablePosition(currentContentTable,controls); 
+                     .attr("class", "tableContainer");
+
+                  
 
                    Vtool.charts.commonFunctionality.tableFunctionality.appendTableContent(currentContentTable,data,colorRange,controls,categoriesList);  
+                   Vtool.charts.commonFunctionality.tableFunctionality.setTablePosition(currentContentTable,controls); 
+
               return currentContentTable;
               },
 
               //set Table Position
              setTablePosition : function(currentContentTable,controls){// position content table
                //  if(charts.responsiveFunctionality.checkViewPortWidth() > controls.mobileViewPort){
-
+                      console.log(controls)
                       if(d3.select('.y.axis.left')==null ){
 
                         var yAxisLeftWidth = d3.select('.y.axis.left').node().getBBox().width ;  
@@ -555,7 +558,19 @@ function commonChartFunctionality () {
                       }
 
                      currentContentTable.transition().duration(200).attr("transform",function(){
-                        return  "translate("+ ( +d3.select('.horizontalGrid').node().getBBox().width + yAxisLeftWidth+ controls.marginLeft()/2  ) +','+0+')'; 
+                                
+                                if(controls.chartType === 'pie'){
+                                   
+                                   var x = d3.select('#chartContainer')[0][0].offsetWidth- (d3.select('.tableContainer').node().getBBox().width *2);
+                                                                     
+
+                                  return "translate("+ x +','+0+')';
+
+                                }else{
+
+                                   return  "translate("+ ( +d3.select('.horizontalGrid').node().getBBox().width + yAxisLeftWidth+ controls.marginLeft()/2  ) +','+0+')'; 
+                                }
+                       
                     });
 
              //   }else{
@@ -586,6 +601,7 @@ function commonChartFunctionality () {
                   .style('font-size', function(i){
                       return controls.fontSize-2 +'px';
                   })
+
                 charts.tableFunctionality.legend.append("rect")// append rect that defines the category color
                   .attr("width", function(){
                       return 15* (controls.fontSize/15);
@@ -606,11 +622,12 @@ function commonChartFunctionality () {
 
                        return colorRange(categoriesList[i]);
                   });
+
                 charts.tableFunctionality.legend.attr("transform", function(d, i) {
                   return "translate("+ 0 +"," + i * (15* (controls.fontSize/15) +5) + ")";      
                 });
 
-               
+   
 
             },
 
